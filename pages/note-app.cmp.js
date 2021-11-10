@@ -1,16 +1,33 @@
+import notePreview from '../apps/note/js/cmps/note-preview.cmp.js';
+import { noteService } from '../apps/note/js/services/note-service.js';
+
 export default {
 	props: [],
 	components: {},
 	template: `
-        <h1>AppSus</h1>
+		
+        <note-preview :notes="notes" />
 `,
 	data() {
-		return {};
+		return {
+			notes: null
+		};
 	},
-	created() {},
+	created() {
+		this.loadNotes();
+	},
 	updated() {},
 	destroyed() {},
-	methods: {},
+	methods: {
+		loadNotes() {
+			const demoNotes = noteService.query();
+			this.notes = demoNotes;
+			console.log(this.notes);
+		}
+	},
 	computed: {},
-	watch: {}
+	watch: {},
+	components: {
+		notePreview
+	}
 };
