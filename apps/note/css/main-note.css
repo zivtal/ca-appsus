@@ -55,15 +55,43 @@ body {
 
 .preview-note {
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	grid-auto-rows: 200px;
+	grid-auto-rows: auto;
 	gap: 10px;
-	justify-content: center;
+	/* justify-content: center; */
 	padding: 10px;
 	text-align: center;
 }
 
 .user-note {
-	background-color: darkgray;
+	background-color: rgb(232, 234, 237);
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-evenly;
+	border: 1px solid black;
+	border-radius: 8px;
+}
+
+.user-todo-list {
+	text-align: left;
+	padding: 0;
+}
+
+.user-note img {
+	padding: 20px;
+}
+
+.user-todo-list {
+	list-style: none;
+}
+
+.checked {
+	text-decoration: line-through;
+}
+
+.note-toolbar {
+	opacity: 0%;
+	transition: opacity .5s;
+}
+
+.note-toolbar:hover {
+	opacity: 100%;
 }
