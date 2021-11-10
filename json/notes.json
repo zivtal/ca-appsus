@@ -1,6 +1,6 @@
 [
     {
-        "type": "note-txt",
+        "type": "NoteTxt",
         "isPinned": false,
         "info": {
             "txt": "Hi Muki,Asi invited you to view the folder \"CaJul21-Materials\" on Dropbox.    Enjoy!The Dropbox team.Asi and others will be able to see when you view files in this folder.     Other files shared with you through Dropbox may also show this info.Learn more in our help center.",
@@ -12,7 +12,7 @@
         "id": "jKdMjw"
     },
     {
-        "type": "note-txt",
+        "type": "NoteTxt",
         "isPinned": false,
         "info": {
             "txt": "Cyber Deals are here with 50% off!     Be ready to enjoy a massive 50% discount on Absolute Collection, Dorico, SpectraLayers,     Iconica, Nuendo Live and Cubasis. Just enter the coupon code at checkout or save directly     in the App Store or Google Play Store.    Get six of our industry-leading audio software applications for half the price! This offer is only valid until December 7, 2020.",
@@ -25,7 +25,7 @@
     },
     {
         "id": "7X92DM",
-        "type": "note-txt",
+        "type": "NoteTxt",
         "isPinned": true,
         "info": {
             "title": "Nice one.",
@@ -37,7 +37,7 @@
     },
     {
         "id": "6c5JnY",
-        "type": "note-txt",
+        "type": "NoteTxt",
         "isPinned": true,
         "info": {
             "title": "Reminder",
@@ -49,7 +49,7 @@
     },
     {
         "id": "qAFAgr",
-        "type": "note-txt",
+        "type": "NoteTxt",
         "isPinned": false,
         "info": {
             "title": "lol",
@@ -61,7 +61,7 @@
     },
     {
         "id": "U9TTeN",
-        "type": "note-img",
+        "type": "NoteImg",
         "isPinned": false,
         "info": {
             "url": "https://i.insider.com/5484d9d1eab8ea3017b17e29?width=700&format=jpeg&auto=webp",
@@ -74,7 +74,7 @@
     },
     {
         "id": "3HCD39",
-        "type": "note-todos",
+        "type": "NoteToDo",
         "isPinned": false,
         "info": {
             "txt": "",
@@ -86,24 +86,30 @@
                 {
                     "txt": "Driving liscence",
                     "doneAt": null,
-                    "id": "H0WuGR"
+                    "id": "H0WuGR",
+                    "checked":"false"
+
                 },
                 {
                     "txt": "Coding power",
                     "doneAt": 187111111,
-                    "id": "Ih7m3U"
+                    "id": "Ih7m3U",
+                    "checked":"false"
+
                 },
                 {
                     "txt": "Eat cake",
                     "doneAt": 187101111,
-                    "id": "LpKBfm"
+                    "id": "LpKBfm",
+                    "checked":"false"
+
                 }
             ]
         }
     },
     {
         "id": "Fs6aZs",
-        "type": "note-video",
+        "type": "NoteVideo",
         "isPinned": false,
         "info": {
             "title": "Cool video",
@@ -113,7 +119,7 @@
     },
     {
         "id": "trqOuQ",
-        "type": "note-txt",
+        "type": "NoteTxt",
         "isPinned": false,
         "info": {
             "title": "Haha!",
@@ -125,7 +131,7 @@
     },
     {
         "id": "8CQgPk",
-        "type": "note-todos",
+        "type": "NoteToDo",
         "isPinned": false,
         "info": {
             "title": "groceries",
@@ -134,34 +140,44 @@
                 {
                     "txt": "Apples",
                     "doneAt": null,
-                    "id": "KQxsFq"
+                    "id": "KQxsFq",
+                    "checked":"false"
+
                 },
                 {
                     "txt": "Bread",
                     "doneAt": null,
-                    "id": "aDMerC"
+                    "id": "aDMerC",
+                    "checked":"false"
+
                 },
                 {
                     "txt": "Eggs",
                     "doneAt": null,
-                    "id": "dsHdzQ"
+                    "id": "dsHdzQ",
+                    "checked":"false"
+
                 },
                 {
                     "txt": "Milk",
                     "doneAt": 187111111,
-                    "id": "WLQTm3"
+                    "id": "WLQTm3",
+                    "checked":"false"
+
                 },
                 {
                     "txt": "Suagar",
                     "doneAt": 187101111,
-                    "id": "VKfJzd"
+                    "id": "VKfJzd",
+                    "checked":"false"
+
                 }
             ]
         }
     },
     {
         "id": "lsyLrh",
-        "type": "note-txt",
+        "type": "NoteTxt",
         "isPinned": false,
         "info": {
             "title": "Tomorrow",
@@ -173,7 +189,7 @@
     },
     {
         "id": "h7H6Wh",
-        "type": "note-img",
+        "type": "NoteImg",
         "isPinned": false,
         "info": {
             "url": "https://i.pinimg.com/736x/2d/cf/63/2dcf63c23e359dd5fec6ced32d4d8805.jpg",
@@ -186,7 +202,7 @@
     },
     {
         "id": "TBj6fb",
-        "type": "note-img",
+        "type": "NoteImg",
         "isPinned": false,
         "info": {
             "url": "https://i.ytimg.com/vi/317jz-PU7Mg/maxresdefault.jpg",
@@ -199,7 +215,7 @@
     },
     {
         "id": "hfhvKv",
-        "type": "note-todos",
+        "type": "NoteToDo",
         "isPinned": false,
         "info": {
             "txt": "",
@@ -211,17 +227,20 @@
                 {
                     "txt": "Learn to play guitar",
                     "doneAt": null,
-                    "id": "rQTl6V"
+                    "id": "rQTl6V",
+                    "checked":"false"
                 },
                 {
                     "txt": "Find a drummer",
                     "doneAt": 187111111,
-                    "id": "PSI5tl"
+                    "id": "PSI5tl",
+                    "checked":"false"
                 },
                 {
                     "txt": "Buy a piano",
                     "doneAt": 187101111,
-                    "id": "OQwY4J"
+                    "id": "OQwY4J",
+                    "checked":"false"
                 }
             ]
         }

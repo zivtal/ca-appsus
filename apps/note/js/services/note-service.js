@@ -1,15 +1,33 @@
 import { utilService } from '../../../../services/utils.service.js';
 
 export const noteService = {
-	query
+	query,
+	addNote
 };
 
+var gNotes;
+
 function query() {
-	return utilService.createDemo('../../../json/notes.json');
+	gNotes = utilService.createDemo('../../../json/notes.json');
+	return gNotes;
 }
 
-// function renderCards() {
-// 	const data = getDemoNotes();
-// 	console.log(data);
-// 	var strHtml = '';
+function addNote(type, info, style) {
+	const id = utilService.makeId();
+	const noteToSave = {
+		id,
+		type,
+		isPinned: false,
+		info,
+		style: {
+			backgroundColor: style
+		}
+	};
+	gNotes.unshift(noteToSave);
+	console.log(noteToSave);
+	return noteToSave;
+}
+
+// function _saveNotes() {
+// 	storageService.saveToStorage('notesDB', gNotes);
 // }

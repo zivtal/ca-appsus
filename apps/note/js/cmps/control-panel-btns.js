@@ -1,9 +1,11 @@
+import { eventBus } from '../../../../services/event.bus-service.js';
+
 export default {
-	props: [],
+	props: [ 'note' ],
 	components: {},
 	template: `
             <div class="note-toolbar">
-                    <button> color </button>
+                <input type="color" v-model="backgroundColor" @blur="changeColor"></input>
                 <button> edit note </button>
                 <button> add label </button>
                 <button> duplicate note </button>
@@ -12,12 +14,22 @@ export default {
             </div>
     `,
 	data() {
-		return {};
+		return {
+			currNote: this.note,
+			backgroundColor: ''
+		};
 	},
 	created() {},
 	updated() {},
 	destroyed() {},
-	methods: {},
+	methods: {
+		changeColor() {
+			eventBus.$emit('showChange', { note: this.currNote, color: this.backgroundColor });
+		}
+	},
 	computed: {},
-	watch: {}
+	watch: {},
+	components: {
+		eventBus
+	}
 };
