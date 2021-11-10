@@ -7,7 +7,7 @@ export default {
 	components: {},
 	template: `
 
-        <note-preview :notes="notes" />
+        <note-preview :notes="notes"  />
 `,
 	data() {
 		return {
@@ -28,6 +28,8 @@ export default {
 		},
 		handleEvent(val) {
 			console.log(val);
+			const { note, color } = val;
+			note.style.backgroundColor = color;
 		}
 	},
 	computed: {},

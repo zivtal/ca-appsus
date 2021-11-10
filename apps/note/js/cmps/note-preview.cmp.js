@@ -1,6 +1,7 @@
 import controlPanelBtns from './control-panel-btns.js';
 import { noteService } from '../services/note-service.js';
 import { utilService } from '../../../../services/utils.service.js';
+import addNewNote from './add-new-note.cmp.js';
 
 const NoteTxt = {
 	props: [ 'note' ],
@@ -12,20 +13,14 @@ const NoteTxt = {
         </div>
     `,
 	data() {
-		return {
-			text: ''
-		};
+		return {};
 	},
-	methods: {
-		reportVal() {
-			this.$emit('setInput', this.text);
-		}
-	},
+	methods: {},
 	computed: {
 		setTxtLength() {
 			if (this.note.info.txt.length > 30) {
 				return this.note.info.txt.substring(0, 25);
-			}
+			} else return this.note.info.txt;
 		}
 	},
 	mounted() {},
@@ -125,7 +120,7 @@ export default {
 	template: `
     <div class="main-note">
     <div class="main-note-container">
-        <form @submit.prevent="save" class="add-note-container">
+        <!-- <form @submit.prevent="save" class="add-note-container">
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
                     <input type="text" PlaceHolder="Title" class="add-note-title" v-model="title">
@@ -146,10 +141,11 @@ export default {
                     <button @click.prevent> close </button>
     </div>
             </div>
-        </form>
+        </form> -->
+		<add-new-note :notes="notes" @cmpType="addNewNote" />
         <section class="preview-note grid">
             <template v-for="note in notes">
-                <component :is="note.type" :note="note"> </component>
+                <component :is="note.type" :note="note" > </component>
             </template>
         </section>
         <section class="pinned-note">
@@ -163,56 +159,61 @@ export default {
     `,
 	data() {
 		return {
-			demoNotes: this.notes,
-			setPlaceHolder: 'amir',
-			title: '',
-			txt: '',
-			noteType: '',
-			backgroundColor: '',
-			placeHolder: {
-				text: 'Please write some text',
-				image: 'Please paste your image url',
-				video: 'Please paste your video url',
-				todo: 'Please write some todos'
-			}
+			// demoNotes: this.notes,
+			// setPlaceHolder: 'amir',
+			// title: '',
+			// txt: '',
+			// noteType: '',
+			// backgroundColor: '',
+			// placeHolder: {
+			// 	text: 'Please write some text',
+			// 	image: 'Please paste your image url',
+			// 	video: 'Please paste your video url',
+			// 	todo: 'Please write some todos'
+			// }
 		};
 	},
 	created() {},
 	updated() {},
 	destroyed() {},
 	methods: {
-		setObjType(ev) {
-			this.noteType = ev.target.value;
-			this.setPlaceHolder = this.placeHolder[ev.target.value];
-		},
-		save() {
-			const backgroundColor = this.backgroundColor;
-			if (this.noteType === 'text') {
-				const txtInfo = { title: this.title, txt: this.txt };
-				noteService.addNote('NoteTxt', txtInfo, backgroundColor);
-			} else if (this.noteType === 'image') {
-				const imgInfo = { title: this.title, url: this.txt };
-				noteService.addNote('NoteImg', imgInfo, backgroundColor);
-			} else if (this.noteType === 'video') {
-				const videoInfo = { title: this.title, url: this.txt };
-				noteService.addNote('NoteVideo', videoInfo, backgroundColor);
-			} else if (this.noteType === 'todo') {
-				const todosTxt = this.txt.split(',');
-				const todos = [];
-				todosTxt.map((todo) => {
-					const task = {
-						txt: todo,
-						doneAt: new Date(),
-						id: utilService.makeId(),
-						checked: false
-					};
-					todos.push(task);
-				});
-				const toDoInfo = { title: this.title, todos: todos, label: null };
-				noteService.addNote('NoteToDo', toDoInfo, backgroundColor);
-			}
-			this.title = '';
-			this.txt = '';
+		// setObjType(ev) {
+		// 	this.noteType = ev.target.value;
+		// 	this.setPlaceHolder = this.placeHolder[ev.target.value];
+		// },
+		// save() {
+		// 	const backgroundColor = this.backgroundColor;
+		// 	if (this.noteType === 'text') {
+		// 		const txtInfo = { title: this.title, txt: this.txt };
+		// 		noteService.addNote('NoteTxt', txtInfo, backgroundColor);
+		// 	} else if (this.noteType === 'image') {
+		// 		const imgInfo = { title: this.title, url: this.txt };
+		// 		noteService.addNote('NoteImg', imgInfo, backgroundColor);
+		// 	} else if (this.noteType === 'video') {
+		// 		const videoInfo = { title: this.title, url: this.txt };
+		// 		noteService.addNote('NoteVideo', videoInfo, backgroundColor);
+		// 	} else if (this.noteType === 'todo') {
+		// 		const todosTxt = this.txt.split(',');
+		// 		const todos = [];
+		// 		todosTxt.map((todo) => {
+		// 			const task = {
+		// 				txt: todo,
+		// 				doneAt: new Date(),
+		// 				id: utilService.makeId(),
+		// 				checked: false
+		// 			};
+		// 			todos.push(task);
+		// 		});
+		// 		const toDoInfo = { title: this.title, todos: todos, label: null };
+		// 		noteService.addNote('NoteToDo', toDoInfo, backgroundColor);
+		// 	}
+		// 	this.title = '';
+		// 	this.txt = '';
+		// }
+
+		addNewNote(val) {
+			noteService.addNote(val.type, val.val, val.style);
+			console.log(this.notes);
 		}
 	},
 	computed: {},
@@ -223,6 +224,7 @@ export default {
 		NoteVideo,
 		NoteToDo,
 		controlPanelBtns,
-		noteService
+		noteService,
+		addNewNote
 	}
 };
