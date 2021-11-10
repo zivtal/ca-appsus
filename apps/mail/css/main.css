@@ -12,29 +12,61 @@
 }
 
 .mail-app .mail-folder > div {
-  height: 1.4em;
   justify-self: center;
   padding: 0.6em;
   margin: 5px;
-  border-radius: 0px 25px 25px 0;
+  transition: 0.5s;
 }
 
 .mail-app .mail-folder > div.selected {
+  border-radius: 0px 25px 25px 0;
   background-color: #fce8e6;
   font-weight: bold;
   color: #d61200;
 }
 
 .mail-app .mail-folder > div:not(.selected):hover {
+  border-radius: 0px 25px 25px 0;
   background-color: #f1f3f4;
 }
 
 .mail-app .mail-list {
   flex-grow: 1;
-  background-color: blue;
+  background-color: lightblue;
 }
 
-.mail-app .mail-list .controls {
-  background-color: red;
-  height: 100px;
+.mail-app .mail-list > .controls {
+  background-color: lightgrey;
+  height: 3.5em;
+}
+
+.mail-app .mail-list > .list {
+  width: 100%;
+}
+
+.mail-app .mail-list > .list > section {
+  margin: 0.2em;
+}
+
+.mail-app .mail-list > .list .star {
+  display: flex;
+  align-items: center;
+  width: 2em;
+}
+
+.mail-app .mail-list > .list .content {
+  flex-grow: 1;
+}
+
+.mail-app .mail-list > .list .date {
+  width: 4em;
+}
+
+.mail-app .mail-list > .list .controls {
+  display: none;
+}
+
+.mail-app .mail-list > .list .preview {
+  margin: 0.2em;
+  min-height: 3em;
 }
