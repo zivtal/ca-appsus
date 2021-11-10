@@ -26,24 +26,38 @@ const folderList = {
 const mailPreview = {
 	props: ['mail'],
 	template: `
-		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended">
-			<div class="star">{{star}}</div>
+	<div>
+		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="controls = true" @mouseleave="controls = false">
+			<div class="star">
+				<img v-if="mail.isStarred" src="./apps/mail/img/star-active.svg"/>
+				<img v-if="!mail.isStarred" src="./apps/mail/img/star-disabled.svg"/>
+			</div>
 			<div class="content"><p>{{mail.subject}}</p></div>
-			<div class="date"><p>{{sent}}</p></div>
-			<div class="controls flex">kkk</div>
+			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
+			<div v-if="controls" class="controls flex">
+				<img src="apps/mail/img/reply.svg"/>
+				<img src="apps/mail/img/trash.png"/>
+				<img src="apps/mail/img/unread.png"/>
+				<img src="apps/mail/img/fullscreen.svg"/>
+			</div>
 		</section>
-		<section class="preview-extended" :class="{hide: !extended}">
-			KKKKK
-		</section>
+		<transition name="slide-fade">
+			<section v-if="extended" class="preview-extended">
+				{{mail.body}}
+			</section>
+		</transition>
+	</div>
 	`,
 	data() {
 		return {
 			extended: false,
+			controls: false,
 		}
 	},
 	methods: {
 		toggleExtended() {
 			this.extended = !this.extended;
+			console.log(this.extended);
 		}
 	},
 	computed: {
