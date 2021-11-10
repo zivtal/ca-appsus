@@ -12,7 +12,7 @@ const routes = [
 		component: mailPage
 	},
 	{
-		path: '/mail/:mailId?',
+		path: '/mail/:folder?/:mailId?',
 		component: mailPage
 	},
 	{
