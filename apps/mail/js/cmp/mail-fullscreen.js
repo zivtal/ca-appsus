@@ -7,7 +7,7 @@ export const mailFullscreen = {
 			<section class="controls flex">
 				<img src="apps/mail/img/back.png"  @click="goBack"/>
 				<img src="apps/mail/img/reply.svg" />
-				<img src="apps/mail/img/trash.png" @click="$emit('remove',mail)"/>
+				<img src="apps/mail/img/trash.png" @click="remove"/>
 				<img src="apps/mail/img/unread.png"/>
 				<img src="apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
 			</section>
@@ -33,6 +33,10 @@ export const mailFullscreen = {
 		</section>
 	`,
 	methods: {
+		remove() {
+			this.$router.go(-1);
+			$emit('remove', mail);
+		},
 		goBack() {
 			this.$router.go(-1);
 		},
