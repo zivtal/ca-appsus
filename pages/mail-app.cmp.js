@@ -1,4 +1,4 @@
-import { utilService } from "../services/utils.service";
+import { utilService } from "../services/utils.service.js";
 
 const getFolder = {
 	props: ['folder'],
@@ -85,7 +85,7 @@ export default {
 		};
 	},
 	created() {
-
+		this.mails = utilService.createDemo('')
 	},
 	updated() { },
 	destroyed() { },
