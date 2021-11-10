@@ -9,8 +9,32 @@
 </head>
 <body>
     <section class="mail-app flex">
-        <section class="mail-folder"></section>
-        <section class="mail-list"></section>
+        <section class="mail-folder flex columns">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </section>
+        <section class="mail-list">
+            <section class="control">controls</section>
+            <section class='list'>
+                <section class="preview">
+                    <div class="star">X</div>
+                    <div class="content"></div>
+                    <div class="date"></div>
+                </section>
+            </section>
+        </section>
     </section>
+    <script>
+        function createDemo(fileUrl) {
+            console.log('k');
+            var request = new XMLHttpRequest();
+            request.open('GET', fileUrl, false);
+            request.send(null);
+            return JSON.parse(request.responseText);
+        }
+        console.log(createDemo('../../json/emails.json'));
+    </script>
 </body>
 </html>

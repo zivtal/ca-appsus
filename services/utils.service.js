@@ -19,8 +19,9 @@ function deepCopy(obj) {
 }
 
 function createDemo(fileUrl) {
+    console.log('k');
     var request = new XMLHttpRequest();
-    request.open('GET', jsonFile, false);
+    request.open('GET', fileUrl, false);
     request.send(null);
     return JSON.parse(request.responseText);
 }
