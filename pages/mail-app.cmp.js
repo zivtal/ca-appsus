@@ -39,7 +39,7 @@ const mailPreview = {
 				<img src="apps/mail/img/reply.svg"/>
 				<img src="apps/mail/img/trash.png" @click.stop="$emit('remove',mail)"/>
 				<img src="apps/mail/img/unread.png"/>
-				<img src="apps/mail/img/fullscreen.svg"/>
+				<img src="apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
 			</div>
 		</section>
 		<transition name="slide-fade">
@@ -58,6 +58,9 @@ const mailPreview = {
 	methods: {
 		toggleExtended() {
 			this.extended = !this.extended;
+		},
+		goTo(mail) {
+			this.$router.push({ path: `/mail/${mail.id}` });
 		}
 	},
 	computed: {
@@ -99,17 +102,54 @@ const mailList = {
 	}
 }
 
+const mailFullscreen = {
+	props: ['mail'],
+	template: `
+		<section class="mail-read">
+			<section class="controls flex">
+				<button> < Back </button>
+				<img src="apps/mail/img/reply.svg"/>
+				<img src="apps/mail/img/trash.png" @click.stop="$emit('remove',mail)"/>
+				<img src="apps/mail/img/unread.png"/>
+				<img src="apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
+			</section>
+			<section class="mail">
+				<img src="./apps/mail/img/profile.png">
+				<section class="content">
+					<div class="subject">
+						<span class="title">{{mail.subject}}</span>
+						<span class="tags">{{mail.folder}}</span>
+					</div>
+					<p class="from">{{mail.from}}</p>
+					<p class="to">{{mail.to}}</p>
+					<p class="body">
+						{{mail.body}}
+					</p>
+				<section>
+
+			</section>
+		</section>
+	`,
+	computed: {
+		tagForDisplay() {
+			return mail.folder;
+		},
+	}
+}
+
 export default {
 	props: [],
 	components: {
 		folderList,
 		mailList,
+		mailFullscreen,
 	},
 	template: `
-		<section class="mail-app">
+		<section class="mail-app main-app">
 			<section v-if="mails.all" class="display flex">
 				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange"/>
-				<mail-list :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove"/>
+				<mail-fullscreen v-if="active.mail" :mail="active.mail" />
+				<mail-list v-else :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove"/>
 			</section>
 		</section>
     `,
@@ -119,6 +159,7 @@ export default {
 				folder: null,
 				filter: null,
 				sort: null,
+				mail: null,
 			},
 			mails: {
 				all: null,
@@ -176,5 +217,11 @@ export default {
 			},
 			deep: true,
 		},
+		'$route.params.mailId': {
+			handler(mailId) {
+				this.active.mail = (mailId) ? this.mails.all.find(item => item.id === mailId) : null;
+			},
+			immediate: true,
+		}
 	}
 };

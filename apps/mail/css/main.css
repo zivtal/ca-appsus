@@ -3,11 +3,8 @@
 .mail-app {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-}
-
-.mail-app .display {
-  height: 500px;
+  color: whitesmoke;
+  background-color: #111;
 }
 
 .mail-app .display .mail-folder {
@@ -23,6 +20,7 @@
   background-color: white;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
   border-radius: 2em;
+  font-weight: bold;
   border: 0;
 }
 
@@ -39,6 +37,7 @@
   justify-self: center;
   padding: 0.6em;
   margin: 0.3em 1em 0 1.3em;
+  border-radius: 0px 25px 25px 0;
   transition: 0.5s;
 }
 
@@ -51,18 +50,18 @@
 }
 
 .mail-app .display .mail-folder > div.selected {
-  border-radius: 0px 25px 25px 0;
-  background-color: #fce8e6;
+  background-color: #666;
   font-weight: bold;
-  color: #d61200;
+  color: white;
 }
 
 .mail-app .display .mail-folder > div:not(.selected):hover {
-  border-radius: 0px 25px 25px 0;
   background-color: #f1f3f4;
+  color: #333;
 }
 
 .mail-app .display .mail-list {
+  color: black;
   flex-grow: 1;
 }
 
@@ -71,10 +70,13 @@
 }
 
 .mail-app .display .mail-list > .controls button {
+  cursor: pointer;
+  font-weight: bold;
   margin: 10px 15px 0px 0px;
   height: 2.5em;
   min-width: 8em;
   border: 0;
+  border-radius: 2em;
 }
 
 .mail-app .display .mail-list > .list {
@@ -82,11 +84,14 @@
 }
 
 .mail-app .display .mail-list > .list .preview {
+  cursor: pointer;
   border-bottom: 1px solid #e2e8ea;
   min-height: 3em;
+  transition: 0.5s;
 }
 
 .mail-app .display .mail-list > .list .preview-extended {
+  background-color: whitesmoke;
   padding: 1em 3em;
 }
 
@@ -95,11 +100,16 @@
 }
 
 .mail-app .display .mail-list > .list .preview.unread {
+  background-color: whitesmoke;
   font-weight: bold;
 }
 
 .mail-app .display .mail-list > .list .preview:not(.preview.unread) {
   background-color: rgba(242, 245, 245, 0.8);
+}
+
+.mail-app .display .mail-list > .list .preview:hover {
+  transform: scale(101%);
 }
 
 .mail-app .display .mail-list > .list .star {
@@ -126,7 +136,7 @@
 }
 
 .mail-app .display .mail-list > .list .controls > img {
-  opacity: 0.5;
+  opacity: 0.7;
   margin: 0 7px;
   padding: 5px;
   height: 32px;
@@ -136,21 +146,77 @@
 }
 
 .mail-app .display .mail-list > .list .controls > img:hover {
-  background-color: silver;
+  background-color: #555;
 }
 
 .mail-app .display .mail-list > .list .controls > img:last-child {
   margin-inline-end: 1em;
 }
 
-.slide-fade-enter-active {
+.mail-app .display .mail-list .slide-fade-enter-active {
   transition: all 0.8s ease;
 }
-.slide-fade-leave-active {
+.mail-app .display .mail-list .slide-fade-leave-active {
   transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter,
-.slide-fade-leave-to {
+.mail-app .display .mail-list .slide-fade-enter,
+.mail-app .display .mail-list .slide-fade-leave-to {
   transform: translateY(-50%);
   opacity: 0;
+}
+
+.mail-app .display .mail-read {
+  width: 100%;
+  padding: 25px;
+}
+
+.mail-app .display .mail-read > .controls {
+  background-color: whitesmoke;
+  height: 38px;
+  margin-block-end: 20px;
+}
+
+.mail-app .display .mail-read > .controls > img {
+  fill: white;
+  margin: 10px;
+}
+
+.mail-app .display .mail-read > .mail {
+  margin: 0px 10px;
+}
+
+.mail-app .display .mail-read > .mail > img {
+  float: left;
+  width: 48px;
+  border-radius: 50%;
+  margin-inline-end: 10px;
+}
+
+.mail-app .display .mail-read > .mail .subject .title {
+  font-size: 1.6em;
+  height: 2em;
+}
+
+.mail-app .display .mail-read > .mail .subject .tags {
+  margin: 20px;
+  padding: 3px 10px;
+  font-size: 0.8em;
+  border-radius: 5px;
+  color: black;
+  background-color: whitesmoke;
+}
+
+.mail-app .display .mail-read > .mail p {
+  margin-inline-start: 58px;
+  line-height: 1.4em;
+}
+
+.mail-app .display .mail-read > .mail .from {
+  margin: 15px 58px;
+  font-size: 1.2em;
+}
+
+.mail-app .display .mail-read > .mail .to {
+  margin: 10px 58px;
+  font-size: 0.9em;
 }
