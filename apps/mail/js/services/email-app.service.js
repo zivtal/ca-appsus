@@ -1,8 +1,10 @@
-import { storageService } from "../../../../services/async-storage.service";
+import { storageService } from "../../../../services/async-storage.service.js";
+import { utilService } from "../../../../services/utils.service.js";
 
 const KEY = 'mail';
+_createDemo();
 
-export const bookService = {
+export const mailService = {
     query,
     remove,
     save,
@@ -26,3 +28,11 @@ function getById(itemId) {
     return storageService.get(KEY, itemId);
 }
 
+function _createDemo() {
+    let mails = utilService.loadFromStorage(KEY);
+    if (!mails || !mails.length) {
+        mails = utilService.createDemo('../json/emails.json');
+        utilService.saveToStorage(KEY, mails);
+    }
+    return mails;
+}

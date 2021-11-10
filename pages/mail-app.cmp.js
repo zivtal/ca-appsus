@@ -1,3 +1,4 @@
+import { mailService } from "../apps/mail/js/services/email-app.service.js";
 import { utilService } from "../services/utils.service.js";
 
 const folderList = {
@@ -28,7 +29,7 @@ const mailPreview = {
 	template: `
 	<div>
 		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="controls = true" @mouseleave="controls = false">
-			<div class="star">
+			<div class="star" @click.stop="mail.isStarred = !mail.isStarred">
 				<img v-if="mail.isStarred" src="./apps/mail/img/star-active.svg"/>
 				<img v-if="!mail.isStarred" src="./apps/mail/img/star-disabled.svg"/>
 			</div>
@@ -36,7 +37,7 @@ const mailPreview = {
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
 				<img src="apps/mail/img/reply.svg"/>
-				<img src="apps/mail/img/trash.png"/>
+				<img src="apps/mail/img/trash.png" @click.stop="$emit('remove',mail)"/>
 				<img src="apps/mail/img/unread.png"/>
 				<img src="apps/mail/img/fullscreen.svg"/>
 			</div>
@@ -57,7 +58,6 @@ const mailPreview = {
 	methods: {
 		toggleExtended() {
 			this.extended = !this.extended;
-			console.log(this.extended);
 		}
 	},
 	computed: {
@@ -85,11 +85,18 @@ const mailList = {
 			</section>
 			<section class="list flex columns">
 				<template v-for="mail in mails">
-					<mail-preview :mail="mail" />
+					<mail-preview :mail="mail" @remove="removeMail"/>
 				</template>
 			</section>
 		</section>
 	`,
+	methods: {
+		removeMail(mail) {
+			mailService.remove(mail.id)
+				.then(this.$emit('remove', mail))
+				.catch(err => console.log(err));
+		}
+	}
 }
 
 export default {
@@ -100,9 +107,9 @@ export default {
 	},
 	template: `
 		<section class="mail-app">
-			<section class="display flex">
+			<section v-if="mails.all" class="display flex">
 				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange"/>
-				<mail-list :mails="mails.filtered" :folder="active"/>
+				<mail-list :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove"/>
 			</section>
 		</section>
     `,
@@ -120,27 +127,30 @@ export default {
 				folders: ['All', 'Inbox', 'Sent', 'Draft'],
 				unread: {},
 			},
+			refresh: Date.now(),
 		};
 	},
 	created() {
-		this.active.folder = 'Inbox';
-		this.mails.all = utilService.createDemo('../json/emails.json');
-		// check for more folders
-		const folders = this.mails.folders;
-		const other = this.mails.all.filter(item => !folders.includes(item.folder));
-		other.forEach(item => { if (!folders.includes(item.folder)) folders.push(item.folder); });
-		// duplicated code - exists in watch but not working with 'immediate'.
-		const all = this.mails.all;
-		this.mails.folders.forEach((folder, idx) => {
-			const count = all.filter(item => (idx) ? item.folder === folder && !item.isRead : !item.isRead).length;
-			this.mails.unread[folder] = count;
-		});
+		mailService.query()
+			.then(mails => {
+				this.mails.all = mails
+				// check for more folders
+				const folders = this.mails.folders;
+				const other = this.mails.all.filter(item => !folders.includes(item.folder));
+				other.forEach(item => { if (!folders.includes(item.folder)) folders.push(item.folder); });
+				this.active.folder = 'Inbox';
+			})
+			.catch(err => console.log(err));
 	},
 	updated() { },
 	destroyed() { },
 	methods: {
 		folderChange(active) {
 			this.active.folder = active;
+		},
+		remove(mail) {
+			const idx = this.mails.filtered.findIndex(item => item === mail);
+			this.mails.filtered.splice(idx, 1);
 		}
 	},
 	computed: {
@@ -151,7 +161,8 @@ export default {
 	watch: {
 		active: {
 			handler(active) {
-				this.mails.filtered = this.mails.all.filter(item => item.folder === active.folder);
+				const all = (this.mails.folders[0] === active.folder);
+				this.mails.filtered = (all) ? this.mails.all : this.mails.all.filter(item => item.folder === active.folder);
 			},
 			deep: true,
 		},
