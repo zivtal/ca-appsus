@@ -100,7 +100,8 @@
 }
 
 .mail-app .display .mail-list > .list .preview.unread {
-  background-color: whitesmoke;
+  color: whitesmoke;
+  background-color: #666;
   font-weight: bold;
 }
 

@@ -16,10 +16,13 @@ const folderList = {
 			activeFolder: this.active,
 		}
 	},
+	created() {
+		console.log(this.active);
+	},
 	methods: {
 		folderChange(activeFolder) {
 			this.activeFolder = activeFolder;
-			this.$emit('change', this.activeFolder);
+			this.$router.push({ path: `/mail/${activeFolder.toLowerCase()}` });
 		}
 	},
 }
@@ -60,7 +63,7 @@ const mailPreview = {
 			this.extended = !this.extended;
 		},
 		goTo(mail) {
-			this.$router.push({ path: `/mail/${mail.id}` });
+			this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}/${mail.id}` });
 		}
 	},
 	computed: {
@@ -107,7 +110,7 @@ const mailFullscreen = {
 	template: `
 		<section class="mail-read">
 			<section class="controls flex">
-				<button> < Back </button>
+				<button @click="goBack"> < Back </button>
 				<img src="apps/mail/img/reply.svg"/>
 				<img src="apps/mail/img/trash.png" @click.stop="$emit('remove',mail)"/>
 				<img src="apps/mail/img/unread.png"/>
@@ -130,6 +133,12 @@ const mailFullscreen = {
 			</section>
 		</section>
 	`,
+	methods: {
+		goBack() {
+			console.log('k');
+			this.$router.push(`/mail/${this.mail.folder}`);
+		},
+	},
 	computed: {
 		tagForDisplay() {
 			return mail.folder;
@@ -217,11 +226,15 @@ export default {
 			},
 			deep: true,
 		},
-		'$route.params.mailId': {
-			handler(mailId) {
-				this.active.mail = (mailId) ? this.mails.all.find(item => item.id === mailId) : null;
+		'$route.params': {
+			handler(get) {
+				if (get.folder) {
+					const idx = this.mails.folders.findIndex(folder => folder.toLowerCase() === get.folder.toLowerCase());
+					this.active.folder = this.mails.folders[idx];
+				}
+				this.active.mail = (get.mailId) ? this.mails.all.find(item => item.id === get.mailId) : null;
 			},
 			immediate: true,
-		}
+		},
 	}
 };
