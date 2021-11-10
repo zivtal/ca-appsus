@@ -3,7 +3,8 @@ export const utilService = {
 	loadFromStorage,
 	deepCopy,
 	createDemo,
-	getTimeFormat
+	getTimeFormat,
+	makeId
 };
 
 function saveToStorage(key, val) {
