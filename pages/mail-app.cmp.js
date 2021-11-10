@@ -31,7 +31,7 @@ const mailPreview = {
 	props: ['mail'],
 	template: `
 	<div>
-		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="controls = true" @mouseleave="controls = false">
+		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="mouseOver" @mouseleave="mouseLeave">
 			<div class="star" @click.stop="mail.isStarred = !mail.isStarred">
 				<img v-if="mail.isStarred" src="./apps/mail/img/star-active.svg"/>
 				<img v-if="!mail.isStarred" src="./apps/mail/img/star-disabled.svg"/>
@@ -59,6 +59,12 @@ const mailPreview = {
 		}
 	},
 	methods: {
+		mouseOver() {
+			this.controls = true;
+		},
+		mouseLeave() {
+			this.controls = false;
+		},
 		toggleExtended() {
 			this.extended = !this.extended;
 		},
@@ -73,7 +79,7 @@ const mailPreview = {
 		sent() {
 			return utilService.getTimeFormat(this.mail.sentAt);
 		}
-	}
+	},
 }
 
 const mailList = {
@@ -155,6 +161,9 @@ export default {
 	},
 	template: `
 		<section class="mail-app main-app">
+			<section class="search-bar">
+				
+			</section>
 			<section v-if="mails.all" class="display flex">
 				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange"/>
 				<mail-fullscreen v-if="active.mail" :mail="active.mail" />
