@@ -18,3 +18,7 @@
 .grid.gap {
   gap: 20px;
 }
+
+.hide {
+  display: none;
+}
