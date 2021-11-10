@@ -1,18 +1,14 @@
+import { router } from './routes.js';
+
 const options = {
 	el: '#app',
 	router,
 	template: `
 	<section>
-		<user-msg />
-		<headerApp />
 		<router-view /> 
 	</section>
     `,
-	components: {
-		bookApp,
-		headerApp,
-		userMsg
-	}
+	components: {}
 };
 
 new Vue(options);
