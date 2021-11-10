@@ -6,7 +6,7 @@ export const mailPreview = {
     template: `
 	<div>
 		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="mouseOver" @mouseleave="mouseLeave">
-			<div class="star" @click.stop="mail.isStarred = !mail.isStarred">
+			<div class="star" @click.stop="$emit('star',mail)">
 				<img v-if="mail.isStarred" src="./apps/mail/img/star-active.svg"/>
 				<img v-if="!mail.isStarred" src="./apps/mail/img/star-disabled.svg"/>
 			</div>
@@ -45,7 +45,7 @@ export const mailPreview = {
         goTo(mail) {
             mail.isRead = true;
             mailService.save(mail)
-                .then(this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}/${mail.id}` }))
+                .then(this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}?id=${mail.id}` }))
                 .catch(err => console.log(err));
         }
     },
@@ -74,7 +74,7 @@ export const mailList = {
 			</section>
 			<section class="list flex columns">
 				<template v-for="mail in mails">
-					<mail-preview :mail="mail" @remove="$emit('remove',mail)"/>
+					<mail-preview :mail="mail" @remove="$emit('remove',mail)" @star="$emit('star',mail)"/>
 				</template>
 			</section>
 		</section>

@@ -1,4 +1,5 @@
 import { mailService } from "../apps/mail/js/services/email-app.service.js";
+import { utilService } from "../services/utils.service.js";
 import { mailList } from "../apps/mail/js/cmp/mail-list.cmp.js";
 import { folderList } from "../apps/mail/js/cmp/mail-folderlist.cmp.js";
 import { mailFullscreen } from "../apps/mail/js/cmp/mail-fullscreen.js";
@@ -18,12 +19,13 @@ export default {
 			<section v-if="mails.all" class="display flex">
 				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange"/>
 				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove"/>
-				<mail-list v-else :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove"/>
+				<mail-list v-else :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove" @star="star"/>
 			</section>
 		</section>
     `,
 	data() {
 		return {
+			id: null,
 			active: {
 				folder: null,
 				filter: null,
@@ -73,6 +75,12 @@ export default {
 					.then(() => splicer(mail, this.mails))
 					.catch(err => console.log(err));
 			}
+		},
+		star(mail) {
+			mail.isStarred = !mail.isStarred;
+			mailService.save(mail)
+				.then()
+				.catch(err => console.log(err));
 		}
 	},
 	computed: {
@@ -83,20 +91,26 @@ export default {
 	watch: {
 		active: {
 			handler(active) {
-				const all = (this.mails.folders[0] === active.folder);
+				const all = (!active.folder || this.mails.folders[0] === active.folder);
 				this.mails.filtered = (all) ? this.mails.all : this.mails.all.filter(item => item.folder === active.folder);
 			},
 			deep: true,
 		},
-		'$route.params': {
+		'$route.params.folder': {
 			handler(get) {
-				if (get.folder) {
-					const idx = this.mails.folders.findIndex(folder => folder.toLowerCase() === get.folder.toLowerCase());
+				console.log(get);
+				if (get) {
+					const idx = this.mails.folders.findIndex(folder => folder.toLowerCase() === get.toLowerCase());
 					this.active.folder = this.mails.folders[idx];
 				}
-				this.active.mail = (get.mailId) ? this.mails.all.find(item => item.id === get.mailId) : null;
 			},
 			immediate: true,
 		},
+		'$route.query.id': {
+			handler(get) {
+				this.active.mail = (get) ? this.mails.all.find(item => item.id === get) : null;
+			},
+			immediate: true,
+		}
 	}
 };

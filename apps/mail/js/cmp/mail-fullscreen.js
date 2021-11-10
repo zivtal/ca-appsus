@@ -34,7 +34,7 @@ export const mailFullscreen = {
 	`,
 	methods: {
 		goBack() {
-			this.$router.push(`/mail/${this.mail.folder}`);
+			this.$router.go(-1);
 		},
 	},
 	computed: {
