@@ -5,3 +5,7 @@
 body {
   margin: 0;
 }
+
+.main-app {
+  max-width: 1280px;
+}
