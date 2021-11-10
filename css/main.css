@@ -1,4 +1,5 @@
 @import "/apps/mail/css/main.css";
+@import "/apps/note/css/main-note.css";
 
 * {
   box-sizing: border-box;
