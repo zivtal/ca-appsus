@@ -1,156 +1,7 @@
 import { mailService } from "../apps/mail/js/services/email-app.service.js";
-import { utilService } from "../services/utils.service.js";
-
-const folderList = {
-	props: ['folders', 'active', 'unread'],
-	template: `
-		<section class="mail-folder flex columns">
-			<button class="flex align-center"><img src="./apps/mail/img/compose.png"/><p>Compose</p></button>
-			<template v-for="folder in folders">
-				<div @click="folderChange(folder)" :class="{selected: folder === activeFolder}"><span class="title">{{folder}}</span><span class="number">{{unread[folder]}}</span></div>
-			</template>
-		</section>
-	`,
-	data() {
-		return {
-			activeFolder: this.active,
-		}
-	},
-	created() {
-		console.log(this.active);
-	},
-	methods: {
-		folderChange(activeFolder) {
-			this.activeFolder = activeFolder;
-			this.$router.push({ path: `/mail/${activeFolder.toLowerCase()}` });
-		}
-	},
-}
-
-const mailPreview = {
-	props: ['mail'],
-	template: `
-	<div>
-		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="mouseOver" @mouseleave="mouseLeave">
-			<div class="star" @click.stop="mail.isStarred = !mail.isStarred">
-				<img v-if="mail.isStarred" src="./apps/mail/img/star-active.svg"/>
-				<img v-if="!mail.isStarred" src="./apps/mail/img/star-disabled.svg"/>
-			</div>
-			<div class="content"><p>{{mail.subject}}</p></div>
-			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
-			<div v-if="controls" class="controls flex">
-				<img src="apps/mail/img/reply.svg"/>
-				<img src="apps/mail/img/trash.png" @click.stop="$emit('remove',mail)"/>
-				<img src="apps/mail/img/unread.png"/>
-				<img src="apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
-			</div>
-		</section>
-		<transition name="slide-fade">
-			<section v-if="extended" class="preview-extended">
-				{{mail.body}}
-			</section>
-		</transition>
-	</div>
-	`,
-	data() {
-		return {
-			extended: false,
-			controls: false,
-		}
-	},
-	methods: {
-		mouseOver() {
-			this.controls = true;
-		},
-		mouseLeave() {
-			this.controls = false;
-		},
-		toggleExtended() {
-			this.extended = !this.extended;
-		},
-		goTo(mail) {
-			this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}/${mail.id}` });
-		}
-	},
-	computed: {
-		star() {
-			return (this.mail.isStarred) ? '*' : '';
-		},
-		sent() {
-			return utilService.getTimeFormat(this.mail.sentAt);
-		}
-	},
-}
-
-const mailList = {
-	props: ['mails'],
-	components: {
-		mailPreview,
-	},
-	template: `
-		<section class="mail-list">
-			<section class="controls">
-				<button>Read/Unread</button>
-				<button>Starred/Unstarred</button>
-				<button>Date</button>
-				<button>Subject</button>
-			</section>
-			<section class="list flex columns">
-				<template v-for="mail in mails">
-					<mail-preview :mail="mail" @remove="removeMail"/>
-				</template>
-			</section>
-		</section>
-	`,
-	methods: {
-		removeMail(mail) {
-			mailService.remove(mail.id)
-				.then(this.$emit('remove', mail))
-				.catch(err => console.log(err));
-		}
-	}
-}
-
-const mailFullscreen = {
-	props: ['mail'],
-	template: `
-		<section class="mail-read">
-			<section class="controls flex">
-				<button @click="goBack"> < Back </button>
-				<img src="apps/mail/img/reply.svg"/>
-				<img src="apps/mail/img/trash.png" @click.stop="$emit('remove',mail)"/>
-				<img src="apps/mail/img/unread.png"/>
-				<img src="apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
-			</section>
-			<section class="mail">
-				<img src="./apps/mail/img/profile.png">
-				<section class="content">
-					<div class="subject">
-						<span class="title">{{mail.subject}}</span>
-						<span class="tags">{{mail.folder}}</span>
-					</div>
-					<p class="from">{{mail.from}}</p>
-					<p class="to">{{mail.to}}</p>
-					<p class="body">
-						{{mail.body}}
-					</p>
-				<section>
-
-			</section>
-		</section>
-	`,
-	methods: {
-		goBack() {
-			console.log('k');
-			this.$router.push(`/mail/${this.mail.folder}`);
-		},
-	},
-	computed: {
-		tagForDisplay() {
-			return mail.folder;
-		},
-	}
-}
+import { mailList } from "../apps/mail/js/cmp/mail-list.cmp.js";
+import { folderList } from "../apps/mail/js/cmp/mail-folderlist.cmp.js";
+import { mailFullscreen } from "../apps/mail/js/cmp/mail-fullscreen.js";
 
 export default {
 	props: [],
@@ -162,11 +13,11 @@ export default {
 	template: `
 		<section class="mail-app main-app">
 			<section class="search-bar">
-				
+
 			</section>
 			<section v-if="mails.all" class="display flex">
 				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange"/>
-				<mail-fullscreen v-if="active.mail" :mail="active.mail" />
+				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove"/>
 				<mail-list v-else :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove"/>
 			</section>
 		</section>
@@ -183,7 +34,7 @@ export default {
 				all: null,
 				filtered: null,
 				display: null,
-				folders: ['All', 'Inbox', 'Sent', 'Draft'],
+				folders: ['All', 'Inbox', 'Sent', 'Draft', 'Trash'],
 				unread: {},
 			},
 			refresh: Date.now(),
@@ -208,8 +59,20 @@ export default {
 			this.active.folder = active;
 		},
 		remove(mail) {
-			const idx = this.mails.filtered.findIndex(item => item === mail);
-			this.mails.filtered.splice(idx, 1);
+			const splicer = function (mail, mails) {
+				const idx = mails.filtered.findIndex(item => item === mail);
+				mails.filtered.splice(idx, 1);
+			};
+			if (mail.folder === 'Trash') {
+				mailService.remove(mail.id)
+					.then(() => splicer(mail, this.mails))
+					.catch(err => console.log(err));
+			} else {
+				mail.folder = 'Trash';
+				mailService.save(mail)
+					.then(() => splicer(mail, this.mails))
+					.catch(err => console.log(err));
+			}
 		}
 	},
 	computed: {
@@ -222,16 +85,6 @@ export default {
 			handler(active) {
 				const all = (this.mails.folders[0] === active.folder);
 				this.mails.filtered = (all) ? this.mails.all : this.mails.all.filter(item => item.folder === active.folder);
-			},
-			deep: true,
-		},
-		mails: {
-			handler(mails) {
-				const all = this.mails.all;
-				mails.folders.forEach((folder, idx) => {
-					const count = all.filter(item => (idx) ? item.folder === folder && !item.isRead : !item.isRead).length;
-					this.mails.unread[folder] = count;
-				});
 			},
 			deep: true,
 		},

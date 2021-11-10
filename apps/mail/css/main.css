@@ -57,7 +57,7 @@
 
 .mail-app .display .mail-folder > div:not(.selected):hover {
   background-color: #f1f3f4;
-  color: #333;
+  color: gray;
 }
 
 .mail-app .display .mail-list {
@@ -65,17 +65,25 @@
 }
 
 .mail-app .display .mail-list > .controls {
-  height: 3.8em;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: 1.2em;
+  background-color: #444;
 }
 
 .mail-app .display .mail-list > .controls button {
   cursor: pointer;
-  font-weight: bold;
-  margin: 10px 15px 0px 0px;
-  height: 2.5em;
-  min-width: 8em;
+  color: white;
+  justify-content: flex-end;
+  height: 3em;
+  padding: 0 25px;
   border: 0;
-  border-radius: 2em;
+  background-color: transparent;
+  border-bottom: 5px solid #444;
+}
+
+.mail-app .display .mail-list > .controls button:hover {
+  border-bottom: 5px solid whitesmoke;
 }
 
 .mail-app .display .mail-list > .list {
@@ -145,11 +153,11 @@
   width: 32px;
   border-radius: 50%;
   object-fit: cover;
-  background-color: whitesmoke;
+  filter: invert(100%);
 }
 
 .mail-app .display .mail-list > .list .controls > img:hover {
-  background-color: white;
+  background-color: rgb(165, 164, 164);
 }
 
 .mail-app .display .mail-list > .list .controls > img:last-child {
@@ -172,22 +180,30 @@
   width: 100%;
   padding: 25px;
   color: #111;
-  background-color: whitesmoke;
 }
 
 .mail-app .display .mail-read > .controls {
-  background-color: whitesmoke;
   height: 38px;
   margin-block-end: 20px;
 }
 
 .mail-app .display .mail-read > .controls > img {
-  fill: white;
+  height: 32px;
+  padding: 5px;
+  filter: invert(70%);
   margin: 10px;
+  border-radius: 50%;
+}
+
+.mail-app .display .mail-read > .controls > img:hover {
+  filter: invert(100%);
+  background-color: silver;
 }
 
 .mail-app .display .mail-read > .mail {
+  background-color: whitesmoke;
   margin: 0px 10px;
+  padding: 25px;
 }
 
 .mail-app .display .mail-read > .mail > img {
@@ -225,4 +241,33 @@
 .mail-app .display .mail-read > .mail .to {
   margin: 10px 58px;
   font-size: 0.9em;
+}
+
+.mail-app .display .mail-read > .mail .actions {
+  margin-top: 50px;
+}
+
+.mail-app .display .mail-read > .mail .actions button {
+  border: 0;
+  padding: 10px;
+  box-shadow: inset 0 0 0 1px #dadce0;
+  background-color: transparent;
+  border-radius: 5px;
+  margin-inline-end: 10px;
+  transition: 0.3s;
+}
+
+.mail-app .display .mail-read > .mail .actions button:hover {
+  background-color: rgba(32, 33, 36, 0.059);
+}
+
+.mail-app .display .mail-read > .mail .actions button > img {
+  float: left;
+  height: 22px;
+  width: 22px;
+}
+
+.mail-app .display .mail-read > .mail .actions button > p {
+  margin: 2px 6px;
+  float: right;
 }
