@@ -1,13 +1,40 @@
 @import "../../../css/helpers.css";
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
 .mail-app {
+  margin: 0;
+  height: 500px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mail-app .mail-folder {
+  min-width: 220px;
+  justify-content: start;
+}
+
+.mail-app .mail-folder > div {
+  height: 1.4em;
+  justify-self: center;
+  padding: 0.6em;
+  margin: 5px;
+  border-radius: 0px 25px 25px 0;
+}
+
+.mail-app .mail-folder > div.selected {
+  background-color: #fce8e6;
+  font-weight: bold;
+  color: #d61200;
+}
+
+.mail-app .mail-folder > div:not(.selected):hover {
+  background-color: #f1f3f4;
+}
+
+.mail-app .mail-list {
+  flex-grow: 1;
+  background-color: blue;
+}
+
+.mail-app .mail-list .controls {
   background-color: red;
+  height: 100px;
 }
