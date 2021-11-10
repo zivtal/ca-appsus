@@ -1,13 +1,14 @@
 @import "/apps/mail/css/main.css";
+@import "/apps/note/css/main-note.css";
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+	margin: 0;
 }
 
 .main-app {
-  max-width: 1280px;
+	max-width: 1280px;
 }
