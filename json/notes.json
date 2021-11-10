@@ -1,0 +1,229 @@
+[
+    {
+        "type": "note-txt",
+        "isPinned": false,
+        "info": {
+            "txt": "Hi Muki,Asi invited you to view the folder \"CaJul21-Materials\" on Dropbox.    Enjoy!The Dropbox team.Asi and others will be able to see when you view files in this folder.     Other files shared with you through Dropbox may also show this info.Learn more in our help center.",
+            "title": "Asi shared \"CaJul21-Materials\" with you"
+        },
+        "style": {
+            "backgroundColor": "#fff"
+        },
+        "id": "jKdMjw"
+    },
+    {
+        "type": "note-txt",
+        "isPinned": false,
+        "info": {
+            "txt": "Cyber Deals are here with 50% off!     Be ready to enjoy a massive 50% discount on Absolute Collection, Dorico, SpectraLayers,     Iconica, Nuendo Live and Cubasis. Just enter the coupon code at checkout or save directly     in the App Store or Google Play Store.    Get six of our industry-leading audio software applications for half the price! This offer is only valid until December 7, 2020.",
+            "title": "Massive Savings with Our Cyber Deals"
+        },
+        "style": {
+            "backgroundColor": "#fff"
+        },
+        "id": "A6lyod"
+    },
+    {
+        "id": "7X92DM",
+        "type": "note-txt",
+        "isPinned": true,
+        "info": {
+            "title": "Nice one.",
+            "txt": "What do you call a fish wearing a bowtie? - Sofishticated"
+        },
+        "style": {
+            "backgroundColor": "#e8eaed"
+        }
+    },
+    {
+        "id": "6c5JnY",
+        "type": "note-txt",
+        "isPinned": true,
+        "info": {
+            "title": "Reminder",
+            "txt": "Take out the trash before I leave!"
+        },
+        "style": {
+            "backgroundColor": "#e6c9a8"
+        }
+    },
+    {
+        "id": "qAFAgr",
+        "type": "note-txt",
+        "isPinned": false,
+        "info": {
+            "title": "lol",
+            "txt": "Where do fruits go on vacation? -- Pear-is!"
+        },
+        "style": {
+            "backgroundColor": "#fff"
+        }
+    },
+    {
+        "id": "U9TTeN",
+        "type": "note-img",
+        "isPinned": false,
+        "info": {
+            "url": "https://i.insider.com/5484d9d1eab8ea3017b17e29?width=700&format=jpeg&auto=webp",
+            "title": "Bobi and Me",
+            "txt": ""
+        },
+        "style": {
+            "backgroundColor": "#f28b82"
+        }
+    },
+    {
+        "id": "3HCD39",
+        "type": "note-todos",
+        "isPinned": false,
+        "info": {
+            "txt": "",
+            "labels": [
+                "Important",
+                "My stuff"
+            ],
+            "todos": [
+                {
+                    "txt": "Driving liscence",
+                    "doneAt": null,
+                    "id": "H0WuGR"
+                },
+                {
+                    "txt": "Coding power",
+                    "doneAt": 187111111,
+                    "id": "Ih7m3U"
+                },
+                {
+                    "txt": "Eat cake",
+                    "doneAt": 187101111,
+                    "id": "LpKBfm"
+                }
+            ]
+        }
+    },
+    {
+        "id": "Fs6aZs",
+        "type": "note-video",
+        "isPinned": false,
+        "info": {
+            "title": "Cool video",
+            "txt": "",
+            "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+        }
+    },
+    {
+        "id": "trqOuQ",
+        "type": "note-txt",
+        "isPinned": false,
+        "info": {
+            "title": "Haha!",
+            "txt": "What did the chinese janitor say when he jumped out of the closet? - Supplies!"
+        },
+        "style": {
+            "backgroundColor": "#ccff90"
+        }
+    },
+    {
+        "id": "8CQgPk",
+        "type": "note-todos",
+        "isPinned": false,
+        "info": {
+            "title": "groceries",
+            "txt": "",
+            "todos": [
+                {
+                    "txt": "Apples",
+                    "doneAt": null,
+                    "id": "KQxsFq"
+                },
+                {
+                    "txt": "Bread",
+                    "doneAt": null,
+                    "id": "aDMerC"
+                },
+                {
+                    "txt": "Eggs",
+                    "doneAt": null,
+                    "id": "dsHdzQ"
+                },
+                {
+                    "txt": "Milk",
+                    "doneAt": 187111111,
+                    "id": "WLQTm3"
+                },
+                {
+                    "txt": "Suagar",
+                    "doneAt": 187101111,
+                    "id": "VKfJzd"
+                }
+            ]
+        }
+    },
+    {
+        "id": "lsyLrh",
+        "type": "note-txt",
+        "isPinned": false,
+        "info": {
+            "title": "Tomorrow",
+            "txt": "Tomorrow - Maccabi Haifa vs Tottenham!"
+        },
+        "style": {
+            "backgroundColor": "#aecbfa"
+        }
+    },
+    {
+        "id": "h7H6Wh",
+        "type": "note-img",
+        "isPinned": false,
+        "info": {
+            "url": "https://i.pinimg.com/736x/2d/cf/63/2dcf63c23e359dd5fec6ced32d4d8805.jpg",
+            "title": "Who are you looking at?!",
+            "txt": ""
+        },
+        "style": {
+            "backgroundColor": "#d7aefb"
+        }
+    },
+    {
+        "id": "TBj6fb",
+        "type": "note-img",
+        "isPinned": false,
+        "info": {
+            "url": "https://i.ytimg.com/vi/317jz-PU7Mg/maxresdefault.jpg",
+            "title": "Smelly cat",
+            "txt": ""
+        },
+        "style": {
+            "backgroundColor": "#fff"
+        }
+    },
+    {
+        "id": "hfhvKv",
+        "type": "note-todos",
+        "isPinned": false,
+        "info": {
+            "txt": "",
+            "labels": [
+                "Music",
+                "Hobbies"
+            ],
+            "todos": [
+                {
+                    "txt": "Learn to play guitar",
+                    "doneAt": null,
+                    "id": "rQTl6V"
+                },
+                {
+                    "txt": "Find a drummer",
+                    "doneAt": 187111111,
+                    "id": "PSI5tl"
+                },
+                {
+                    "txt": "Buy a piano",
+                    "doneAt": 187101111,
+                    "id": "OQwY4J"
+                }
+            ]
+        }
+    }
+]
