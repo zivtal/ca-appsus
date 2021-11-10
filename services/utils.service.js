@@ -3,6 +3,7 @@ export const utilService = {
     loadFromStorage,
     deepCopy,
     createDemo,
+    getTimeFormat,
 };
 
 function saveToStorage(key, val) {
@@ -23,4 +24,18 @@ function createDemo(fileUrl) {
     request.open('GET', fileUrl, false);
     request.send(null);
     return JSON.parse(request.responseText);
+}
+
+function getTimeFormat(timestamp, countryCode = 'en-US') {
+    const year = new Date().getFullYear();
+    const date = new Date(timestamp);
+    var options = (year === date.getFullYear()) ? {
+        month: 'short',
+        day: 'numeric',
+    } : {
+        year: '2-digit',
+        month: 'numeric',
+        day: 'numeric',
+    };
+    return date.toLocaleDateString(countryCode, options);
 }
