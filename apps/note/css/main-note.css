@@ -152,7 +152,7 @@ body {
 	border-radius: 8px;
 	break-inside: avoid-column;
 	border: 1px solid #dadce0;
-	transition: .3s;
+	transition: .9s;
 	position: relative;
 }
 
@@ -164,7 +164,8 @@ body {
 }
 
 .user-note:hover {
-	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 20%), 0 1px 3px 1px rgb(60 64 67 /15%);
+	border-top: 1px solid black;
 	border: 1px solid transparent;
 }
 
@@ -221,6 +222,7 @@ body {
 	background: white;
 	border-radius: 8px;
 	border: 1px solid transparent;
+	z-index: 3;
 }
 
 .note-editor > * :not(:nth-child(3)) {

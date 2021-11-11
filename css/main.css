@@ -2,13 +2,140 @@
 @import "/apps/note/css/main-note.css";
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+	margin: 0;
 }
 
 .main-app {
-  min-height: calc(100vh - 6.4em);
+	min-height: calc(100vh - 6.4em);
+}
+
+/*NavBar */
+
+.navbar-container {
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border-bottom: 1px solid rgb(236, 239, 241);
+}
+
+.main-logo {
+	cursor: pointer;
+}
+
+.apps-menu {
+	transition: .4s;
+	position: absolute;
+	top: 50px;
+	right: 0;
+	z-index: 10;
+	padding: 20px;
+	background-color: white;
+	border: 1px solid rgb(224, 224, 224);
+	border-radius: 10px;
+	gap: 30px;
+	margin-inline-end: 20px;
+}
+
+.apps-menu a:hover {
+	background-color: #f8f8f8;
+	cursor: pointer;
+	transform: scale(110%);
+}
+
+.navbar-container .menu-burger {
+	cursor: pointer;
+}
+
+/* Footer*/
+.footer-container {
+	font-size: 0.9rem;
+	height: auto;
+	background-color: #fbfbfb;
+	color: #282828;
+	text-align: center;
+	line-height: 50px;
+	border-top: 1px solid rgb(236, 239, 241);
+	margin-top: 50px;
+	padding: 10px;
+	bottom: 0;
+	width: 100%;
+}
+
+.about-us-container img {
+	height: 100px;
+	border-radius: 20px;
+}
+
+.about-us-container {
+	justify-content: center;
+	align-items: center;
+}
+
+.about-us-container > * {
+	margin-inline-end: 50px;
+}
+
+.footer-icon {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	height: 40px;
+	width: 40px;
+	background-color: #e5e5e5;
+	margin-right: 20px;
+	align-self: center;
+	color: #ffffff;
+	font-size: 1.875rem;
+	cursor: pointer;
+}
+
+.footer-icon:hover {
+	background-color: #516fad;
+}
+
+.social-icon {
+	max-height: 16px;
+}
+
+.footer-container .about-us-container .github-icon {
+	height: 35px;
+}
+.footer-container .about-us-container .linkedin-icon {
+	height: 25px;
+}
+
+.github-icon:hover {
+	background-color: #4078c0;
+}
+.linkedin-icon:hover {
+	background: #fae106;
+}
+
+/*Home Page */
+.apps-cards {
+	justify-content: center;
+	align-items: center;
+}
+
+.box-app {
+	border: 1px solid #d9dcdf;
+	border-radius: 5px;
+	padding: 1.5rem;
+	margin: 0.3125rem;
+	max-width: 21rem;
+	min-height: 21rem;
+	flex-direction: column;
+}
+
+.apps-cards img {
+	height: 100px;
+	object-fit: contain;
+	position: absolute;
+	top: 50%;
+	left: 50;
+	transform: translate(-50%, -50%);
 }

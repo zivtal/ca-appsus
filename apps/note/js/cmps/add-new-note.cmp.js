@@ -34,7 +34,7 @@ export default {
 			setPlaceHolder: 'amir',
 			title: '',
 			txt: '',
-			isPinned: '',
+			isPinned: false,
 			noteType: '',
 			backgroundColor: '#545454',
 			placeHolder: {
@@ -49,7 +49,6 @@ export default {
 	created() {
 		if (this.editNote) {
 			this.editMode = true;
-			console.log(this.editNote);
 			this.title = this.editNote.info.title;
 			if (this.editNote.type === 'NoteTxt') {
 				this.title = this.editNote.info.title;
@@ -80,8 +79,8 @@ export default {
 		save() {
 			this.closeEditNote();
 			if (this.editMode) {
-				console.log('d');
 				this.editNote.info.title = this.title;
+				this.editNote.style = this.backgroundColor;
 				if (this.editNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo')
 					this.editNote.info.url = this.txt;
 				else {
@@ -134,6 +133,8 @@ export default {
 		},
 		pinnedNote() {
 			this.isPinned = !this.isPinned;
+			console.log(this.isPinned);
+			if (this.editMode) this.editNote.isPinned = this.isPinned;
 		}
 	},
 	computed: {},
