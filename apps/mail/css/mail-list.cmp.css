@@ -7,13 +7,14 @@
   justify-content: flex-start;
   margin-top: 1.2em;
   background-color: #444;
+  height: 58px;
 }
 
 .mail-app .display .mail-list > .controls button {
   cursor: pointer;
   color: white;
   justify-content: flex-end;
-  height: 3em;
+  height: 100%;
   padding: 0 25px;
   border: 0;
   background-color: transparent;
@@ -26,6 +27,7 @@
 
 .mail-app .display .mail-list > .list {
   width: 100%;
+  background-color: black;
 }
 
 .mail-app .display .mail-list > .list .preview {
@@ -46,12 +48,7 @@
 
 .mail-app .display .mail-list > .list .preview.unread {
   color: whitesmoke;
-  background-color: #666;
   font-weight: bold;
-}
-
-.mail-app .display .mail-list > .list .preview:not(.preview.unread) {
-  background-color: black;
 }
 
 .mail-app .display .mail-list > .list .preview:hover {
@@ -73,6 +70,10 @@
 
 .mail-app .display .mail-list > .list .content {
   flex-grow: 1;
+}
+
+.mail-app .display .mail-list > .list .content.deleted {
+  text-decoration: line-through;
 }
 
 .mail-app .display .mail-list > .list .date {

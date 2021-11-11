@@ -1,43 +1,16 @@
-.mail-app .display .mail-folder {
-  min-width: 255px;
-  justify-content: start;
-}
-
 .mail-app .display .mail-folder > button {
   cursor: pointer;
-  height: 3.8em;
-  padding: 10px 24px 10px 15px;
-  margin: 0.75em 5em 1.5em 1em;
   background-color: white;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
-  border-radius: 2em;
-  font-weight: bold;
   border: 0;
 }
 
-.mail-app .display .mail-folder > button > img {
-  padding-inline-end: 10px;
-}
-
-.mail-app .display .mail-folder > button > p {
-  font-size: 1.2em;
-}
-
 .mail-app .display .mail-folder > div {
-  cursor: pointer;
-  justify-self: center;
-  padding: 0.6em;
-  margin: 0.3em 1em 0 1.3em;
-  border-radius: 0px 25px 25px 0;
-  transition: 0.5s;
+  font-size: 0.8em;
 }
 
-.mail-app .display .mail-folder > div .title {
-  float: left;
-}
-
-.mail-app .display .mail-folder > div .number {
-  float: right;
+.mail-app .display .mail-folder > div > img {
+  filter: invert(100%);
 }
 
 .mail-app .display .mail-folder > div.selected {
@@ -47,6 +20,105 @@
 }
 
 .mail-app .display .mail-folder > div:not(.selected):hover {
-  background-color: #f1f3f4;
-  color: gray;
+  filter: invert(100%);
+  background-color: #333;
+  color: white;
+}
+
+@media screen and (max-width: 740px) {
+  .mail-app .display .mail-folder > button {
+    margin: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .mail-app .display .mail-folder > button > img {
+    height: 24px;
+    width: 24px;
+  }
+
+  .mail-app .display .mail-folder > button > p {
+    display: none;
+  }
+
+  .mail-app .display .mail-folder > div > img {
+    height: 18px;
+    filter: invert(100%);
+  }
+
+  .mail-app .display .mail-folder > div .title {
+    display: none;
+  }
+
+  .mail-app .display .mail-folder > div .number {
+    display: none;
+  }
+
+  .mail-app .display .mail-folder {
+    min-width: 52px;
+    justify-content: start;
+  }
+  .mail-app .display .mail-folder > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 50%;
+    transition: 0.5s;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (min-width: 740px) {
+  .mail-app .display .mail-folder > button {
+    height: 3.6em;
+    /* padding: 10px 24px 10px 15px; */
+    margin: 0.75em 5em 1.5em 0;
+    width: 12em;
+    border-radius: 2em;
+    font-weight: bold;
+  }
+
+  .mail-app .display .mail-folder > button > img {
+    position: relative;
+    left: -10px;
+  }
+
+  .mail-app .display .mail-folder > button > p {
+    font-size: 1.2em;
+    display: block;
+  }
+
+  .mail-app .display .mail-folder > div > img {
+    float: left;
+    height: 18px;
+    padding-inline-end: 10px;
+  }
+
+  .mail-app .display .mail-folder > div .title {
+    float: left;
+    display: block;
+  }
+
+  .mail-app .display .mail-folder > div .number {
+    float: right;
+    display: block;
+  }
+
+  .mail-app .display .mail-folder {
+    min-width: 255px;
+    justify-content: start;
+  }
+  .mail-app .display .mail-folder > div {
+    cursor: pointer;
+    justify-self: center;
+    padding: 0.6em;
+    border-radius: 0px 25px 25px 0;
+    transition: 0.5s;
+    padding-inline-start: 1.5em;
+    margin-inline-end: 2em;
+  }
 }

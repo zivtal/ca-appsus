@@ -8,11 +8,11 @@ const quickReply = {
 		eventBus,
 	},
 	template: `
-        <div v-if="mail" class="reply">
+        <div v-if="mail && !isNewCompose" class="reply">
 			<img src="./apps/mail/img/profile.png">
 			<section class="board">
-					<label>To:</label>
-					<input ref="email" type="text" v-model="mail.to" :readonly="isReply" autofocus/>
+				<label>To:</label>
+				<input ref="email" type="text" v-model="mail.to" :readonly="isReply" autofocus/>
 				<textarea ref="content" v-if="mail" v-model="mail.body"></textarea>
 				<button @click="send">{{button}}</button>
 			</section>
@@ -21,6 +21,7 @@ const quickReply = {
 	data() {
 		return {
 			mail: null,
+			isNewCompose: false,
 		}
 	},
 	created() {
@@ -85,11 +86,11 @@ export const mailFullscreen = {
 	template: `
 		<section class="mail-read" @keydown.esc="resetMode">
 			<section class="controls flex">
-				<img src="apps/mail/img/back.png" title="Go back" @click="goBack"/>
-				<img src="apps/mail/img/reply.svg" title="Reply"/>
-				<img src="apps/mail/img/trash.png" title="Delete" @click="remove"/>
-				<img src="apps/mail/img/unread.png" :title="markAs"/>
-				<img src="apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
+				<img src="./apps/mail/img/back.png" title="Go back" @click="goBack"/>
+				<img src="./apps/mail/img/reply.svg" title="Reply"/>
+				<img src="./apps/mail/img/trash.png" title="Delete" @click="remove"/>
+				<img src="./apps/mail/img/unread.png" :title="markAs"/>
+				<img src="./apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
 			</section>
 			<section class="mail">
 				<img src="./apps/mail/img/profile.png">

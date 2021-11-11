@@ -67,7 +67,7 @@
 }
 
 .mail-app .display .mail-read > .mail .body {
-  white-space: pre-wrap;
+  white-space: pre-line;
   font-size: 0.8em;
   line-height: 1.4em;
 }
@@ -152,6 +152,7 @@
   min-height: 180px;
   border: 0;
   outline: none;
+  overflow: hidden;
 }
 
 .mail-app .display.flex > .mail-read > .mail .reply .board button {

@@ -11,13 +11,13 @@ export const mailPreview = {
 				<img v-if="mail.isStarred" src="./apps/mail/img/star-active.svg"/>
 				<img v-if="!mail.isStarred" src="./apps/mail/img/star-disabled.svg"/>
 			</div>
-			<div class="content"><p>{{mail.subject}}</p></div>
+			<div class="content" :class="{deleted: isInTrash}"><p>{{mail.subject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
-				<img src="apps/mail/img/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
-				<img src="apps/mail/img/trash.png" title="Delete" @click.stop="$emit('remove',mail)"/>
-				<img src="apps/mail/img/unread.png" :title="markAs" @click.stop="markRead(mail)"/>
-				<img src="apps/mail/img/fullscreen.svg" title="Full screen" @click.stop="goTo(mail)"/>
+				<img src="./apps/mail/img/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
+				<img src="./apps/mail/img/trash.png" :title="delTitle" @click.stop="removeMail(mail)"/>
+				<img :src="'./apps/mail/img/'+markImg+'.png'" :title="markAs" @click.stop="markRead(mail)"/>
+				<img src="./apps/mail/img/fullscreen.svg" title="Full screen" @click.stop="goTo(mail)"/>
 			</div>
 		</section>
 		<transition name="slide-fade">
@@ -63,8 +63,8 @@ export const mailPreview = {
             eventBus.$emit('mailSave', mail);
         },
         removeMail(mail) {
-
-        }
+            eventBus.$emit('mailRemove', mail);
+        },
     },
     computed: {
         sent() {
@@ -72,6 +72,15 @@ export const mailPreview = {
         },
         markAs() {
             return (this.mail.isRead) ? 'Mark as unread' : "Mark as read";
+        },
+        markImg() {
+            return (this.mail.isRead) ? 'read' : "unread";
+        },
+        delTitle() {
+            return (this.mail.folder === 'trash') ? 'Delete forever' : 'Delete';
+        },
+        isInTrash() {
+            return this.mail.folder === 'trash';
         }
     },
 }
