@@ -24,7 +24,7 @@ export default {
 				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove" @save="save"/>
 				<mail-list v-else-if="mails.filtered" :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove" @star="star"/>
 			</section>
-			<mail-compose/>
+			<!-- <mail-compose/> -->
 		</section>
     `,
 	data() {
@@ -89,7 +89,8 @@ export default {
 			mailService.save(mail)
 				.then(save => {
 					eventBus.$emit('mailDraftId', save.id);
-					if (!this.mails.all.find(item => item.id === save.id)) this.mails.all.push(save);
+					const index = this.mails.all.findIndex(item => item.id === save.id);
+					if (index < 0) { this.mails.all.push(save) } else { this.mails.all[index] = save };
 				})
 				.catch(err => console.log(err));
 		}
