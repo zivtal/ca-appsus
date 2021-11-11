@@ -93,7 +93,7 @@ body {
 }
 
 .note-toolbar {
-	opacity: 0%;
+	/* opacity: 0%; */
 	transition: opacity .5s;
 }
 
@@ -101,6 +101,18 @@ body {
 	opacity: 100%;
 }
 
-.test::before {
-	content: '\f037';
+/*Editor */
+
+.note-editor {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -100%);
+	opacity: 100%;
+	padding: 30px;
+	background-color: whitesmoke;
+}
+
+.note-editor > * :not(:nth-child(3)) {
+	margin-block-start: 20px;
 }

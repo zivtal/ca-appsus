@@ -142,7 +142,7 @@ export default {
     </div>
             </div>
         </form> -->
-		<add-new-note :notes="notes" @cmpType="addNewNote" />
+		<add-new-note @cmpType="addNewNote" class="add-note-container" />
         <section class="preview-note grid">
             <template v-for="note in notes">
                 <component :is="note.type" :note="note" > </component>

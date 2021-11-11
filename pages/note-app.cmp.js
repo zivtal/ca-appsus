@@ -17,6 +17,8 @@ export default {
 	created() {
 		this.loadNotes();
 		eventBus.$on('showChange', this.handleEvent);
+		eventBus.$on('copyNote', this.updateNotes);
+		eventBus.$on('removenote', this.removeNote);
 	},
 	updated() {},
 	destroyed() {},
@@ -30,6 +32,14 @@ export default {
 			console.log(val);
 			const { note, color } = val;
 			note.style.backgroundColor = color;
+		},
+		updateNotes(copyNote) {
+			const { type, info, style } = copyNote;
+			noteService.addNote(type, info, style.backgroundColor);
+		},
+		removeNote(currNote) {
+			const removeNote = this.notes.findIndex((note) => note === currNote);
+			this.notes.splice(removeNote, 1);
 		}
 	},
 	computed: {},

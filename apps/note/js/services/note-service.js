@@ -24,7 +24,6 @@ function addNote(type, info, style) {
 		}
 	};
 	gNotes.unshift(noteToSave);
-	console.log(noteToSave);
 	return noteToSave;
 }
 

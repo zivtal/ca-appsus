@@ -2,10 +2,10 @@ import { noteService } from '../services/note-service.js';
 import { utilService } from '../../../../services/utils.service.js';
 
 export default {
-	props: [ 'notes' ],
+	props: [ 'editNote' ],
 	components: {},
 	template: `
-           <form @submit.prevent="save" class="add-note-container">
+           <form @submit.prevent="save" >
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
                     <input type="text" placeHolder="Title" class="add-note-title" v-model="title">
@@ -16,8 +16,6 @@ export default {
             <div class="new-note-toolbar flex">
                 <div class="note-type-btns">
                 <input type="color" v-model="backgroundColor"></input>
-                <i class="fa-solid fa-copy"></i>
-                <span class="test"> </span>
                 <button value="text" @click.stop.prevent="setObjType"> text </button>
                 <button value="image" @click.stop.prevent="setObjType"> image </button>
                 <button value="video" @click.stop.prevent="setObjType"> video </button>
@@ -32,7 +30,6 @@ export default {
     `,
 	data() {
 		return {
-			demoNotes: this.notes,
 			setPlaceHolder: 'amir',
 			title: '',
 			txt: '',
@@ -43,10 +40,33 @@ export default {
 				image: 'Please paste your image url',
 				video: 'Please paste your video url',
 				todo: 'Please write some todos'
-			}
+			},
+			editMode: false
 		};
 	},
-	created() {},
+	created() {
+		if (this.editNote) {
+			this.editMode = true;
+			this.title = this.editNote.info.title;
+			if (this.editNote.type === 'NoteTxt') {
+				this.title = this.editNote.info.title;
+				this.txt = this.editNote.info.txt;
+				this.noteType = this.editNote.type;
+				this.backgroundColor = this.editNote.style.backgroundColor;
+			} else if (this.editNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo') {
+				this.title = this.editNote.info.title;
+				this.txt = this.editNote.info.url;
+				this.noteType = this.editNote.type;
+			} else if (this.editNote.type === 'NoteToDo') {
+				var txtTodos = '';
+				this.title = this.editNote.info.title;
+				this.editNote.info.todos.map((todo) => (txtTodos += todo.txt + ','));
+				txtTodos = txtTodos.substring(0, txtTodos.length - 1);
+				this.txt = txtTodos;
+				this.noteType = this.editNote.type;
+			}
+		}
+	},
 	updated() {},
 	destroyed() {},
 	methods: {
@@ -55,19 +75,25 @@ export default {
 			this.setPlaceHolder = this.placeHolder[ev.target.value];
 		},
 		save() {
+			if (this.editMode) {
+				this.editNote.info.title = this.title;
+				if (this.editNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo')
+					this.editNote.info.url = this.txt;
+				else {
+					this.editNote.info.txt = this.txt;
+				}
+				return;
+			}
 			const backgroundColor = this.backgroundColor;
 			if (this.noteType === 'text') {
+				console.log(this.demoNotes);
 				const txtInfo = { title: this.title, txt: this.txt };
-				console.log(txtInfo);
-				// noteService.addNote('NoteTxt', txtInfo, backgroundColor);
 				this.$emit('cmpType', { type: 'NoteTxt', val: txtInfo, style: backgroundColor });
 			} else if (this.noteType === 'image') {
 				const imgInfo = { title: this.title, url: this.txt };
-				// noteService.addNote('NoteImg', imgInfo, backgroundColor);
 				this.$emit('cmpType', { type: 'NoteImg', val: imgInfo, style: backgroundColor });
 			} else if (this.noteType === 'video') {
 				const videoInfo = { title: this.title, url: this.txt };
-				// noteService.addNote('NoteVideo', videoInfo, backgroundColor);
 				this.$emit('cmpType', { type: 'NoteVideo', val: videoInfo, style: backgroundColor });
 			} else if (this.noteType === 'todo') {
 				const todosTxt = this.txt.split(',');
@@ -83,7 +109,12 @@ export default {
 				});
 				const toDoInfo = { title: this.title, todos: todos, label: null };
 				// noteService.addNote('NoteToDo', toDoInfo, backgroundColor);
-				this.$emit('cmpType', { type: 'NoteToDo', val: toDoInfo, style: backgroundColor });
+				this.$emit('cmpType', {
+					isEdit: this.editMode,
+					type: 'NoteToDo',
+					val: toDoInfo,
+					style: backgroundColor
+				});
 			}
 			this.title = null;
 			this.txt = null;
