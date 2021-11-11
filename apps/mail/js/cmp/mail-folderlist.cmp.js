@@ -7,7 +7,7 @@ export const folderList = {
     },
     template: `
 		<section class="mail-folder flex columns">
-			<button class="flex align-center"><img src="./apps/mail/img/compose.png"/><p>Compose</p></button>
+			<button class="flex align-center" @click="compose"><img src="./apps/mail/img/compose.png"/><p>Compose</p></button>
 			<template v-for="folder,idx in folders">
 				<div @click="folderChange(folder)" :class="{selected: folder.toLowerCase() === activeFolder}">
                     <img :src="'./apps/mail/img/' + getImage(idx)" />
@@ -26,6 +26,9 @@ export const folderList = {
         eventBus.$on('mailFolderChange', console.log);
     },
     methods: {
+        compose() {
+            this.$router.push({ path: `/mail/?compose=new` })
+        },
         getImage(idx) {
             const imgs = ['all.png', 'inbox.png', 'sent.png', 'draft.png'];
             return (imgs[idx]) ? imgs[idx] : 'default.png';

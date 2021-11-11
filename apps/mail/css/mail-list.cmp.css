@@ -31,7 +31,6 @@
   background-color: #444;
 }
 
-.mail-app .display .mail-list > .controls select:hover,
 .mail-app .display .mail-list > .controls button:hover {
   border-bottom: 5px solid whitesmoke;
 }
