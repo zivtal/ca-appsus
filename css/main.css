@@ -59,6 +59,7 @@ body {
 }
 
 .navbar-container .menu-burger {
+  filter: invert(80%);
   cursor: pointer;
 }
 
