@@ -4,7 +4,9 @@ export const utilService = {
 	deepCopy,
 	createDemo,
 	getTimeFormat,
-	makeId
+	getLowerCase,
+	makeId,
+	camelCaseToSentence,
 };
 
 function saveToStorage(key, val) {
@@ -27,7 +29,7 @@ function createDemo(fileUrl) {
 	return JSON.parse(request.responseText);
 }
 
-function makeId(length = 5) {
+function makeId(length = 6) {
 	var txt = '';
 	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	for (var i = 0; i < length; i++) {
@@ -42,13 +44,23 @@ function getTimeFormat(timestamp, countryCode = 'en-US') {
 	var options =
 		year === date.getFullYear()
 			? {
-					month: 'short',
-					day: 'numeric'
-				}
+				month: 'short',
+				day: 'numeric'
+			}
 			: {
-					year: '2-digit',
-					month: 'numeric',
-					day: 'numeric'
-				};
+				year: '2-digit',
+				month: 'numeric',
+				day: 'numeric'
+			};
 	return date.toLocaleDateString(countryCode, options);
+}
+
+function camelCaseToSentence(input, isOnlyFirst = true) {
+	if (!input) return;
+	if (typeof input === 'string') input = [input];
+	return input.map(key => key.replace(/[A-Z]/g, letter => (isOnlyFirst) ? ` ${letter.toLowerCase()}` : ` ${letter}`).replace(/[a-z]/, letter => letter.toUpperCase())).join(' » ')
+};
+
+function getLowerCase(str) {
+	return str.toLowerCase();
 }

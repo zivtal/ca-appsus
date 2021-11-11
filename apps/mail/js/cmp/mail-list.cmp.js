@@ -13,7 +13,7 @@ export const mailPreview = {
 			<div class="content"><p>{{mail.subject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
-				<img src="apps/mail/img/reply.svg"/>
+				<img src="apps/mail/img/reply.svg" @click.stop="reply(mail)"/>
 				<img src="apps/mail/img/trash.png" @click.stop="$emit('remove',mail)"/>
 				<img src="apps/mail/img/unread.png"/>
 				<img src="apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
@@ -45,14 +45,20 @@ export const mailPreview = {
         goTo(mail) {
             mail.isRead = true;
             mailService.save(mail)
-                .then(this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}?id=${mail.id}` }))
+                .then((mail) => {
+                    if (mail.folder === 'draft') {
+                        this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}?id=${mail.reply}&reply=true` })
+                    } else {
+                        this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}?id=${mail.id}` })
+                    }
+                })
                 .catch(err => console.log(err));
-        }
+        },
+        reply(mail) {
+            this.$router.push({ path: `/mail/${mail.folder.toLowerCase()}?id=${mail.id}&reply=true` });
+        },
     },
     computed: {
-        star() {
-            return (this.mail.isStarred) ? '*' : '';
-        },
         sent() {
             return utilService.getTimeFormat(this.mail.sentAt);
         }

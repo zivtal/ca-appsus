@@ -1,10 +1,11 @@
 export const storageService = {
     query,
     get,
+    draft,
     post,
     put,
     remove,
-    postMany
+    postMany,
 }
 
 function query(entityType) {
@@ -17,8 +18,13 @@ function get(entityType, entityId) {
         .then(entities => entities.find(entity => entity.id === entityId))
 }
 
+function draft(entityType, replyId) {
+    return query(entityType)
+        .then(entities => entities.find(entity => entity.reply === replyId))
+}
+
 function post(entityType, newEntity) {
-    newEntity.id = _makeId()
+    newEntity.id = _makeId();
     return query(entityType)
         .then(entities => {
             entities.push(newEntity);
@@ -40,8 +46,8 @@ function put(entityType, updatedEntity) {
     return query(entityType)
         .then(entities => {
             const idx = entities.findIndex(entity => entity.id === updatedEntity.id);
-            entities.splice(idx, 1, updatedEntity)
-            _save(entityType, entities)
+            entities.splice(idx, 1, updatedEntity);
+            _save(entityType, entities);
             return updatedEntity;
         })
 }

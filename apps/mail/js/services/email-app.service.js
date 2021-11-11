@@ -9,6 +9,8 @@ export const mailService = {
     remove,
     save,
     getById,
+    getDraft,
+    getEmptyMail,
 };
 
 function query() {
@@ -26,6 +28,25 @@ function save(item) {
 
 function getById(itemId) {
     return storageService.get(KEY, itemId);
+}
+
+function getDraft(replyId) {
+    return storageService.draft(KEY, replyId);
+}
+
+function getEmptyMail(reply = null, to = null, from = null, subject = null, folder = "draft") {
+    return {
+        id: null,
+        reply,
+        folder,
+        subject,
+        body: null,
+        isRead: true,
+        isStarred: false,
+        sentAt: 0,
+        from,
+        to,
+    };
 }
 
 function _createDemo() {
