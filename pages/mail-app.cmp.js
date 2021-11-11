@@ -22,7 +22,7 @@ export default {
 			<section v-if="mails.all" class="display flex">
 				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange"/>
 				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove" @save="save"/>
-				<mail-list v-else-if="mails.filtered" :mails="mails.filtered" :folder="active" :key="refresh" @remove="remove" @star="star"/>
+				<mail-list v-else-if="mails.filtered" :mails="mails.filtered" :folder="active" @remove="remove" @star="star"/>
 			</section>
 			<mail-compose />
 		</section>
@@ -45,10 +45,10 @@ export default {
 				folders: ['All', 'Inbox', 'Sent', 'Draft'],
 				unread: {},
 			},
-			refresh: Date.now(),
 		};
 	},
 	created() {
+		this.compose();
 		mailService.query()
 			.then(mails => {
 				this.mails.all = mails;
@@ -75,7 +75,6 @@ export default {
 			} else {
 				mail.folder = 'trash';
 				mailService.save(mail)
-					.then(() => splicer(mail, this.mails))
 					.catch(err => console.log(err));
 			}
 		},
@@ -93,6 +92,11 @@ export default {
 					if (index < 0) { this.mails.all.push(save) } else { this.mails.all[index] = save };
 				})
 				.catch(err => console.log(err));
+		},
+		compose() {
+			const mail = mailService.getEmptyMail();
+			mail.id = utilService.makeId();
+			console.log(mail);
 		}
 	},
 	computed: {
@@ -134,8 +138,14 @@ export default {
 			deep: true,
 			immediate: true,
 		},
+		'$route.params': {
+			handler(get) {
+				console.log(get);
+			},
+			immediate: true,
+		},
 		'$route.params.folder': {
-			handler(get, from) {
+			handler(get) {
 				this.active.folder = (this.mails.all && get) ? get : null;
 				eventBus.$emit('mailFolderChange', this.active.folder);
 			},

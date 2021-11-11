@@ -104,7 +104,6 @@ export const mailList = {
     watch: {
         mailsBy: {
             handler(mails) {
-                console.log(mails);
                 this.page.last = Math.ceil(mails.length / this.page.size);
             },
             immediate: true,
