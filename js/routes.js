@@ -1,6 +1,6 @@
-import homePage from './pages/home-page.cmp.js';
-import mailPage from './pages/mail-app.cmp.js';
-import notePage from './pages/note-app.cmp.js';
+import homePage from '../../pages/home-page.cmp.js';
+import mailPage from '../../pages/mail-app.cmp.js';
+import notePage from '../../pages/note-app.cmp.js';
 
 const routes = [
 	{
@@ -16,7 +16,7 @@ const routes = [
 		component: mailPage,
 	},
 	{
-		path: '/mail/:folder',
+		path: '/mail/folder',
 		component: mailPage,
 		props: route => ({ query: router.query.id })
 	},
