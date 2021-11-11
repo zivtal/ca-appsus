@@ -2,6 +2,7 @@
 @import "./mail-folderlist.cmp.css";
 @import "./mail-fullscreen.cmp.css";
 @import "./mail-list.cmp.css";
+@import "./mail-compose.cmp.css";
 
 .mail-app {
   margin: 0;
