@@ -1,7 +1,7 @@
 import controlPanelBtns from './control-panel-btns.js';
 import { noteService } from '../services/note-service.js';
-import { utilService } from '../../../../services/utils.service.js';
 import addNewNote from './add-new-note.cmp.js';
+import noteFilter from './note-filter.cmp.js';
 
 const NoteTxt = {
 	props: [ 'note' ],
@@ -34,7 +34,7 @@ const NoteImg = {
         <div class="user-note flex" :style="note.style">
                 <h1> {{note.info.title}}</h1>
                 <p v-if="note.info.txt"> {{note.info.txt}}</p>
-                <img v-if="note.info.url" :src="note.info.url" />
+                <img v-if="note.info.url" :src="note.info.url" class="note-img" />
             <control-panel-btns :note="note" />
         </div>
     `,
@@ -59,7 +59,7 @@ const NoteVideo = {
         <div class="user-note flex" :style="note.style">
                 <h1> {{note.info.title}}</h1>
                 <p v-if="note.info.txt"> {{note.info.txt}}</p>
-                <video v-if="note.info.url" controls name="media" >
+                <video v-if="note.info.url" controls name="media"  class="note-img">
                     <source :src="note.info.url" type="video/mp4"> </source>
                 </video>
                 
@@ -118,37 +118,23 @@ const NoteToDo = {
 export default {
 	props: [ 'notes' ],
 	template: `
-    <div class="main-note">
+    <div class="main-note" >
     <div class="main-note-container">
-        <!-- <form @submit.prevent="save" class="add-note-container">
-            <div class="add-note-inputs flex"> 
-                <div class="pinned-container flex"> 
-                    <input type="text" PlaceHolder="Title" class="add-note-title" v-model="title">
-                    <button @click.prevent class="note-pinned">Pinend</button>
-                </div>
-                <input type="text" PlaceHolder="Add a note" v-model="txt" class="add-note-text" :placeHolder="setPlaceHolder">
-            </div>
-            <div class="new-note-toolbar flex">
-                <div class="note-type-btns">
-                <input type="color" v-model="backgroundColor"> color </input>
-                <button value="text" @click.stop.prevent="setObjType"> text </button>
-                <button value="image" @click.stop.prevent="setObjType"> image </button>
-                <button value="video" @click.stop.prevent="setObjType"> video </button>
-                <button value="todo" @click.stop.prevent="setObjType"> todo </button>
-                </div>
-                <div class="note-panel-control">
-                <button type="submit"> Add Note </button>
-                    <button @click.prevent> close </button>
-    </div>
-            </div>
-        </form> -->
+		
 		<add-new-note @cmpType="addNewNote" class="add-note-container" />
-        <section class="preview-note grid">
+		<note-filter :notes="notes"/>
+		<h1>Pinned</h1>
+        <section class="pinned-note">
             <template v-for="note in notes">
-                <component :is="note.type" :note="note" > </component>
+                <component :is="note.type" :note="note" v-if="note.isPinned" > </component>
             </template>
         </section>
-        <section class="pinned-note">
+		<hr/>
+		<h1>Others</h1>
+        <section class="others-note">
+			<template v-for="note in notes">
+			<component :is="note.type" :note="note" v-if="!note.isPinned" > </component>
+            </template>
 
         </section>
         <section class="others-note">
@@ -158,59 +144,12 @@ export default {
 </div>
     `,
 	data() {
-		return {
-			// demoNotes: this.notes,
-			// setPlaceHolder: 'amir',
-			// title: '',
-			// txt: '',
-			// noteType: '',
-			// backgroundColor: '',
-			// placeHolder: {
-			// 	text: 'Please write some text',
-			// 	image: 'Please paste your image url',
-			// 	video: 'Please paste your video url',
-			// 	todo: 'Please write some todos'
-			// }
-		};
+		return {};
 	},
 	created() {},
 	updated() {},
 	destroyed() {},
 	methods: {
-		// setObjType(ev) {
-		// 	this.noteType = ev.target.value;
-		// 	this.setPlaceHolder = this.placeHolder[ev.target.value];
-		// },
-		// save() {
-		// 	const backgroundColor = this.backgroundColor;
-		// 	if (this.noteType === 'text') {
-		// 		const txtInfo = { title: this.title, txt: this.txt };
-		// 		noteService.addNote('NoteTxt', txtInfo, backgroundColor);
-		// 	} else if (this.noteType === 'image') {
-		// 		const imgInfo = { title: this.title, url: this.txt };
-		// 		noteService.addNote('NoteImg', imgInfo, backgroundColor);
-		// 	} else if (this.noteType === 'video') {
-		// 		const videoInfo = { title: this.title, url: this.txt };
-		// 		noteService.addNote('NoteVideo', videoInfo, backgroundColor);
-		// 	} else if (this.noteType === 'todo') {
-		// 		const todosTxt = this.txt.split(',');
-		// 		const todos = [];
-		// 		todosTxt.map((todo) => {
-		// 			const task = {
-		// 				txt: todo,
-		// 				doneAt: new Date(),
-		// 				id: utilService.makeId(),
-		// 				checked: false
-		// 			};
-		// 			todos.push(task);
-		// 		});
-		// 		const toDoInfo = { title: this.title, todos: todos, label: null };
-		// 		noteService.addNote('NoteToDo', toDoInfo, backgroundColor);
-		// 	}
-		// 	this.title = '';
-		// 	this.txt = '';
-		// }
-
 		addNewNote(val) {
 			noteService.addNote(val.type, val.val, val.style);
 			console.log(this.notes);
@@ -225,6 +164,7 @@ export default {
 		NoteToDo,
 		controlPanelBtns,
 		noteService,
-		addNewNote
+		addNewNote,
+		noteFilter
 	}
 };

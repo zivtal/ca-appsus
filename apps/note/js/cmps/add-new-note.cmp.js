@@ -5,25 +5,26 @@ export default {
 	props: [ 'editNote' ],
 	components: {},
 	template: `
-           <form @submit.prevent="save" >
+           <form @submit.prevent="save"  >
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
-                    <input type="text" placeHolder="Title" class="add-note-title" v-model="title">
-                    <button @click.prevent class="note-pinned">Pinend</button>
+                    <input type="text" placeHolder="Title" class="add-note-title" v-model="title" >
+                    <img src="apps/note/imgs/pinned.svg" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"></img>
                 </div>
                 <input type="text" PlaceHolder="Add a note" v-model="txt" class="add-note-text" :placeHolder="setPlaceHolder">
             </div>
             <div class="new-note-toolbar flex">
                 <div class="note-type-btns">
-                <input type="color" v-model="backgroundColor"></input>
-                <button value="text" @click.stop.prevent="setObjType"> text </button>
-                <button value="image" @click.stop.prevent="setObjType"> image </button>
-                <button value="video" @click.stop.prevent="setObjType"> video </button>
-                <button value="todo" @click.stop.prevent="setObjType"> todo </button>
+                    <input type="color" v-model="backgroundColor" class="color-input" />
+                    <img src="apps/note/imgs/color.svg" class="color-icon" />
+                <img src="apps/note/imgs/text.svg" @click.stop.prevent="setObjType('text')" />
+                <img src="apps/note/imgs/img.svg"  @click.stop.prevent="setObjType('image')"/>
+                <img src="apps/note/imgs/video.svg"  @click.stop.prevent="setObjType('video')"/> 
+                <img src="apps/note/imgs/todos.svg" @click.stop.prevent="setObjType('todo')"/>
                 </div>
                 <div class="note-panel-control">
-                <button type="submit"> Add Note </button>
-                    <button @click.prevent> close </button>
+                <button class="submit-btn" type="submit" @click.prevent="closeEditNote">Add</button>
+                    <button @click.prevent="closeEditNote" class="close-modal-btn">close</button>
     </div>
             </div>
         </form> 
@@ -33,6 +34,7 @@ export default {
 			setPlaceHolder: 'amir',
 			title: '',
 			txt: '',
+			isPinned: '',
 			noteType: '',
 			backgroundColor: '#545454',
 			placeHolder: {
@@ -47,6 +49,7 @@ export default {
 	created() {
 		if (this.editNote) {
 			this.editMode = true;
+			console.log(this.editNote);
 			this.title = this.editNote.info.title;
 			if (this.editNote.type === 'NoteTxt') {
 				this.title = this.editNote.info.title;
@@ -70,9 +73,9 @@ export default {
 	updated() {},
 	destroyed() {},
 	methods: {
-		setObjType(ev) {
-			this.noteType = ev.target.value;
-			this.setPlaceHolder = this.placeHolder[ev.target.value];
+		setObjType(noteType) {
+			this.noteType = noteType;
+			this.setPlaceHolder = this.placeHolder[noteType];
 		},
 		save() {
 			if (this.editMode) {
@@ -88,7 +91,12 @@ export default {
 			if (this.noteType === 'text') {
 				console.log(this.demoNotes);
 				const txtInfo = { title: this.title, txt: this.txt };
-				this.$emit('cmpType', { type: 'NoteTxt', val: txtInfo, style: backgroundColor });
+				this.$emit('cmpType', {
+					type: 'NoteTxt',
+					val: txtInfo,
+					style: backgroundColor,
+					isPinned: this.isPinned
+				});
 			} else if (this.noteType === 'image') {
 				const imgInfo = { title: this.title, url: this.txt };
 				this.$emit('cmpType', { type: 'NoteImg', val: imgInfo, style: backgroundColor });
@@ -118,6 +126,12 @@ export default {
 			}
 			this.title = null;
 			this.txt = null;
+		},
+		closeEditNote() {
+			this.$emit('isShown');
+		},
+		pinnedNote() {
+			this.isPinned = !this.isPinned;
 		}
 	},
 	computed: {},
