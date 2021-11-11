@@ -15,8 +15,8 @@ export default {
 			notes: null,
 			filterBy: null
 		};
-	},
-	created() {
+		},
+		created() {
 		this.loadNotes();
 		eventBus.$on('showChange', this.handleEvent);
 		eventBus.$on('copyNote', this.updateNotes);
