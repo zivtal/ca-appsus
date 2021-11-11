@@ -7,6 +7,7 @@ const NoteTxt = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
+		<img src="apps/note/imgs/pinned.svg" class="user-note-pinned" v-if="note.isPinned">
                 <h1> {{note.info.title}}</h1>
                 <p v-if="note.info.txt">{{setTxtLength}}</p>
             <control-panel-btns  :note="note" />
@@ -32,6 +33,8 @@ const NoteImg = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
+		<img src="apps/note/imgs/pinned.svg" class="user-note-pinned" v-if="note.isPinned">
+
                 <h1> {{note.info.title}}</h1>
                 <p v-if="note.info.txt"> {{note.info.txt}}</p>
                 <img v-if="note.info.url" :src="note.info.url" class="note-img" />
@@ -57,6 +60,8 @@ const NoteVideo = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
+		<img src="apps/note/imgs/pinned.svg" class="user-note-pinned" v-if="note.isPinned">
+
                 <h1> {{note.info.title}}</h1>
                 <p v-if="note.info.txt"> {{note.info.txt}}</p>
                 <video v-if="note.info.url" controls name="media"  class="note-img">
@@ -85,6 +90,8 @@ const NoteToDo = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
+		<img src="apps/note/imgs/pinned.svg" class="user-note-pinned" v-if="note.isPinned">
+
                 <h1> {{note.info.title}}</h1>
                     <ul class="user-todo-list">
                         <li v-for="todo in note.info.todos">

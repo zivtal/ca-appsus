@@ -114,7 +114,18 @@ body {
 }
 
 .ismark {
+	filter: invert(10%);
 	fill: gold;
+}
+
+.main-filter .filter-container select {
+	border-radius: 10px;
+	width: 80px;
+}
+
+.main-filter .filter-container input {
+	border-radius: 10px;
+	border: 0.5px solid black;
 }
 
 .note-pinned {
@@ -142,6 +153,14 @@ body {
 	break-inside: avoid-column;
 	border: 1px solid #dadce0;
 	transition: .3s;
+	position: relative;
+}
+
+.user-note-pinned {
+	position: absolute;
+	height: 15px;
+	margin: 5px;
+	margin-block-end: 3px;
 }
 
 .user-note:hover {
@@ -167,15 +186,23 @@ body {
 }
 
 .note-toolbar {
-	/* opacity: 0%; */
-	transition: opacity .5s;
+	opacity: 0;
+	transition: opacity .8s;
+}
+.user-note .user-note-pinned {
+	opacity: 0;
+	transition: opacity .8s;
 }
 
 .note-toolbar img {
 	cursor: pointer;
 }
 
-.note-toolbar:hover {
+.user-note:hover .note-toolbar,
+.user-note-pinned {
+	opacity: 100%;
+}
+.user-note:hover .user-note-pinned {
 	opacity: 100%;
 }
 

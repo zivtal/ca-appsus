@@ -8,7 +8,7 @@ export default {
 	template: `
             <div class="note-toolbar">
                 <img src="apps/note/imgs/edit.svg" @click="openEditor"></img>
-                <input type="color" v-model="backgroundColor" @blur="changeColor" class="color-input"/>
+                <input type="color" v-model="backgroundColor" value="#545454" @blur="changeColor" class="color-input"/>
 				<img src="apps/note/imgs/color.svg" />
 				<add-new-note v-if="isEditor" class="note-editor" :editNote="note" @isShown="isShown" />
                 <img src="apps/note/imgs/label.svg" /> 
@@ -20,7 +20,7 @@ export default {
 	data() {
 		return {
 			currNote: this.note,
-			backgroundColor: '',
+			backgroundColor: '#545454',
 			isEditor: false
 		};
 	},
