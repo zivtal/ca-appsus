@@ -1,5 +1,6 @@
 @import "/apps/mail/css/main.css";
 @import "/apps/note/css/main-note.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -129,13 +130,39 @@ body {
 	max-width: 21rem;
 	min-height: 21rem;
 	flex-direction: column;
+	position: relative;
+	justify-content: space-around;
+	text-align: center;
 }
 
 .apps-cards img {
 	height: 100px;
 	object-fit: contain;
-	position: absolute;
-	top: 50%;
-	left: 50;
-	transform: translate(-50%, -50%);
+}
+
+.learn-more-btn {
+	background-color: #fff;
+	color: #1a73e8;
+	border: 1px solid #dadce0;
+	padding: 15px 20px;
+	border-radius: 5px;
+	transition-duration: 0.3s;
+	margin: 5px;
+	width: 50%;
+	transform: translateX(50%);
+	cursor: pointer;
+}
+
+.home-page-header {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.home-page-title {
+	padding: 50px;
+	font-size: 2rem;
+	background: darkslategray;
+	border-radius: 50px;
+	color: whitesmoke;
 }
