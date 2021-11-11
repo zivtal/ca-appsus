@@ -6,12 +6,14 @@ export default {
 	props: [],
 	components: {},
 	template: `
-
-        <note-preview :notes="notes"  />
+	<section class="main-note">
+        <note-preview :notes="notesToShow"  />
+</section>
 `,
 	data() {
 		return {
-			notes: null
+			notes: null,
+			filterBy: null
 		};
 	},
 	created() {
@@ -19,6 +21,7 @@ export default {
 		eventBus.$on('showChange', this.handleEvent);
 		eventBus.$on('copyNote', this.updateNotes);
 		eventBus.$on('removenote', this.removeNote);
+		eventBus.$on('filtered', this.notesToShow);
 	},
 	updated() {},
 	destroyed() {},
@@ -42,7 +45,18 @@ export default {
 			this.notes.splice(removeNote, 1);
 		}
 	},
-	computed: {},
+	computed: {
+		notesToShow(filterBy) {
+			if (!filterBy) return this.notes;
+			this.filterBy = filterBy;
+			console.log(filterBy);
+			const { type, txt } = filterBy;
+
+			return this.notes.filter((note) => {
+				return note.type === type && note.title.toLowerCase().includes(txt.toLowerCase());
+			});
+		}
+	},
 	watch: {},
 	components: {
 		notePreview

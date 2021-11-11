@@ -1,8 +1,7 @@
 import controlPanelBtns from './control-panel-btns.js';
 import { noteService } from '../services/note-service.js';
-import { utilService } from '../../../../services/utils.service.js';
 import addNewNote from './add-new-note.cmp.js';
-import filter from './filter.cmp.js';
+import noteFilter from './note-filter.cmp.js';
 
 const NoteTxt = {
 	props: [ 'note' ],
@@ -119,11 +118,11 @@ const NoteToDo = {
 export default {
 	props: [ 'notes' ],
 	template: `
-    <div class="main-note">
+    <div class="main-note" >
     <div class="main-note-container">
 		
 		<add-new-note @cmpType="addNewNote" class="add-note-container" />
-		<filter :notes="notes" />
+		<note-filter :notes="notes"/>
 		<h1>Pinned</h1>
         <section class="pinned-note">
             <template v-for="note in notes">
@@ -166,6 +165,6 @@ export default {
 		controlPanelBtns,
 		noteService,
 		addNewNote,
-		filter
+		noteFilter
 	}
 };

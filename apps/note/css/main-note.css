@@ -74,6 +74,7 @@ body {
 	background: none;
 	font-family: googlefont;
 	font-size: 1.5rem;
+	cursor: pointer;
 }
 
 .new-note-toolbar {
@@ -94,8 +95,37 @@ body {
 	margin-inline-end: 20px;
 }
 
+/*Filter */
+.main-filter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.filter-container {
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+	border: 1px solid transparent;
+	padding: 20px;
+	border-radius: 50px;
+}
+
 .others-note > div {
 	margin-block-end: 20px;
+}
+
+.ismark {
+	fill: gold;
+}
+
+.note-pinned {
+	cursor: pointer;
+	border-radius: 50px;
+	height: 30px;
+	margin: 5px;
+}
+
+.note-pinned:hover {
+	background: rgba(95, 99, 104, 0.157);
 }
 
 .note-img {
@@ -156,21 +186,31 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -100%);
+	max-width: 600px;
+	width: 100%;
 	opacity: 100%;
-	padding: 30px;
-	background-color: whitesmoke;
+	padding: 10px;
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+	background: white;
+	border-radius: 8px;
+	border: 1px solid transparent;
 }
 
 .note-editor > * :not(:nth-child(3)) {
 	margin-block-start: 20px;
 }
 
-/*Helpers */
+.note-editor .note-pinned {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 40px;
+}
 
 .isshown {
 	display: block;
 }
-
+/*Helpers */
 .ishide {
 	display: none;
 }

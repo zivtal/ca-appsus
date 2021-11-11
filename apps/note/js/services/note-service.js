@@ -12,12 +12,12 @@ function query() {
 	return gNotes;
 }
 
-function addNote(type, info, style) {
+function addNote(type, info, style, isPinned) {
 	const id = utilService.makeId();
 	const noteToSave = {
 		id,
 		type,
-		isPinned: false,
+		isPinned: isPinned || false,
 		info,
 		style: {
 			backgroundColor: style

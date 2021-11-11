@@ -9,7 +9,7 @@ export default {
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
                     <input type="text" placeHolder="Title" class="add-note-title" v-model="title" >
-                    <img src="apps/note/imgs/pinned.svg" @click.prevent="openColorPicker" class="note-pinned"></img>
+                    <img src="apps/note/imgs/pinned.svg" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"></img>
                 </div>
                 <input type="text" PlaceHolder="Add a note" v-model="txt" class="add-note-text" :placeHolder="setPlaceHolder">
             </div>
@@ -23,7 +23,7 @@ export default {
                 <img src="apps/note/imgs/todos.svg" @click.stop.prevent="setObjType('todo')"/>
                 </div>
                 <div class="note-panel-control">
-                <button class="submit-btn" type="submit">Add</button>
+                <button class="submit-btn" type="submit" @click.prevent="closeEditNote">Add</button>
                     <button @click.prevent="closeEditNote" class="close-modal-btn">close</button>
     </div>
             </div>
@@ -34,6 +34,7 @@ export default {
 			setPlaceHolder: 'amir',
 			title: '',
 			txt: '',
+			isPinned: '',
 			noteType: '',
 			backgroundColor: '#545454',
 			placeHolder: {
@@ -47,6 +48,8 @@ export default {
 	},
 	created() {
 		if (this.editNote) {
+			this.editMode = true;
+			console.log(this.editNote);
 			this.title = this.editNote.info.title;
 			if (this.editNote.type === 'NoteTxt') {
 				this.title = this.editNote.info.title;
@@ -88,7 +91,12 @@ export default {
 			if (this.noteType === 'text') {
 				console.log(this.demoNotes);
 				const txtInfo = { title: this.title, txt: this.txt };
-				this.$emit('cmpType', { type: 'NoteTxt', val: txtInfo, style: backgroundColor });
+				this.$emit('cmpType', {
+					type: 'NoteTxt',
+					val: txtInfo,
+					style: backgroundColor,
+					isPinned: this.isPinned
+				});
 			} else if (this.noteType === 'image') {
 				const imgInfo = { title: this.title, url: this.txt };
 				this.$emit('cmpType', { type: 'NoteImg', val: imgInfo, style: backgroundColor });
@@ -121,6 +129,9 @@ export default {
 		},
 		closeEditNote() {
 			this.$emit('isShown');
+		},
+		pinnedNote() {
+			this.isPinned = !this.isPinned;
 		}
 	},
 	computed: {},

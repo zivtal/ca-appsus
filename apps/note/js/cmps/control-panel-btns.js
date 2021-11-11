@@ -32,7 +32,6 @@ export default {
 			eventBus.$emit('showChange', { note: this.currNote, color: this.backgroundColor });
 		},
 		openEditor() {
-			console.log('s');
 			this.isEditor = true;
 		},
 		duplicateNote() {
