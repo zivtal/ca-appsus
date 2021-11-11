@@ -6,11 +6,12 @@ export default {
 	template: `
     <div class="main-filter">
 		<div class="filter-container">
-        <select v-model="filterBy.type">
-            <option value="text">Text</option>
-            <option value="image">Image</option>
-            <option value="video">Video</option>
-            <option value="todos">Todos</option>
+        <select v-model="filterBy.type" @change="filter">
+            <option value="All">All</option>
+            <option value="NoteTxt">Text</option>
+            <option value="NoteImg">Image</option>
+            <option value="NoteVideo">Video</option>
+            <option value="NoteToDo">Todos</option>
             <option value="audio">Audio</option>
         </select>
         <input @input="filter" v-model="filterBy.txt" />

@@ -9,13 +9,13 @@ export default {
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
                     <input type="text" placeHolder="Title" class="add-note-title" v-model="title" >
-                    <img src="apps/note/imgs/pinned.svg" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"></img>
+                    <img src="apps/note/imgs/pinned.svg" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"/>
                 </div>
                 <input type="text" PlaceHolder="Add a note" v-model="txt" class="add-note-text" :placeHolder="setPlaceHolder">
             </div>
             <div class="new-note-toolbar flex">
                 <div class="note-type-btns">
-                    <input type="color" v-model="backgroundColor" class="color-input" />
+                    <input type="color" v-model="backgroundColor" class="color-input" value="#545454" />
                     <img src="apps/note/imgs/color.svg" class="color-icon" />
                 <img src="apps/note/imgs/text.svg" @click.stop.prevent="setObjType('text')" />
                 <img src="apps/note/imgs/img.svg"  @click.stop.prevent="setObjType('image')"/>
@@ -23,7 +23,7 @@ export default {
                 <img src="apps/note/imgs/todos.svg" @click.stop.prevent="setObjType('todo')"/>
                 </div>
                 <div class="note-panel-control">
-                <button class="submit-btn" type="submit" @click.prevent="closeEditNote">Add</button>
+                <button class="submit-btn" type="submit" >Add</button>
                     <button @click.prevent="closeEditNote" class="close-modal-btn">close</button>
     </div>
             </div>
@@ -78,18 +78,20 @@ export default {
 			this.setPlaceHolder = this.placeHolder[noteType];
 		},
 		save() {
+			this.closeEditNote();
 			if (this.editMode) {
+				console.log('d');
 				this.editNote.info.title = this.title;
 				if (this.editNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo')
 					this.editNote.info.url = this.txt;
 				else {
 					this.editNote.info.txt = this.txt;
 				}
+				this.editMode = false;
 				return;
 			}
 			const backgroundColor = this.backgroundColor;
 			if (this.noteType === 'text') {
-				console.log(this.demoNotes);
 				const txtInfo = { title: this.title, txt: this.txt };
 				this.$emit('cmpType', {
 					type: 'NoteTxt',
@@ -116,7 +118,6 @@ export default {
 					todos.push(task);
 				});
 				const toDoInfo = { title: this.title, todos: todos, label: null };
-				// noteService.addNote('NoteToDo', toDoInfo, backgroundColor);
 				this.$emit('cmpType', {
 					isEdit: this.editMode,
 					type: 'NoteToDo',
@@ -126,6 +127,7 @@ export default {
 			}
 			this.title = null;
 			this.txt = null;
+			this.closeEditNote();
 		},
 		closeEditNote() {
 			this.$emit('isShown');

@@ -7,7 +7,7 @@ export default {
 	components: {},
 	template: `
 	<section class="main-note">
-        <note-preview :notes="notesToShow"  />
+        <note-preview :notes="notes"/>
 </section>
 `,
 	data() {
@@ -27,9 +27,8 @@ export default {
 	destroyed() {},
 	methods: {
 		loadNotes() {
-			const demoNotes = noteService.query();
-			this.notes = demoNotes;
-			console.log(this.notes);
+			this.notes = noteService.query();
+			return this.notes;
 		},
 		handleEvent(val) {
 			console.log(val);
@@ -43,20 +42,23 @@ export default {
 		removeNote(currNote) {
 			const removeNote = this.notes.findIndex((note) => note === currNote);
 			this.notes.splice(removeNote, 1);
-		}
-	},
-	computed: {
+		},
 		notesToShow(filterBy) {
-			if (!filterBy) return this.notes;
-			this.filterBy = filterBy;
-			console.log(filterBy);
 			const { type, txt } = filterBy;
-
-			return this.notes.filter((note) => {
-				return note.type === type && note.title.toLowerCase().includes(txt.toLowerCase());
+			if (!filterBy || ((type === '' && txt === '') || type === 'All')) {
+				this.loadNotes();
+				return;
+			}
+			this.filterBy = filterBy;
+			this.notes = this.loadNotes().filter((note) => {
+				if (type === 'NoteToDo') return note.type === 'NoteToDo';
+				if (!type) return note.info.title?.toLowerCase().includes(txt.toLowerCase());
+				if (!txt) return note.type === type;
+				return note.type === type && note.info.title.toLowerCase().includes(txt.toLowerCase());
 			});
 		}
 	},
+	computed: {},
 	watch: {},
 	components: {
 		notePreview
