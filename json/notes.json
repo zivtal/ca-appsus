@@ -76,6 +76,9 @@
         "id": "3HCD39",
         "type": "NoteToDo",
         "isPinned": false,
+        "style": {
+            "backgroundColor": "#f28b82"
+        },
         "info": {
             "txt": "",
             "labels": [
@@ -111,6 +114,9 @@
         "id": "Fs6aZs",
         "type": "NoteVideo",
         "isPinned": false,
+        "style": {
+            "backgroundColor": "#f28b82"
+        },
         "info": {
             "title": "Cool video",
             "txt": "",
@@ -133,6 +139,9 @@
         "id": "8CQgPk",
         "type": "NoteToDo",
         "isPinned": false,
+        "style": {
+            "backgroundColor": "#f28b82"
+        },
         "info": {
             "title": "groceries",
             "txt": "",
@@ -217,6 +226,9 @@
         "id": "hfhvKv",
         "type": "NoteToDo",
         "isPinned": false,
+        "style": {
+            "backgroundColor": "#f28b82"
+        },
         "info": {
             "txt": "",
             "labels": [

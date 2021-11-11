@@ -7,13 +7,14 @@ export default {
 	components: {},
 	template: `
             <div class="note-toolbar">
-                <input type="color" v-model="backgroundColor" @blur="changeColor"></input>
-                <button @click="openEditor"> edit note </button>
-				<add-new-note v-if="isEditor" class="note-editor" style="opacity:100%" :editNote="note" />
-                <button> add label </button>
-                <button @click="duplicateNote"> duplicate note </button>
-                <button @click="removeNote"> delete note </button>
-                <button> Export to email </button>
+                <img src="apps/note/imgs/edit.svg" @click="openEditor"></img>
+                <input type="color" v-model="backgroundColor" @blur="changeColor" class="color-input"/>
+				<img src="apps/note/imgs/color.svg" />
+				<add-new-note v-if="isEditor" class="note-editor" :editNote="note" @isShown="isShown" />
+                <img src="apps/note/imgs/label.svg" /> 
+                <img src="apps/note/imgs/duplicate.svg" @click="duplicateNote"/>
+                <img src="apps/note/imgs/delete.svg" @click="removeNote"/>
+                <img src="apps/note/imgs/export.svg" />
             </div>
     `,
 	data() {
@@ -37,10 +38,12 @@ export default {
 		duplicateNote() {
 			const copyNote = utilService.deepCopy(this.note);
 			eventBus.$emit('copyNote', copyNote);
-			// const copyNote = JSON.parse(stringfl());
 		},
 		removeNote() {
 			eventBus.$emit('removenote', this.note);
+		},
+		isShown() {
+			this.isEditor = !this.isEditor;
 		}
 	},
 	computed: {},
