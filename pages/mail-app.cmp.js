@@ -24,7 +24,7 @@ export default {
 				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove" @save="save"/>
 				<mail-list v-else-if="mails.filtered" :mails="mails.filtered" :folder="active" @remove="remove" @star="star"/>
 			</section>
-			<mail-compose />
+			<!-- <mail-compose /> -->
 		</section>
     `,
 	data() {
