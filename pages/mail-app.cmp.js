@@ -75,7 +75,6 @@ export default {
 			} else {
 				mail.folder = 'trash';
 				mailService.save(mail)
-					.then(() => splicer(mail, this.mails))
 					.catch(err => console.log(err));
 			}
 		},
