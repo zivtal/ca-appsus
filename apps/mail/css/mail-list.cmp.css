@@ -10,6 +10,7 @@
   height: 58px;
 }
 
+.mail-app .display .mail-list > .controls select,
 .mail-app .display .mail-list > .controls button {
   cursor: pointer;
   color: white;
@@ -19,8 +20,18 @@
   border: 0;
   background-color: transparent;
   border-bottom: 5px solid #444;
+  outline: none;
 }
 
+.mail-app .display .mail-list > .controls button {
+  float: right;
+}
+
+.mail-app .display .mail-list > .controls option {
+  background-color: #444;
+}
+
+.mail-app .display .mail-list > .controls select:hover,
 .mail-app .display .mail-list > .controls button:hover {
   border-bottom: 5px solid whitesmoke;
 }
