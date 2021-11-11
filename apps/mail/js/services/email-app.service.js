@@ -30,23 +30,25 @@ function getById(itemId) {
     return storageService.get(KEY, itemId);
 }
 
-function getDraft(replyId) {
-    return storageService.draft(KEY, replyId);
+function getDraft(id, key) {
+    return storageService.draft(KEY, id, key);
 }
 
-function getEmptyMail(reply = null, to = null, from = null, subject = null, folder = "draft") {
-    return {
+function getEmptyMail(key, value) {
+    const mail = {
         id: null,
-        reply,
-        folder,
-        subject,
+        reply: null,
+        forward: null,
+        folder: "draft",
+        subject: null,
         body: null,
         isRead: true,
         isStarred: false,
         sentAt: 0,
-        from,
-        to,
+        from: null,
+        to: null,
     };
+    return mail;
 }
 
 function _createDemo() {

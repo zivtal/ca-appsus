@@ -18,9 +18,9 @@ function get(entityType, entityId) {
         .then(entities => entities.find(entity => entity.id === entityId))
 }
 
-function draft(entityType, replyId) {
+function draft(entityType, id, key) {
     return query(entityType)
-        .then(entities => entities.find(entity => entity.reply === replyId))
+        .then(entities => entities.find(entity => entity[key] === id))
 }
 
 function post(entityType, newEntity) {

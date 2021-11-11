@@ -50,7 +50,8 @@ export default {
 		mailService.query()
 			.then(mails => {
 				this.mails.all = mails;
-				eventBus.$on('save', this.save);
+				eventBus.$on('mailSave', this.save);
+				eventBus.$on('mailRemove', this.remove);
 			})
 			.catch(err => console.log(err));
 	},
