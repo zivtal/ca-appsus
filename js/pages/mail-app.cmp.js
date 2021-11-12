@@ -1,10 +1,10 @@
-import { mailService } from "../apps/mail/js/services/email-app.service.js";
+import { mailService } from "../apps/mail/services/email-app.service.js";
 import { utilService } from "../services/utils.service.js";
 import { eventBus } from "../services/event.bus-service.js";
-import { mailList } from "../apps/mail/js/cmp/mail-list.cmp.js";
-import { folderList } from "../apps/mail/js/cmp/mail-folderlist.cmp.js";
-import { mailFullscreen } from "../apps/mail/js/cmp/mail-fullscreen.js";
-import { mailCompose } from "../apps/mail/js/cmp/mail-compose.cmp.js";
+import { mailList } from "../apps/mail/cmp/mail-list.cmp.js";
+import { folderList } from "../apps/mail/cmp/mail-folderlist.cmp.js";
+import { mailFullscreen } from "../apps/mail/cmp/mail-fullscreen.js";
+import { mailCompose } from "../apps/mail/cmp/mail-compose.cmp.js";
 
 export default {
 	props: [],
