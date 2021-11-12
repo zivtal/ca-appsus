@@ -132,17 +132,12 @@ export default {
 		<note-filter :notes="notes"/>
 		<h1>Pinned</h1>
         <section class="pinned-note">
-            <template v-for="note in notes">
-                <component :is="note.type" :note="note" v-if="note.isPinned" > </component>
-            </template>
+                <component :is="note.type" :note="note" v-if="note.isPinned" v-for="note in notes" > </component>
         </section>
 		<hr/>
 		<h1>Others</h1>
         <section class="others-note">
-			<template v-for="note in notes">
-			<component :is="note.type" :note="note" v-if="!note.isPinned" > </component>
-            </template>
-
+			<component :is="note.type" :note="note" v-if="!note.isPinned" v-for="note in notes" > </component>
         </section>
         <section class="others-note">
 
@@ -151,7 +146,9 @@ export default {
 </div>
     `,
 	data() {
-		return {};
+		return {
+			demoNotes: this.notes
+		};
 	},
 	created() {},
 	updated() {},
