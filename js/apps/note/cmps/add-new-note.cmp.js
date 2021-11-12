@@ -11,11 +11,22 @@ export default {
                     <input type="text" placeHolder="Title" class="add-note-title" v-model="title" >
                     <img src="apps/note/imgs/pinned.svg" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"/>
                 </div>
+				<div class="colors-container grid"> 
+					<div class="color-select" @click=setColorChoice style="background-color:#DE3163"></div>
+					<div class="color-select" @click=setColorChoice style="background-color:#FF7F50"> </div>
+					<div class="color-select" @click=setColorChoice style="background-color:#FFBF00"> </div>
+					<div class="color-select" @click=setColorChoice style="background-color:#DFFF00"> </div>
+					<div class="color-select" @click=setColorChoice style="background-color:#CCCCFF"> </div>
+					<div class="color-select" @click=setColorChoice style="background-color:#6495ED"> </div>
+					<div class="color-select" @click=setColorChoice style="background-color:#40E0D0"> </div>
+					<div class="color-select" @click=setColorChoice style="background-color:#9FE2BF"> </div>
+					<div class="color-select" @click=setColorChoice style="background-color:#999999"> </div>
+</div>
                 <input type="text" PlaceHolder="Add a note" v-model="txt" class="add-note-text" :placeHolder="setPlaceHolder">
             </div>
             <div class="new-note-toolbar flex">
                 <div class="note-type-btns">
-                    <input type="color" v-model="backgroundColor" class="color-input" value="#f1f3f4" />
+                    <!-- <input type="color" v-model="backgroundColor" class="color-input" value="#f1f3f4" /> -->
                     <img src="apps/note/imgs/color.svg" class="color-icon" />
                 <img src="apps/note/imgs/text.svg" @click.stop.prevent="setObjType('text')" />
                 <img src="apps/note/imgs/img.svg"  @click.stop.prevent="setObjType('image')"/>
@@ -55,6 +66,7 @@ export default {
 				this.txt = this.editNote.info.txt;
 				this.noteType = this.editNote.type;
 				this.backgroundColor = this.editNote.style.backgroundColor;
+				console.log(this.backgroundColor);
 			} else if (this.editNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo') {
 				this.title = this.editNote.info.title;
 				this.txt = this.editNote.info.url;
@@ -72,6 +84,14 @@ export default {
 	updated() {},
 	destroyed() {},
 	methods: {
+		setColorChoice(ev) {
+			var style = ev.target.style.backgroundColor;
+			const rgb = style.replace(/[^0-9]/g, '');
+
+			const hexColor = noteService.rgbToHex(rgb);
+			this.backgroundColor = '#' + hexColor;
+			console.log(this.backgroundColor);
+		},
 		setObjType(noteType) {
 			this.noteType = noteType;
 			this.setPlaceHolder = this.placeHolder[noteType];

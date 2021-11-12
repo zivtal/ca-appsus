@@ -7,7 +7,7 @@ export default {
 	components: {},
 	template: `
 	<section class="main-note">
-        <note-preview :notes="notes"/>
+        <note-preview v-if="notes" :notes="notes"/>
 </section>
 `,
 	data() {
@@ -17,24 +17,25 @@ export default {
 		};
 		},
 		created() {
-		this.loadDemo()
 		this.loadNotes();
 		eventBus.$on('showChange', this.handleEvent);
 		eventBus.$on('copyNote', this.updateNotes);
 		eventBus.$on('removenote', this.removeNote);
 		eventBus.$on('filtered', this.notesToShow);
-		eventBus.$on('loadQuery', this.loadNotes);
+		eventBus.$on('addNote', this.addNote);
 	},
 	updated() {},
 	destroyed() {},
 	methods: {
-		loadDemo() {
-			noteService.createDemoQuery()
-		},
+		
 		loadNotes() {
-			this.notes = noteService.query();
-			console.log(this.notes);
-			return this.notes;
+			return noteService.query().then((notes)=> {
+				this.notes = notes
+				return notes
+			})
+		},
+		addNote(note) {
+			this.notes.unshift(note)
 		},
 		handleEvent(val) {
 			console.log(val);
@@ -51,17 +52,19 @@ export default {
 		},
 		notesToShow(filterBy) {
 			const { type, txt } = filterBy;
-			if (!filterBy || ((type === '' && txt === '') || type === 'All')) {
+			if (!filterBy || ((type === '' && txt === '') || type === 'All' && txt === '')) {
 				this.loadNotes();
 				return;
 			}
 			this.filterBy = filterBy;
-			this.notes = this.loadNotes().filter((note) => {
+			this.loadNotes().then((notes) => {
+			 return this.notes = notes.filter((note) => {
 				if (type === 'NoteToDo') return note.type === 'NoteToDo';
 				if (!type) return note.info.title?.toLowerCase().includes(txt.toLowerCase());
 				if (!txt) return note.type === type;
-				return note.type === type && note.info.title.toLowerCase().includes(txt.toLowerCase());
-			});
+				console.log(note.type, type);
+				return note.info.title?.toLowerCase().includes(txt.toLowerCase());
+			})});
 		}
 	},
 	computed: {},

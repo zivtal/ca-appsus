@@ -44,6 +44,7 @@ export default {
 		},
 		removeNote() {
 			eventBus.$emit('removenote', this.note);
+			// eventBus.$emit('tRemoveNote', this.note);
 		},
 		isShown() {
 			this.isEditor = !this.isEditor;

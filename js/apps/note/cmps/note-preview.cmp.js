@@ -17,6 +17,7 @@ const NoteTxt = {
 	data() {
 		return {};
 	},
+	created() {},
 	methods: {},
 	computed: {
 		setTxtLength() {
@@ -131,17 +132,27 @@ export default {
 	template: `
     <div class="main-note main-layout-note" >
     <div class="main-note-container">
-		
-		<add-new-note @cmpType="addNewNote" class="add-note-container" />
+		<transition name="slide-fade">
+		<add-new-note v-if="show" @cmpType="addNewNote" class="add-note-container" />
+</transition>
 		<note-filter :notes="notes"/>
 		<h1>Pinned</h1>
         <section class="pinned-note">
-                <component :is="note.type" :note="note" v-if="note.isPinned" v-for="note in notes" > </component>
+		<transition-group name="bounce" >
+                <component :is="note.type" :note="note" v-if="note.isPinned" v-for="(note,idx) in getPinnednotes" :key="idx"  :ind="note"
+              > 
+			</component>
+</transition-group>
         </section>
 		<hr/>
 		<h1>Others</h1>
         <section class="others-note">
-			<component :is="note.type" :note="note" v-if="!note.isPinned" v-for="note in notes" > </component>
+		<transition-group name="bounce" >
+
+			<component :is="note.type" :note="note" v-if="!note.isPinned" v-for="(note,idx) in notes" :key="idx" :ind="note"
+              > </component>
+			 </transition-group>
+
         </section>
         <section class="others-note">
 
@@ -151,20 +162,31 @@ export default {
     `,
 	data() {
 		return {
-			demoNotes: this.notes
+			demoNotes: this.notes,
+			show: this.isShow
 		};
 	},
-	created() {},
+	created() {
+		eventBus.$on('showModal', this.slideNewPage);
+		eventBus.$on('tRemoveNote');
+	},
 	updated() {},
 	destroyed() {},
 	methods: {
+		slideNewPage(isShow) {
+			this.show = isShow;
+		},
 		addNewNote(val) {
-			noteService.addNote(val.type, val.val, val.style);
-			console.log(this.notes);
-			eventBus.$emit('loadQuery');
+			noteService.addNote(val.type, val.val, val.style).then((note) => {
+				eventBus.$emit('addNote', note);
+			});
 		}
 	},
-	computed: {},
+	computed: {
+		getPinnednotes() {
+			return this.notes.filter((note) => note.isPinned);
+		}
+	},
 	watch: {},
 	components: {
 		NoteTxt,
