@@ -48,14 +48,9 @@ export const mailPreview = {
                         if (mail.reply || mail.forward) {
                             const mode = (mail.reply) ? 'reply' : 'forward';
                             const id = mail[mode];
-                            this.$router.push({ path: `/mail/${mail.folder}?id=${id}&mode=${mode}` })
-                        } else {
-                            // open in compose
-                            this.$router.push({ path: `/mail/${mail.folder}?id=${mail.id}` })
-                        }
-                    } else {
-                        this.$router.push({ path: `/mail/${mail.folder}?id=${mail.id}` })
-                    }
+                            this.$router.push({ path: `/mail/${mail.folder}?id=${id}&mode=${mode}` });
+                        } else this.$router.push({ path: `/mail/?compose=${mail.id}` });
+                    } else this.$router.push({ path: `/mail/${mail.folder}?id=${mail.id}` });
                 })
                 .catch(err => console.log(err));
         },

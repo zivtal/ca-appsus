@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-.googlebook-app .search img {
+.googlebook-app .search div > img {
   width: 200px;
   display: block;
 }
@@ -49,4 +49,29 @@
 .googlebook-app .search div input:focus-visible {
   border: 0;
   outline: none;
+}
+
+.googlebook-app .search button {
+  position: absolute;
+  top: 8em;
+  left: 2em;
+  cursor: pointer;
+  border-radius: 10px;
+  color: black;
+  background-color: silver;
+  padding: 10px;
+  border: 0;
+  transition: 0.5s;
+  opacity: 0.8;
+}
+
+.googlebook-app .search button > img {
+  height: 18px;
+  width: 18px;
+}
+
+.googlebook-app .search button:hover {
+  opacity: 1;
+  background-color: gold;
+  transform: scale(105%);
 }

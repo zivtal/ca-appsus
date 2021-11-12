@@ -36,6 +36,7 @@ export const mailCompose = {
         this.mail = this.data;
         this.mail.from = "zivtal@appsus.com";
         this.interval = setInterval(() => {
+            this.mail.sentAt = Date.now();
             if (this.mail.body) eventBus.$emit('mailSave', this.mail);
         }, 5000);
     },
