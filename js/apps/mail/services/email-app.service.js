@@ -54,7 +54,7 @@ function getEmptyMail(key, value) {
 function _createDemo() {
     let mails = utilService.loadFromStorage(KEY);
     if (!mails || !mails.length) {
-        mails = utilService.createDemo('../json/emails.json');
+        mails = utilService.createDemo('json/emails.json');
         utilService.saveToStorage(KEY, mails);
     }
     return mails;
