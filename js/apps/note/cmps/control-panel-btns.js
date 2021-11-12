@@ -9,14 +9,14 @@ export default {
 	<div class="note-toolbar-container">
             <div class="note-toolbar">
                 <img src="apps/note/imgs/edit.svg" @click="openEditor"></img>
-                <input type="color" v-model="backgroundColor" value="#545454" @blur="changeColor" class="color-input"/>
+                <input type="color" v-model="backgroundColor" value="#f1f3f4" @blur="changeColor" class="color-input"/>
 				<img src="apps/note/imgs/color.svg" />
                 <img src="apps/note/imgs/label.svg" /> 
                 <img src="apps/note/imgs/duplicate.svg" @click="duplicateNote"/>
                 <img src="apps/note/imgs/delete.svg" @click="removeNote"/>
                 <img src="apps/note/imgs/export.svg" />
             </div>
-			<section>
+			<section class="note-editor-main">
 				<add-new-note v-if="isEditor" class="note-editor" :editNote="note" @isShown="isShown" />
 				 </section>
 </div>
@@ -24,7 +24,7 @@ export default {
 	data() {
 		return {
 			currNote: this.note,
-			backgroundColor: '#545454',
+			backgroundColor: '#f1f3f4',
 			isEditor: false
 		};
 	},

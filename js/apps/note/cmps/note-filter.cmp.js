@@ -6,7 +6,8 @@ export default {
 	template: `
     <div class="main-filter">
 		<div class="filter-container">
-			<span>Filter by Note Type </span>
+			<div class="filter-txt-container">
+			<span class="filter-type-title">Filter by Note Type </span>
 			<select v-model="filterBy.type" @change="filter">
 				<option value="All">All</option>
 				<option value="NoteTxt">Text</option>
@@ -15,8 +16,11 @@ export default {
 				<option value="NoteToDo">Todos</option>
 				<option value="audio">Audio</option>
 			</select>
-			<span>Filter by title</span>
+</div>
+			<div class="filter-txt-container">
+			<span class="filter-txt-title">Filter by title</span>
         <input @input="filter" v-model="filterBy.txt" />
+</div>
 </div>
 </div>
     `,

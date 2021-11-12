@@ -17,17 +17,23 @@ export default {
 		};
 		},
 		created() {
+		this.loadDemo()
 		this.loadNotes();
 		eventBus.$on('showChange', this.handleEvent);
 		eventBus.$on('copyNote', this.updateNotes);
 		eventBus.$on('removenote', this.removeNote);
 		eventBus.$on('filtered', this.notesToShow);
+		eventBus.$on('loadQuery', this.loadNotes);
 	},
 	updated() {},
 	destroyed() {},
 	methods: {
+		loadDemo() {
+			noteService.createDemoQuery()
+		},
 		loadNotes() {
 			this.notes = noteService.query();
+			console.log(this.notes);
 			return this.notes;
 		},
 		handleEvent(val) {
