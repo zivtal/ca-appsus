@@ -10,8 +10,8 @@ export const quickReply = {
         <div v-if="mail && !isNewCompose" class="reply">
 			<img src="./apps/mail/img/profile.png">
 			<section class="board">
-				<label>To:</label>
-				<input ref="email" type="text" v-model="mail.to" :readonly="isReply" autofocus/>
+				<input ref="email" type="text" v-model="mail.to" :readonly="isReply" placeholder="To" autofocus/>
+                <img @click="compose" src="./apps/mail/img/expand_window.png"/>
 				<textarea ref="content" v-if="mail" v-model="mail.body"></textarea>
 				<button @click="send">{{button}}</button>
 			</section>
@@ -68,7 +68,10 @@ export const quickReply = {
             this.mail.sentAt = Date.now();
             eventBus.$emit('mailSave', this.mail);
             this.$emit('send');
-        }
+        },
+        compose() {
+            this.$router.push({ path: `/mail/${this.reply.folder}?id=${this.reply.id}&compose=${this.mail.id}` })
+        },
     },
     computed: {
         isReply() {

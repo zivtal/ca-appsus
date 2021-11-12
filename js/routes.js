@@ -15,11 +15,6 @@ const routes = [
 		path: '/mail/:folder?',
 		component: mailPage,
 	},
-	// {
-	// 	path: '/mail/:folder?',
-	// 	component: mailPage,
-	// 	props: route => ({ query: router.query.id })
-	// },
 	{
 		path: '/note',
 		component: notePage

@@ -7,11 +7,8 @@ export const mailPreview = {
     template: `
 	<div>
 		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="mouseOver" @mouseleave="mouseLeave">
-			<div class="star" @click.stop="$emit('star',mail)">
-				<img v-if="mail.isStarred" src="./apps/mail/img/star-active.svg"/>
-				<img v-if="!mail.isStarred" src="./apps/mail/img/star-disabled.svg"/>
-			</div>
-			<div class="content" :class="{deleted: isInTrash}"><p>{{mail.subject}}</p></div>
+            <img class="star" :src="'./apps/mail/img/'+starImg+'.svg'" @click.stop="$emit('star',mail)"/>
+            <div class="content" :class="{deleted: isInTrash}"><p>{{mail.subject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
 				<img src="./apps/mail/img/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
@@ -87,7 +84,10 @@ export const mailPreview = {
             return (this.mail.folder === 'trash') ? 'Delete forever' : 'Delete';
         },
         isInTrash() {
-            return this.mail.folder === 'trash';
+            return (this.mail.folder === 'trash' && this.$route.params.folder !== 'trash');
+        },
+        starImg() {
+            return (this.mail.isStarred) ? 'star-active' : "star-disabled";
         }
     },
 }
