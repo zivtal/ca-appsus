@@ -27,6 +27,7 @@ export const quickReply = {
         mailService.getDraft(this.reply.id, this.mode)
             .then(draft => {
                 this.mail = (draft) ? draft : mailService.getEmptyMail();
+                this.mail.sentAt = Date.now();
                 eventBus.$emit('mailSave', this.mail);
                 switch (this.mode) {
                     case 'forward':
@@ -42,6 +43,7 @@ export const quickReply = {
 							\n\n\n${this.reply.body}`;
                         this.mail.from = 'me@appsus.com';
                         this.mail.subject = 'FW: ' + this.reply.subject;
+                        this.mail.sentAt = Date.now();
                         break;
                     case 'reply':
                         this.mail.reply = this.reply.id;

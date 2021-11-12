@@ -8,7 +8,7 @@ const reviewArea = {
             <h1>Review by: {{review.name}}</h1>
             <h2>Rate: {{stars}}</h2>
             <h3>Description:</h3>
-            <p>{{review.desc}}</p>
+            <p>{{review.description}}</p>
         </div>
     `,
     computed: {
@@ -68,7 +68,7 @@ export const bookReview = {
                 content: [
                     { key: 'name', value: '', component: 'textBox', return: 'string', isRequired: true },
                     { key: 'rate', value: 5, component: 'selectBox', return: 'string', options: ['1', '2', '3', '4', '5'], symbol: '⭐' },
-                    { key: 'desc', value: '', component: 'textArea', return: 'string', isRequired: true },
+                    { key: 'description', value: '', component: 'textArea', return: 'string', isRequired: true },
                 ],
                 action: 'review',
                 title: 'Enter a new review',
