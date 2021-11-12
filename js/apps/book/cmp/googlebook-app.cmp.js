@@ -42,7 +42,7 @@ export const googleBook = {
     watch: {
         text: {
             handler(newVal, oldVal) {
-                if (newVal !== oldVal) {
+                if (newVal !== oldVal && newVal) {
                     this.search = newVal;
                     this.onSearch();
                 }

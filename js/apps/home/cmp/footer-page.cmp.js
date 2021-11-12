@@ -5,17 +5,17 @@ export default {
 	<footer>
 		<div class="footer-container">
 			<p>&copy; Ziv Tal and Amir Inbar 2021</p>
-			<div class="about-us-container flex">
-				<img src="./imgs/amir.jfif"><span>Amir Inbar</span>
-				<div class="footer-icon"> <img class="social-icon facebook-icon" src="imgs/facebook.png"> </div>
-				<div class="footer-icon"><img class="github-icon" src="imgs/github.png"> </div>
-				<div class="footer-icon"><img class="linkedin-icon" src="imgs/linkedin.png"> </div>
-				<img src="./imgs/ziv.jpg"><span>Ziv Tal</span>
-				<div class="footer-icon"> <img class="social-icon facebook-icon" src="imgs/facebook.png"> </div>
-				<div class="footer-icon"><img class="github-icon" src="imgs/github.png"> </div>
-				<div class="footer-icon"><img class="linkedin-icon" src="imgs/linkedin.png"> </div>
-</div>
-</div>
+			<!-- <div class="about-us-container flex">
+				<img src="./img/amir.jfif"><span>Amir Inbar</span>
+				<div class="footer-icon"> <img class="social-icon facebook-icon" src="./img/facebook.png"> </div>
+				<div class="footer-icon"><img class="github-icon" src="./img/github.png"> </div>
+				<div class="footer-icon"><img class="linkedin-icon" src="./img/linkedin.png"> </div>
+				<img src="./img/ziv.jpg"><span>Ziv Tal</span>
+				<div class="footer-icon"> <img class="social-icon facebook-icon" src="./img/facebook.png"> </div>
+				<div class="footer-icon"><img class="github-icon" src="./img/github.png"> </div>
+				<div class="footer-icon"><img class="linkedin-icon" src="./img/linkedin.png"> </div>
+			</div> -->
+		</div>
 </footer>
     `,
 	data() {

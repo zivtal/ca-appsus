@@ -23,11 +23,6 @@ export default {
             search: null,
         }
     },
-    created() { },
-    updated() { },
-    destroyed() { },
-    methods: {},
-    computed: {},
     watch: {
         '$route.params.bookId': {
             handler(get) {

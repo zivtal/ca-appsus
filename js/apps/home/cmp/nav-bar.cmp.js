@@ -3,14 +3,12 @@ export default {
 	components: {},
 	template: `
 	<nav class="navbar-container flex">
-		<a @click="homePage"> 
-			<img src="imgs/newlogo.png" class="main-logo">
-</a>
-		<img src="imgs/burger.svg" @click="openMenu" class="menu-burger" />
+		<img @click="homePage" src="./img/newlogo.png" class="main-logo">
+		<img src="./img/burger.svg" @click="openMenu" class="menu-burger" />
 		<div class="apps-menu flex" v-if="isMenuOpen">
-			<a @click="booksPage"><img src="imgs/books.png" /> </a>
-			<a @click="emailPage"> <img src="imgs/gmail.png" /> </a>
-			<a @click="notePage"> <img src="imgs/keep.png" /> </a>
+			<a @click="booksPage"><img src="./img/books.png" /> </a>
+			<a @click="emailPage"> <img src="./img/gmail.png" /> </a>
+			<a @click="notePage"> <img src="./img/keep.png" /> </a>
 </div>
 </nav>
     `,

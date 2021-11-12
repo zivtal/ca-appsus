@@ -12,7 +12,7 @@ body {
 }
 
 .main-app {
-  min-height: calc(100vh - 15.2em);
+  min-height: calc(100vh - 10em);
 }
 
 /*NavBar */
@@ -22,7 +22,7 @@ body {
   align-items: center;
   padding: 10px;
   background-color: #111;
-  border-bottom: 1px solid rgb(236, 239, 241);
+  height: 5.5em;
 }
 
 .main-logo {
@@ -73,7 +73,7 @@ body {
   color: silver;
   text-align: center;
   padding: 10px;
-  border-top: 1px solid silver;
+  height: 5em;
 }
 
 .about-us-container img {

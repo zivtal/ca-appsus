@@ -27,6 +27,7 @@ export const booksView = {
                     </label>
                     <button v-if="isEditMode" @click="addItem">+</button>
                 </div>
+                <div><img @click="$router.push({ path: '/book/?search' })" src="./img/book/google.png"/></div>
             </div>
 
             <div class="grid-display">
