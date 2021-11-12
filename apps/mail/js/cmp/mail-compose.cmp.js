@@ -46,6 +46,7 @@ export const mailCompose = {
             clearInterval(this.interval);
             this.mail = null;
             eventBus.$emit('mailComposeClose');
+            this.$router.go(-1);
         },
         send() {
             clearInterval(this.interval);
@@ -54,6 +55,7 @@ export const mailCompose = {
             this.mail.sentAt = Date.now();
             eventBus.$emit('mailSave', this.mail);
             this.mail = null;
+            this.$router.go(-1);
         }
     },
     computed: {

@@ -4,7 +4,7 @@ export default {
 	template: `
 	<nav class="navbar-container flex">
 		<a @click="homePage"> 
-			<img src="imgs/logo.png" class="main-logo">
+			<img src="imgs/newlogo.png" class="main-logo">
 </a>
 		<img src="imgs/burger.svg" @click="openMenu" class="menu-burger" />
 		<div class="apps-menu flex" v-if="isMenuOpen">
@@ -19,9 +19,9 @@ export default {
 			isMenuOpen: false
 		};
 	},
-	created() {},
-	updated() {},
-	destroyed() {},
+	created() { },
+	updated() { },
+	destroyed() { },
 	methods: {
 		openMenu() {
 			this.isMenuOpen = !this.isMenuOpen;

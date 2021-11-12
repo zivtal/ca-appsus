@@ -11,7 +11,7 @@ body {
 }
 
 .main-app {
-  min-height: calc(100vh - 6.4em);
+  min-height: calc(100vh - 15.2em);
 }
 
 /*NavBar */
@@ -26,6 +26,7 @@ body {
 
 .main-logo {
   cursor: pointer;
+  height: 3.2em;
   filter: invert(100%);
 }
 
@@ -67,15 +68,11 @@ body {
 .footer-container {
   font-size: 0.9rem;
   height: auto;
-  background-color: #fbfbfb;
-  color: #282828;
+  background-color: #111;
+  color: silver;
   text-align: center;
-  line-height: 50px;
-  border-top: 1px solid rgb(236, 239, 241);
-  margin-top: 50px;
   padding: 10px;
-  bottom: 0;
-  width: 100%;
+  border-top: 1px solid silver;
 }
 
 .about-us-container img {

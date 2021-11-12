@@ -2,7 +2,7 @@ export default {
 	props: [],
 	components: {},
 	template: `
-        <section>
+        <section class="main-app">
 			<div class="home-page-header flex">
 				<h1 class="home-page-title">AppSus - Take Your Productivity To The Highest Level</h1>
 </div>
@@ -32,9 +32,9 @@ export default {
 	data() {
 		return {};
 	},
-	created() {},
-	updated() {},
-	destroyed() {},
+	created() { },
+	updated() { },
+	destroyed() { },
 	methods: {},
 	computed: {},
 	watch: {}

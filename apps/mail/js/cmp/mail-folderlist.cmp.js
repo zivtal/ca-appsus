@@ -27,7 +27,7 @@ export const folderList = {
     },
     methods: {
         compose() {
-            this.$router.push({ path: `/mail/?compose=new` })
+            this.$router.push({ path: `/mail/?compose` })
         },
         getImage(idx) {
             const imgs = ['all.png', 'inbox.png', 'sent.png', 'draft.png'];
