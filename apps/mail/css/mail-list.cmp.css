@@ -68,10 +68,7 @@
 }
 
 .mail-app .display .mail-list > .list .star {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2em;
+  padding: 5px;
 }
 
 .mail-app .display .mail-list > .list .star > img {

@@ -1,5 +1,13 @@
 import { eventBus } from "../../../../services/event.bus-service.js";
 
+const ICONS = {
+    all: 'all.png',
+    inbox: 'inbox.png',
+    sent: 'sent.png',
+    draft: 'draft.png',
+    trash: 'trash.png',
+};
+
 export const folderList = {
     props: ['folders', 'active', 'unread'],
     components: {
@@ -8,9 +16,9 @@ export const folderList = {
     template: `
 		<section class="mail-folder flex columns">
 			<button class="flex align-center" @click="compose"><img src="./apps/mail/img/compose.png"/><p>Compose</p></button>
-			<template v-for="folder,idx in folders">
+			<template v-for="folder in folders">
 				<div @click="folderChange(folder)" :class="{selected: folder.toLowerCase() === activeFolder}">
-                    <img :src="'./apps/mail/img/' + getImage(idx)" />
+                    <img :src="'./apps/mail/img/' + getImage(folder)" />
                     <span class="title">{{folder}}</span><span class="number">{{unread[folder]}}</span>
                 </div>
 			</template>
@@ -22,21 +30,26 @@ export const folderList = {
             index: 0,
         }
     },
-    create() {
-        eventBus.$on('mailFolderChange', folderChange);
-    },
     methods: {
         compose() {
             this.$router.push({ path: `/mail/?compose` })
         },
-        getImage(idx) {
-            const imgs = ['all.png', 'inbox.png', 'sent.png', 'draft.png'];
-            return (imgs[idx]) ? imgs[idx] : 'default.png';
+        getImage(folder) {
+            return ICONS[folder.toLowerCase()] || 'default.png';
         },
         folderChange(activeFolder) {
+            console.log('k');
             activeFolder = activeFolder.toLowerCase();
             this.activeFolder = activeFolder;
             this.$router.push({ path: `/mail/${activeFolder}` });
         }
     },
+    watch: {
+        '$route.params.folder': {
+            handler(get) {
+                this.activeFolder = (get) || 'inbox';
+            },
+            immediate: true,
+        },
+    }
 }
