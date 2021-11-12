@@ -103,10 +103,12 @@ body {
 }
 
 .filter-container {
+	display: flex;
 	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
 	border: 1px solid transparent;
 	padding: 20px;
 	border-radius: 50px;
+	flex-wrap: wrap;
 }
 
 .others-note > div {
@@ -133,6 +135,9 @@ body {
 	border-radius: 50px;
 	height: 30px;
 	margin: 5px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
 }
 
 .note-pinned:hover {
@@ -242,4 +247,23 @@ body {
 /*Helpers */
 .ishide {
 	display: none;
+}
+
+@media screen and (min-width: 360px) {
+	.pinned-note,
+	.others-note {
+		column-count: 1;
+	}
+}
+@media screen and (min-width: 480px) {
+	.pinned-note,
+	.others-note {
+		column-count: 2;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.pinned-note,
+	.others-note {
+		column-count: 5;
+	}
 }
