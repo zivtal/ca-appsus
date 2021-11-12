@@ -160,6 +160,7 @@ export default {
             return Array(this.item.categories).join();
         },
         getDescription() {
+            if (!desc) return;
             var desc = this.item.description;
             desc = desc.split(' ')
             desc = desc.splice(0, 10).join(' ') + ' ... (read more)';

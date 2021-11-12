@@ -2,6 +2,12 @@
   flex-grow: 1;
 }
 
+@media screen and (max-width: 740px) {
+  .mail-app .display .mail-list {
+    font-size: 0.8em;
+  }
+}
+
 .mail-app .display .mail-list > .controls {
   align-items: flex-end;
   justify-content: flex-start;
@@ -21,6 +27,12 @@
   background-color: transparent;
   border-bottom: 5px solid #444;
   outline: none;
+}
+
+@media screen and (max-width: 740px) {
+  .mail-app .display .mail-list > .controls select {
+    width: 0px;
+  }
 }
 
 .mail-app .display .mail-list > .controls button {
