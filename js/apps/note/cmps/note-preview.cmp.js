@@ -1,7 +1,7 @@
-import controlPanelBtns from 'js/apps/note/cmps/control-panel-btns.js';
-import { noteService } from 'js/apps/note/services/note-service.js';
-import addNewNote from 'js/apps/note/cmps/add-new-note.cmp.js';
-import noteFilter from 'js/apps/note/cmps/note-filter.cmp.js';
+import controlPanelBtns from './control-panel-btns.js';
+import { noteService } from '../services/note-service.js';
+import addNewNote from './add-new-note.cmp.js';
+import noteFilter from './note-filter.cmp.js';
 
 const NoteTxt = {
 	props: [ 'note' ],

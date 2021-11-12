@@ -1,6 +1,6 @@
-import { eventBus } from 'js/services/event.bus-service.js';
-import addNewNote from 'js/apps/note/cmps/add-new-note.cmp.js';
-import { utilService } from 'js/services/utils.service.js';
+import { eventBus } from '../../../services/event.bus-service.js';
+import addNewNote from './add-new-note.cmp.js';
+import { utilService } from '../../../services/utils.service.js';
 
 export default {
 	props: [ 'note' ],

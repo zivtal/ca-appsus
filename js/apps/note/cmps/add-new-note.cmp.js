@@ -1,11 +1,11 @@
-import noteService from 'js/apps/note/services/note-service.js';
-import utilService from 'js/services/utils.service.js';
+import { noteService } from '../services/note-service.js';
+import { utilService } from '../../../services/utils.service.js';
 
 export default {
 	props: [ 'editNote' ],
 	components: {},
 	template: `
-           <form @submit.prevent="save"  >
+           <form @submit.prevent="save">
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
                     <input type="text" placeHolder="Title" class="add-note-title" v-model="title" >
