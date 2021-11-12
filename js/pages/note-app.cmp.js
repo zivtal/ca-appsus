@@ -1,6 +1,6 @@
-import notePreview from '../apps/note/js/cmps/note-preview.cmp.js';
-import { noteService } from '../apps/note/js/services/note-service.js';
-import { eventBus } from '../services/event.bus-service.js';
+import notePreview from 'js/apps/note/cmps/note-preview.cmp.js';
+import { noteService } from 'js/apps/note/services/note-service.js';
+import { eventBus } from 'js/services/event.bus-service.js';
 
 export default {
 	props: [],

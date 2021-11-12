@@ -1,5 +1,5 @@
-import { noteService } from '../services/note-service.js';
-import { utilService } from '../../../../services/utils.service.js';
+import noteService from 'js/apps/note/services/note-service.js';
+import utilService from 'js/services/utils.service.js';
 
 export default {
 	props: [ 'editNote' ],

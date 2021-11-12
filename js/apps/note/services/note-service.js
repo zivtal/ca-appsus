@@ -1,4 +1,4 @@
-import { utilService } from '../../../../services/utils.service.js';
+import { utilService } from 'js/services/utils.service.js';
 
 export const noteService = {
 	query,
