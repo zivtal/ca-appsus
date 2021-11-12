@@ -109,7 +109,6 @@ export default {
 				}
 				if (this.mails.filtered && !this.active.maill) {
 					const sort = active.sort;
-					// console.log(sort);
 				}
 			},
 			deep: true,
@@ -136,7 +135,6 @@ export default {
 		},
 		'$route.query.compose': {
 			handler(get) {
-				console.log(get);
 				if (get === null) {
 					const mail = mailService.getEmptyMail();
 					mail.id = utilService.makeId();

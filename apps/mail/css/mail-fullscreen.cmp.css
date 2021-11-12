@@ -134,12 +134,16 @@
 
 .mail-app .display > .mail-read > .mail > .reply > .board input {
   border: 0;
-  width: calc(100% - 2em - 28px);
+  width: calc(100% - 32px);
   outline: none;
 }
 
 .mail-app .display > .mail-read > .mail > .reply > .board > img {
-  float: right;
+  cursor: pointer;
+  /* float: right; */
+  position: relative;
+  top: -15px;
+  left: 15px;
   height: 28px;
   width: 28px;
   filter: invert(35%);

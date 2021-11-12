@@ -23,7 +23,7 @@ export const folderList = {
         }
     },
     create() {
-        eventBus.$on('mailFolderChange', console.log);
+        eventBus.$on('mailFolderChange', folderChange);
     },
     methods: {
         compose() {
@@ -34,7 +34,6 @@ export const folderList = {
             return (imgs[idx]) ? imgs[idx] : 'default.png';
         },
         folderChange(activeFolder) {
-            console.log(activeFolder);
             activeFolder = activeFolder.toLowerCase();
             this.activeFolder = activeFolder;
             this.$router.push({ path: `/mail/${activeFolder}` });

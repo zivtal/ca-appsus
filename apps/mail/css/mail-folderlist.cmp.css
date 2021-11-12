@@ -75,11 +75,10 @@
 @media screen and (min-width: 740px) {
   .mail-app .display .mail-folder > button {
     height: 3.6em;
-    /* padding: 10px 24px 10px 15px; */
-    margin: 0.75em 5em 1.5em 0;
+    padding: 5px;
+    margin: 0.75em 5em 1.5em 3px;
     width: 12em;
     border-radius: 2em;
-    font-weight: bold;
   }
 
   .mail-app .display .mail-folder > button > img {
@@ -118,7 +117,7 @@
     padding: 0.6em;
     border-radius: 0px 25px 25px 0;
     transition: 0.5s;
-    padding-inline-start: 1.5em;
+    padding-inline-start: 2.15em;
     margin-inline-end: 2em;
   }
 }
