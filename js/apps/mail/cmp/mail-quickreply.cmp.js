@@ -1,5 +1,5 @@
 import { mailService } from "../services/email-app.service.js";
-import { eventBus } from "../../../../services/event.bus-service.js";
+import { eventBus } from "../../../services/event.bus-service.js";
 
 export const quickReply = {
     props: ['reply', 'button', 'mode'],
@@ -8,10 +8,10 @@ export const quickReply = {
     },
     template: `
         <div v-if="mail && !isNewCompose" class="reply">
-			<img src="./apps/mail/img/profile.png">
+			<img src="./img/mail/profile.png">
 			<section class="board">
 				<input ref="email" type="text" v-model="mail.to" :readonly="isReply" placeholder="To" autofocus/>
-                <img @click="compose" src="./apps/mail/img/expand_window.png"/>
+                <img @click="compose" src="./img/mail/expand_window.png"/>
 				<textarea ref="content" v-if="mail" v-model="mail.body"></textarea>
 				<button @click="send">{{button}}</button>
 			</section>

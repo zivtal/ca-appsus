@@ -1,4 +1,4 @@
-import { eventBus } from "../../../../services/event.bus-service.js";
+import { eventBus } from "../../../services/event.bus-service.js";
 
 const ICONS = {
     all: 'all.png',
@@ -15,10 +15,10 @@ export const folderList = {
     },
     template: `
 		<section class="mail-folder flex columns">
-			<button class="flex align-center" @click="compose"><img src="./apps/mail/img/compose.png"/><p>Compose</p></button>
+			<button class="flex align-center" @click="compose"><img src="./img/mail/compose.png"/><p>Compose</p></button>
 			<template v-for="folder in folders">
 				<div @click="folderChange(folder)" :class="{selected: folder.toLowerCase() === activeFolder}">
-                    <img :src="'./apps/mail/img/' + getImage(folder)" />
+                    <img :src="'./img/mail/' + getImage(folder)" />
                     <span class="title">{{folder}}</span><span class="number">{{unread[folder]}}</span>
                 </div>
 			</template>

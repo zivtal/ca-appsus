@@ -1,4 +1,4 @@
-import { eventBus } from "../../../../services/event.bus-service.js";
+import { eventBus } from "../../../services/event.bus-service.js";
 
 export const mailCompose = {
     props: ['data'],
@@ -10,7 +10,7 @@ export const mailCompose = {
                     <span class="text">New Message</span>
                     <span class="close" @click="cancel">×</span>
                     <span class="maximized" @click.stop="isMaximaized = !isMaximaized">
-                        <img src="./apps/mail/img/expand_window.png"/>
+                        <img src="./img/mail/expand_window.png"/>
                     </span>
                 </div>
                 <section class="content">

@@ -1,20 +1,20 @@
-import { utilService } from "../../../../services/utils.service.js";
+import { utilService } from "../../../services/utils.service.js";
 import { mailService } from "../services/email-app.service.js";
-import { eventBus } from "../../../../services/event.bus-service.js";
+import { eventBus } from "../../../services/event.bus-service.js";
 
 export const mailPreview = {
     props: ['mail'],
     template: `
 	<div>
 		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="mouseOver" @mouseleave="mouseLeave">
-            <img class="star" :src="'./apps/mail/img/'+starImg+'.svg'" @click.stop="$emit('star',mail)"/>
+            <img class="star" :src="'./img/mail/'+starImg+'.svg'" @click.stop="$emit('star',mail)"/>
             <div class="content" :class="{deleted: isInTrash}"><p>{{mail.subject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
-				<img src="./apps/mail/img/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
-				<img src="./apps/mail/img/trash.png" :title="delTitle" @click.stop="removeMail(mail)"/>
-				<img :src="'./apps/mail/img/'+markImg+'.png'" :title="markAs" @click.stop="markRead(mail)"/>
-				<img src="./apps/mail/img/fullscreen.svg" title="Full screen" @click.stop="goTo(mail)"/>
+				<img src="./img/mail/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
+				<img src="./img/mail/trash.png" :title="delTitle" @click.stop="removeMail(mail)"/>
+				<img :src="'./img/mail/'+markImg+'.png'" :title="markAs" @click.stop="markRead(mail)"/>
+				<img src="./img/mail/fullscreen.svg" title="Full screen" @click.stop="goTo(mail)"/>
 			</div>
 		</section>
 		<transition name="slide-fade">

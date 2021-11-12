@@ -1,5 +1,5 @@
 import { quickReply } from "./mail-quickreply.cmp.js";
-import { eventBus } from "../../../../services/event.bus-service.js";
+import { eventBus } from "../../../services/event.bus-service.js";
 
 export const mailFullscreen = {
 	props: ['mail'],
@@ -9,14 +9,14 @@ export const mailFullscreen = {
 	template: `
 		<section class="mail-read" @keydown.esc="resetMode">
 			<section class="controls flex">
-				<img src="./apps/mail/img/back.png" title="Go back" @click="goBack"/>
-				<img src="./apps/mail/img/reply.svg" title="Reply"/>
-				<img src="./apps/mail/img/trash.png" title="Delete" @click="remove(mail)"/>
-				<img src="./apps/mail/img/unread.png" :title="markAs"/>
-				<img src="./apps/mail/img/fullscreen.svg" @click.stop="goTo(mail)"/>
+				<img src="./img/mail/back.png" title="Go back" @click="goBack"/>
+				<img src="./img/mail/reply.svg" title="Reply"/>
+				<img src="./img/mail/trash.png" title="Delete" @click="remove(mail)"/>
+				<img src="./img/mail/unread.png" :title="markAs"/>
+				<img src="./img/mail/fullscreen.svg" @click.stop="goTo(mail)"/>
 			</section>
 			<section class="mail">
-				<img src="./apps/mail/img/profile.png">
+				<img src="./img/mail/profile.png">
 				<section class="content">
 					<div class="subject">
 						<span class="title">{{mail.subject}}</span>
@@ -28,9 +28,9 @@ export const mailFullscreen = {
 						{{mail.body}}
 					</p>
                     <div v-if="!mode" class="actions">
-                        <button @click="quickReply"><img src="./apps/mail/img/reply.png"><p>Replay</p></button>
-                        <button @click="quickReply"><img src="./apps/mail/img/reply-all.png"><p>Replay all</p></button>
-                        <button @click="quickForward"><img src="./apps/mail/img/forward.png"><p>Forward</p></button>
+                        <button @click="quickReply"><img src="./img/mail/reply.png"><p>Replay</p></button>
+                        <button @click="quickReply"><img src="./img/mail/reply-all.png"><p>Replay all</p></button>
+                        <button @click="quickForward"><img src="./img/mail/forward.png"><p>Forward</p></button>
                     </div>
                 </section>
 				<quick-reply v-if="mode" :reply="mail" :button="'Send'" :mode="mode" @send="resetMode"/>
