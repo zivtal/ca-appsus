@@ -15,7 +15,7 @@ export default {
             </div>
             <div class="new-note-toolbar flex">
                 <div class="note-type-btns">
-                    <input type="color" v-model="backgroundColor" class="color-input" value="#545454" />
+                    <input type="color" v-model="backgroundColor" class="color-input" value="#f1f3f4" />
                     <img src="apps/note/imgs/color.svg" class="color-icon" />
                 <img src="apps/note/imgs/text.svg" @click.stop.prevent="setObjType('text')" />
                 <img src="apps/note/imgs/img.svg"  @click.stop.prevent="setObjType('image')"/>
@@ -36,7 +36,7 @@ export default {
 			txt: '',
 			isPinned: false,
 			noteType: '',
-			backgroundColor: '#545454',
+			backgroundColor: '#f1f3f4',
 			placeHolder: {
 				text: 'Please write some text',
 				image: 'Please paste your image url',

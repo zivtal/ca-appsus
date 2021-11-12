@@ -2,14 +2,15 @@ import controlPanelBtns from './control-panel-btns.js';
 import { noteService } from '../services/note-service.js';
 import addNewNote from './add-new-note.cmp.js';
 import noteFilter from './note-filter.cmp.js';
+import { eventBus } from '../../../services/event.bus-service.js';
 
 const NoteTxt = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
 		<img src="apps/note/imgs/pinned.svg" class="user-note-pinned" v-if="note.isPinned">
-                <h1> {{note.info.title}}</h1>
-                <p v-if="note.info.txt">{{setTxtLength}}</p>
+                <h1 :style="{color:replaceHex}"> {{note.info.title}}</h1>
+                <p :style="{color:replaceHex}" v-if="note.info.txt">{{setTxtLength}}</p>
             <control-panel-btns  :note="note" />
         </div>
     `,
@@ -22,6 +23,9 @@ const NoteTxt = {
 			if (this.note.info.txt.length > 30) {
 				return this.note.info.txt.substring(0, 25);
 			} else return this.note.info.txt;
+		},
+		replaceHex() {
+			if (!this.note.style.isDark) return '#599d86';
 		}
 	},
 	mounted() {},
@@ -125,7 +129,7 @@ const NoteToDo = {
 export default {
 	props: [ 'notes' ],
 	template: `
-    <div class="main-note" >
+    <div class="main-note main-layout-note" >
     <div class="main-note-container">
 		
 		<add-new-note @cmpType="addNewNote" class="add-note-container" />
@@ -157,6 +161,7 @@ export default {
 		addNewNote(val) {
 			noteService.addNote(val.type, val.val, val.style);
 			console.log(this.notes);
+			eventBus.$emit('loadQuery');
 		}
 	},
 	computed: {},
