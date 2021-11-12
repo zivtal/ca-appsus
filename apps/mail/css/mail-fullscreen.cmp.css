@@ -129,12 +129,20 @@
 
 .mail-app .display > .mail-read > .mail > .reply > .board label {
   font-size: 0.8em;
+  width: 1em;
 }
 
 .mail-app .display > .mail-read > .mail > .reply > .board input {
   border: 0;
-  width: 80%;
+  width: calc(100% - 2em - 28px);
   outline: none;
+}
+
+.mail-app .display > .mail-read > .mail > .reply > .board > img {
+  float: right;
+  height: 28px;
+  width: 28px;
+  filter: invert(35%);
 }
 
 .mail-app .display > .mail-read > .mail > .reply > .board .from > img {
