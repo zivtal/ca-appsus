@@ -24,7 +24,7 @@ export default {
 				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove" @save="save"/>
 				<mail-list v-else-if="mails.filtered" :mails="mails.filtered" :folder="active" @remove="remove" @star="star"/>
 			</section>
-			<mail-compose />
+			<mail-compose v-if="compose" :data="compose" />
 		</section>
     `,
 	data() {
@@ -45,15 +45,16 @@ export default {
 				folders: ['All', 'Inbox', 'Sent', 'Draft'],
 				unread: {},
 			},
+			compose: null,
 		};
 	},
 	created() {
-		this.compose();
 		mailService.query()
 			.then(mails => {
 				this.mails.all = mails;
 				eventBus.$on('mailSave', this.save);
 				eventBus.$on('mailRemove', this.remove);
+				eventBus.$on('mailComposeClose', () => this.compose = null);
 			})
 			.catch(err => console.log(err));
 	},
@@ -93,11 +94,6 @@ export default {
 				})
 				.catch(err => console.log(err));
 		},
-		compose() {
-			const mail = mailService.getEmptyMail();
-			mail.id = utilService.makeId();
-			console.log(mail);
-		}
 	},
 	computed: {
 		numOfMails() {
@@ -138,9 +134,22 @@ export default {
 			deep: true,
 			immediate: true,
 		},
-		'$route.params': {
+		'$route.query.compose': {
 			handler(get) {
 				console.log(get);
+				if (!this.$route.params.folder) {
+					if (get === null) {
+						const mail = mailService.getEmptyMail();
+						mail.id = utilService.makeId();
+						mail.to = this.$route.query.to || null;
+						mail.subject = this.$route.query.subject || null;
+						mail.body = this.$route.query.body || null;
+						this.compose = mail;
+					} else if (get) {
+						mailService.getById(get)
+							.then(mail => this.compose = (mail) ? mail : null);
+					}
+				}
 			},
 			immediate: true,
 		},
@@ -153,7 +162,7 @@ export default {
 		},
 		'$route.query.id': {
 			handler(get) {
-				this.active.mail = (this.mails.all && get) ? this.mails.all.find(item => item.id === get) : null;
+				this.active.mail = (this.$route.params.folder && this.mails.all && get) ? this.mails.all.find(item => item.id === get) : null;
 			},
 			immediate: true,
 		}
