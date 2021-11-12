@@ -1,5 +1,5 @@
-@import "/apps/mail/css/mail-main.css";
-@import "/apps/note/css/main-note.css";
+@import "apps/mail/mail-main.css";
+@import "apps/note/main-note.css";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap");
 
 * {
