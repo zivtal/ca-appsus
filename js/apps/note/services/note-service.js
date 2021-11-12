@@ -8,7 +8,7 @@ export const noteService = {
 var gNotes;
 
 function query() {
-	gNotes = utilService.createDemo('json/notes.json');
+	// gNotes = utilService.createDemo('json/notes.json');
 	return gNotes;
 }
 
