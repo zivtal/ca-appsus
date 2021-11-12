@@ -2,7 +2,7 @@ import { storageService } from "../../../services/async-storage.service.js";
 import { utilService } from "../../../services/utils.service.js";
 
 const KEY = 'mail';
-// _createDemo();
+_createDemo();
 
 export const mailService = {
     query,
