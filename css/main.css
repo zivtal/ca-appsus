@@ -79,14 +79,14 @@ body {
   border-radius: 0px;
 }
 
-.apps-menu {
+.navbar-container .apps-menu {
   transition: 0.4s;
   position: absolute;
   top: 50px;
   right: 0;
   z-index: 10;
   padding: 20px;
-  background-color: whitesmoke;
+  background-color: white;
   border: 1px solid rgb(224, 224, 224);
   border-radius: 10px;
   gap: 30px;
@@ -124,58 +124,7 @@ body {
   height: 5em;
 }
 
-.about-us-container img {
-  height: 100px;
-  border-radius: 20px;
-}
-
-.about-us-container {
-  justify-content: center;
-  align-items: center;
-}
-
-.about-us-container > * {
-  margin-inline-end: 50px;
-}
-
-.footer-icon {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 40px;
-  width: 40px;
-  background-color: #e5e5e5;
-  margin-right: 20px;
-  align-self: center;
-  color: #ffffff;
-  font-size: 1.875rem;
-  cursor: pointer;
-}
-
-.footer-icon:hover {
-  background-color: #516fad;
-}
-
-.social-icon {
-  max-height: 16px;
-}
-
-.footer-container .about-us-container .github-icon {
-  height: 35px;
-}
-.footer-container .about-us-container .linkedin-icon {
-  height: 25px;
-}
-
-.github-icon:hover {
-  background-color: #4078c0;
-}
-.linkedin-icon:hover {
-  background: #fae106;
-}
-
 /*Home Page */
-
 .home-page {
   background-image: url("../img/background.jfif");
   background-size: cover;
