@@ -1,532 +1,518 @@
 @font-face {
-  font-family: googlefont;
-  src: url("../../../fonts/OpenSans-Medium.ttf");
+	font-family: googlefont;
+	src: url("../../../fonts/OpenSans-Medium.ttf");
 }
 
 body {
-  font-family: google font;
-  margin: 0;
-  padding: 0;
-  overflow-y: scroll;
+	font-family: google font;
+	margin: 0;
+	padding: 0;
+	overflow-y: scroll;
 }
 
 .main-note {
-  margin: auto;
-  max-width: 1280px;
+	margin: auto;
+	max-width: 1280px;
 }
 
 .main-layout-note {
-  margin-inline-end: 20px;
-  margin-inline-start: 20px;
+	margin-inline-end: 20px;
+	margin-inline-start: 20px;
 }
 
 .add-note-container {
-  transition: 0.6s;
-  margin: 20px auto;
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
-  padding: 10px;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  gap: 20px;
-  position: relative;
-  margin-bottom: 50px;
+	transition: 0.6s;
+	margin: 20px auto;
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+	padding: 10px;
+	width: 100%;
+	max-width: 600px;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	gap: 20px;
+	position: relative;
+	margin-bottom: 50px;
 }
 
 .add-note-container .new-note-toolbar .note-type-btns img:hover {
-  transform: scale(120%);
+	transform: scale(120%);
 }
 
 .add-note-container > * {
-  margin-block-start: 10px;
-  margin-block-end: 10px;
+	margin-block-start: 10px;
+	margin-block-end: 10px;
 }
 
 /* main input */
 
 .color-input {
-  opacity: 0;
-  position: absolute;
+	opacity: 0;
+	position: absolute;
 
-  cursor: pointer;
-  width: 22px;
+	cursor: pointer;
+	width: 22px;
 }
 
 .note-type-btns img {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .add-note-inputs {
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .add-note-inputs input {
-  border: none;
-  outline: none;
+	border: none;
+	outline: none;
 }
 
 .pinned-container {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .colors-container {
-  justify-content: center;
-  align-items: center;
-  background-color: whitesmoke;
-  border-radius: 10px;
-  box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
-  gap: 3px;
-  grid-template-columns: repeat(3, 40px);
-  position: absolute;
-  bottom: 0;
-  transform: translateY(100%);
-  z-index: 3;
-  padding: 5px;
+	justify-content: center;
+	align-items: center;
+	background-color: whitesmoke;
+	border-radius: 10px;
+	box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
+	gap: 3px;
+	grid-template-columns: repeat(3, 40px);
+	position: absolute;
+	bottom: 0;
+	transform: translateY(100%);
+	z-index: 3;
+	padding: 5px;
 }
 
 .colors-container-edit {
-  justify-content: center;
-  align-items: center;
-  background-color: whitesmoke;
-  border-radius: 10px;
-  box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
-  gap: 3px;
-  grid-template-columns: repeat(3, 40px);
-  position: absolute;
-  top: 0;
-  /* transform: translateY(100%); */
-  z-index: 3;
-  padding: 5px;
+	justify-content: center;
+	align-items: center;
+	background-color: whitesmoke;
+	border-radius: 10px;
+	box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
+	gap: 3px;
+	grid-template-columns: repeat(3, 40px);
+	position: absolute;
+	top: 0;
+	/* transform: translateY(100%); */
+	z-index: 3;
+	padding: 5px;
 }
 
 .color-select {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  border: 1px solid #222222;
-  transform: translateX(17%);
-  cursor: pointer;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #222222;
+	transform: translateX(17%);
+	cursor: pointer;
 }
 .add-note-title {
-  font-size: 2.5rem;
-  width: 100%;
+	font-size: 1.5rem;
+	width: 100%;
 }
 
 .add-note-text {
-  font-size: 1.5rem;
-  font-family: googlefont;
+	font-size: 1rem;
+	font-family: googlefont;
 }
 
 .submit-btn,
 .close-modal-btn {
-  border: none;
-  background: none;
-  font-family: googlefont;
-  font-size: 1.5rem;
-  cursor: pointer;
+	border: none;
+	background: none;
+	font-family: googlefont;
+	font-size: 1.5rem;
+	cursor: pointer;
 }
 
 .new-note-toolbar {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .note-toolbar img {
-  color: black;
+	color: black;
 }
 
 .user-note {
-  margin-block-end: 20px;
+	margin-block-end: 20px;
 }
 
 .pinned-note,
 .others-note {
-  margin-block-end: 20px;
-  column-count: 6;
-  padding: 10px;
-  text-align: center;
-  gap: 20px;
+	margin-block-end: 20px;
+	column-count: 6;
+	padding: 10px;
+	text-align: center;
+	gap: 20px;
 }
 
 /*Filter */
 .main-filter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-block-start: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-block-start: 50px;
 }
 
 .main-filter .filter-container {
-  width: 680px;
+	width: 680px;
 }
 
 .main-filter .filter-container .filter-type-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  max-width: 350px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	max-width: 350px;
 }
 
 .main-filter .filter-container .filter-txt-container {
-  position: relative;
-  max-width: 680px;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+	position: relative;
+	max-width: 680px;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .main-filter .filter-container .filter-txt-container .add-new-note-txt {
-  width: 90%;
+	width: 90%;
 }
 .main-filter .filter-container .filter-txt-container .icon-search-svg {
-  position: absolute;
+	position: absolute;
 }
 
 .main-filter .filter-container .filter-txt-container .filter-txt-input {
-  margin-block-start: 10px;
-  width: 100%;
-  background-color: #f1f3f4;
-  height: 3rem;
-  border-radius: 8px;
-  border: 1px solid #1e1e1e00;
-  box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
-  padding-inline-start: 2.5rem;
-  font-family: googleFont;
-  color: black;
-  font-size: 1.125rem;
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+	margin-block-start: 10px;
+	width: 100%;
+	background-color: #f1f3f4;
+	height: 3rem;
+	border-radius: 8px;
+	border: 1px solid #1e1e1e00;
+	box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
+	padding-inline-start: 2.5rem;
+	font-family: googleFont;
+	color: black;
+	font-size: 1.125rem;
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
 }
 
 .main-filter .filter-container div svg {
-  height: 40px;
-  position: absolute;
-  transform: translateY(30%);
+	height: 40px;
+	position: absolute;
+	transform: translateY(30%);
 }
 
 .main-filter .filter-container .filter-txt-container .add-new-note-btn {
-  margin-block-start: 10px;
-  height: 48px;
-  width: 48px;
-  background-color: whitesmoke;
-  font-size: 2.5rem;
-  box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
-  outline: none;
-  border-radius: 2px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
+	margin-block-start: 10px;
+	height: 48px;
+	width: 48px;
+	background-color: whitesmoke;
+	font-size: 2.5rem;
+	box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
+	outline: none;
+	border-radius: 2px;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
 }
 .main-filter .filter-container .filter-type-container .add-new-note-btn span {
-  position: absolute;
-  top: 0;
-  left: 25%;
+	position: absolute;
+	top: 0;
+	left: 25%;
 }
 .others-note > div {
-  margin-block-end: 20px;
+	margin-block-end: 20px;
 }
 
 .ismark {
-  filter: invert(10%);
-  fill: gold;
+	filter: invert(10%);
+	fill: gold;
 }
 
 .main-filter .filter-container select {
-  border-radius: 10px;
-  width: 80px;
+	border-radius: 10px;
+	width: 80px;
 }
 
 .main-filter .filter-container input {
-  border-radius: 10px;
-  border: 0.5px solid black;
+	border-radius: 10px;
+	border: 0.5px solid black;
 }
 
 .note-pinned {
-  cursor: pointer;
-  border-radius: 50px;
-  height: 30px;
-  margin: 5px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
+	cursor: pointer;
+	border-radius: 50px;
+	height: 30px;
+	margin: 5px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
 }
 
 .btns-light {
-  fill: whitesmoke;
+	fill: whitesmoke;
 }
 .btns-dark {
-  fill: black;
+	fill: black;
 }
 
 .note-pinned:hover {
-  background: rgba(95, 99, 104, 0.157);
+	background: rgba(95, 99, 104, 0.157);
 }
 
 .note-img {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-  padding: 15px;
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+	padding: 15px;
 }
 
 .user-note {
-  background-color: rgb(232, 234, 237);
-  flex-direction: column;
-  border-radius: 8px;
-  break-inside: avoid-column;
-  border: 1px solid #dadce0;
-  transition: 0.9s;
-  position: relative;
+	background-color: rgb(232, 234, 237);
+	flex-direction: column;
+	border-radius: 8px;
+	break-inside: avoid-column;
+	border: 1px solid #dadce0;
+	transition: 0.9s;
+	position: relative;
 }
 
 .user-note-pinned {
-  transition: 0.9s;
-  position: absolute;
-  height: 25px;
-  margin: 5px;
-  margin-block-end: 3px;
-  cursor: pointer;
+	transition: 0.9s;
+	position: absolute;
+	height: 25px;
+	margin: 5px;
+	margin-block-end: 3px;
+	cursor: pointer;
 }
 
 .user-note-pinned:hover {
-  transform: scale(120%);
+	transform: scale(120%);
 }
 
 .user-note:hover {
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 20%), 0 1px 3px 1px rgb(60 64 67 /15%);
-  border-top: 1px solid black;
-  border: 1px solid transparent;
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 20%), 0 1px 3px 1px rgb(60 64 67 /15%);
+	border-top: 1px solid black;
+	border: 1px solid transparent;
 }
 
 .user-note .note-toolbar img {
-  height: 20px;
+	height: 20px;
 }
 
 .user-todo-list {
-  text-align: left;
-  padding: 0;
+	text-align: left;
+	padding: 0;
 }
 
 .user-todo-list {
-  list-style: none;
+	list-style: none;
 }
 
 .checked {
-  text-decoration: line-through;
+	text-decoration: line-through;
 }
 
 .note-toolbar {
-  opacity: 0;
-  transition: opacity 0.8s;
+	opacity: 0;
+	transition: opacity 0.8s;
 }
 .user-note .user-note-pinned {
-  opacity: 0;
-  transition: opacity 0.8s;
+	opacity: 0;
+	transition: opacity 0.8s;
 }
 
 .note-toolbar img {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .user-note:hover .note-toolbar,
 .user-note-pinned {
-  opacity: 100%;
+	opacity: 100%;
 }
 .user-note:hover .user-note-pinned {
-  opacity: 100%;
+	opacity: 100%;
 }
 
 /*Editor */
 
 .note-editor {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -100%);
-  max-width: 600px;
-  width: 100%;
-  opacity: 100%;
-  padding: 10px;
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
-  background: white;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  z-index: 3;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -100%);
+	max-width: 600px;
+	width: 90%;
+	opacity: 100%;
+	padding: 10px;
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+	background: white;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	z-index: 3;
 }
 
 .note-editor .note-pinned {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 40px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 40px;
 }
 
 .isshown {
-  display: block;
+	display: block;
 }
 /*Helpers */
 .ishide {
-  display: none;
+	display: none;
 }
 
 @media screen and (max-width: 480px) {
-  .pinned-note,
-  .others-note {
-    column-count: 1;
-  }
+	.pinned-note,
+	.others-note {
+		column-count: 1;
+	}
 
-  .add-note-container {
-    max-height: 100px;
-  }
-  .add-note-container .add-note-text,
-  .add-note-title {
-    font-size: 1rem;
-  }
-  .add-note-container .note-pinned {
-    height: 20px;
-  }
-  .new-note-toolbar .note-panel-control .submit-btn,
-  .close-modal-btn {
-    font-size: 0.8rem;
-  }
+	.add-note-container {
+		max-height: 100px;
+	}
+	.add-note-container .add-note-text,
+	.add-note-title {
+		font-size: 1rem;
+	}
+	.add-note-container .note-pinned {
+		height: 20px;
+	}
+	.new-note-toolbar .note-panel-control .submit-btn,
+	.close-modal-btn {
+		font-size: 0.8rem;
+	}
 
-  .main-filter .filter-container {
-    justify-content: space-between;
-    gap: 10px;
-  }
+	.main-filter .filter-container {
+		justify-content: space-between;
+		gap: 10px;
+	}
 
-  .main-filter .filter-container .filter-type-title,
-  .filter-txt-title {
-    font-size: 1rem;
-  }
+	.main-filter .filter-container .filter-type-title,
+	.filter-txt-title {
+		font-size: 1rem;
+	}
 
-  .note-editor-main {
-    position: relative;
-    left: 0;
-    top: 0;
-  }
+	.note-editor-main {
+		position: relative;
+		left: 0;
+		top: 0;
+	}
 
-  .note-toolbar-container .note-editor-main .note-editor {
-    max-width: 375px;
-    height: 130px;
-  }
-  .note-toolbar-container
-    .note-editor-main
-    .note-editor
-    .add-note-inputs
-    .pinned-container
-    .note-pinned {
-    height: 20px;
-  }
-  .note-toolbar-container
-    .note-editor-main
-    .note-editor
-    .add-note-inputs
-    input {
-    font-size: 1rem;
-  }
-  .note-editor > *:not(:nth-child(1)) {
-    margin-block-start: 25px;
-  }
+	.note-toolbar-container .note-editor-main .note-editor {
+		max-width: 375px;
+		height: 130px;
+	}
+	.note-toolbar-container .note-editor-main .note-editor .add-note-inputs .pinned-container .note-pinned {
+		height: 20px;
+	}
+	.note-toolbar-container .note-editor-main .note-editor .add-note-inputs input {
+		font-size: 1rem;
+	}
+	.note-editor > *:not(:nth-child(1)) {
+		margin-block-start: 25px;
+	}
 }
 @media screen and (min-width: 480px) {
-  .pinned-note,
-  .others-note {
-    column-count: 2;
-  }
-  .note-toolbar-container .note-editor-main .note-editor {
-    height: 125px;
-    width: 450px;
-  }
-  .note-editor > .new-note-toolbar {
-    margin-block-start: 70px;
-  }
+	.pinned-note,
+	.others-note {
+		column-count: 2;
+	}
+	.note-toolbar-container .note-editor-main .note-editor {
+		height: 125px;
+		width: 450px;
+	}
+	.note-editor > .new-note-toolbar {
+		margin-block-start: 70px;
+	}
 }
 
 @media screen and (max-width: 760px) {
-  .note-toolbar-container .note-editor-main .note-editor {
-    max-width: 600px;
-    height: 175px;
-  }
-  .note-editor > * {
-    margin-block-start: 20px;
-  }
-  .note-editor > *:not(:nth-child(1)) {
-    margin-block-start: 25px;
-  }
+	.note-toolbar-container .note-editor-main .note-editor {
+		max-width: 400px;
+		height: 175px;
+	}
+	.note-editor > * {
+		margin-block-start: 20px;
+	}
+	.note-editor > *:not(:nth-child(1)) {
+		margin-block-start: 25px;
+	}
 }
 
 @media screen and (min-width: 760px) {
-  .pinned-note,
-  .others-note {
-    column-count: 3;
-  }
-  .add-note-container {
-    max-height: 200px;
-  }
-  .new-note-toolbar .note-panel-control .submit-btn,
-  .close-modal-btn {
-    font-size: 1.4rem;
-  }
+	.pinned-note,
+	.others-note {
+		column-count: 3;
+	}
+	.add-note-container {
+		max-height: 200px;
+	}
+	.new-note-toolbar .note-panel-control .submit-btn,
+	.close-modal-btn {
+		font-size: 1.4rem;
+	}
 
-  .note-toolbar-container .note-editor-main .note-editor {
-    max-width: 600px;
-    height: 225px;
-  }
-  .note-toolbar-container
-    .note-editor-main
-    .note-editor
-    .add-note-inputs
-    .pinned-container
-    .note-pinned {
-    height: 30px;
-    top: 10px;
-  }
-  /* .note-editor > * :not(:nth-child(3)) {
+	.note-toolbar-container .note-editor-main .note-editor {
+		max-width: 600px;
+		height: 225px;
+	}
+	.note-toolbar-container .note-editor-main .note-editor .add-note-inputs .pinned-container .note-pinned {
+		height: 30px;
+		top: 10px;
+	}
+	/* .note-editor > * :not(:nth-child(3)) {
 	} */
-  .note-editor > * {
-    margin-block-start: 20px;
-  }
+	.note-editor > * {
+		margin-block-start: 20px;
+	}
 }
 @media screen and (min-width: 1080px) {
-  .pinned-note,
-  .others-note {
-    column-count: 4;
-  }
+	.pinned-note,
+	.others-note {
+		column-count: 4;
+	}
 }
 @media screen and (min-width: 1280px) {
-  .pinned-note,
-  .others-note {
-    column-count: 5;
-  }
+	.pinned-note,
+	.others-note {
+		column-count: 5;
+	}
 }
 
 /*Animation */
 .slide-fade-enter-active {
-  transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+	transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
-  transform: translateY(-15px);
-  opacity: 0;
+	transform: translateY(-15px);
+	opacity: 0;
 }
 
 .bounce-enter-active {
-  animation: bounce-in 1.7s;
+	animation: bounce-in 1.7s;
 }
 .bounce-leave-active {
-  animation: bounce-in 1.7s reverse;
+	animation: bounce-in 1.7s reverse;
 }
 @keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
+	0% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(0.9);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
