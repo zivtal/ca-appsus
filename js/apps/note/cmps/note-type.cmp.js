@@ -4,7 +4,7 @@ export const NoteTxt = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
-		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned">
+		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned" :title="titleCalc">
                 <h1 :style="{color:replaceHex}"> {{note.info.title}}</h1>
                 <p :style="{color:replaceHex}" v-if="note.info.txt">{{setTxtLength}}</p>
             <control-panel-btns  :note="note" />
@@ -32,6 +32,10 @@ export const NoteTxt = {
 		pinnedSrc() {
 			if (this.note.isPinned) return 'img/note/pinnedOn.svg';
 			else return 'img/note/pinned.svg';
+		},
+		titleCalc() {
+			if (this.note.isPinned) return 'Pinned';
+			if (!this.note.isPinned) return 'UnPinned';
 		}
 	},
 	mounted() {},
@@ -44,7 +48,7 @@ export const NoteImg = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
-		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned">
+		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned"  :title="titleCalc">
 
                 <h1> {{note.info.title}}</h1>
                 <p v-if="note.info.txt"> {{note.info.txt}}</p>
@@ -71,6 +75,10 @@ export const NoteImg = {
 		pinnedSrc() {
 			if (this.note.isPinned) return 'img/note/pinnedOn.svg';
 			else return 'img/note/pinned.svg';
+		},
+		titleCalc() {
+			if (this.note.isPinned) return 'Pinned';
+			if (!this.note.isPinned) return 'UnPinned';
 		}
 	},
 	components: {
@@ -81,7 +89,7 @@ export const NoteVideo = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
-		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned">
+		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned"  :title="titleCalc">
 
                 <h1> {{note.info.title}}</h1>
                 <p v-if="note.info.txt"> {{note.info.txt}}</p>
@@ -110,6 +118,10 @@ export const NoteVideo = {
 		pinnedSrc() {
 			if (this.note.isPinned) return 'img/note/pinnedOn.svg';
 			else return 'img/note/pinned.svg';
+		},
+		titleCalc() {
+			if (this.note.isPinned) return 'Pinned';
+			if (!this.note.isPinned) return 'UnPinned';
 		}
 	},
 	mounted() {},
@@ -121,7 +133,7 @@ export const NoteToDo = {
 	props: [ 'note' ],
 	template: `
         <div class="user-note flex" :style="note.style">
-		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned">
+		<img :src="pinnedSrc" class="user-note-pinned" @click="setNotePinned"  :title="titleCalc">
 
                 <h1> {{note.info.title}}</h1>
                     <ul class="user-todo-list">
@@ -155,6 +167,10 @@ export const NoteToDo = {
 		pinnedSrc() {
 			if (this.note.isPinned) return 'img/note/pinnedOn.svg';
 			else return 'img/note/pinned.svg';
+		},
+		titleCalc() {
+			if (this.note.isPinned) return 'Pinned';
+			if (!this.note.isPinned) return 'UnPinned';
 		}
 	},
 	mounted() {},

@@ -9,15 +9,14 @@ export default {
 	template: `
 	<div class="note-toolbar-container">
             <div class="note-toolbar">
-                <img src="img/note/edit.svg" @click="openEditor" ></img>
-				<div class="colors-container-edit grid" v-if="isColorShow"> 
+                <img src="img/note/edit.svg" @click="openEditor"title="Edit" ></img>
+				<div class="colors-container-edit grid" v-if="isColorShow" title="Color"> 
 						<div class="color-select" @click=setColorChoice  :style="{background:color}" v-for="color in colors"></div>
 					</div>
-				<img src="img/note/color.svg"  @click="isColorShow = !isColorShow" />
-                <img src="img/note/label.svg" /> 
-                <img src="img/note/duplicate.svg" @click="duplicateNote"/>
-                <img src="img/note/delete.svg" @click="removeNote"/>
-                <img src="img/note/export.svg" @click="exportToMail" />
+				<img src="img/note/color.svg"  @click="isColorShow = !isColorShow" title="Color" />
+                <img src="img/note/duplicate.svg" @click="duplicateNote" title="Duplicate"/>
+                <img src="img/note/delete.svg" @click="removeNote" title="Delete"/>
+                <img src="img/note/export.svg" @click="exportToMail" title="Export" />
             </div>
 			<section class="note-editor-main">
 			

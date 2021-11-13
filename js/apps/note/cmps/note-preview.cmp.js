@@ -63,15 +63,14 @@ export default {
 	destroyed() {},
 	methods: {
 		setEamilContent(note) {
+			console.log(note);
 			this.openModal(note);
 		},
 		closeEditModal() {
 			if (this.isEditor) this.isEditor = !this.isEditor;
 		},
 		openModal(note) {
-			console.log(note);
 			this.isEditor = !this.isEditor;
-			console.log(note);
 			this.editNote = note;
 		},
 		slideNewPage(isShow) {
