@@ -4,11 +4,12 @@ export const utilService = {
 	deepCopy,
 	createDemo,
 	getTimeFormat,
-	getLowerCase,
 	makeId,
 	camelCaseToSentence,
 	getHexToRgb,
 	isRgbDarkColor,
+	setCaretPosition,
+	getLowerCase,
 };
 
 function saveToStorage(key, val) {
@@ -74,6 +75,27 @@ function getHexToRgb(hex) {
 
 function isRgbDarkColor(color) {
 	return (0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b) < 50;
+}
+
+function setCaretPosition(el, pos) {
+	if (!pos) pos = el.innerText.length;
+	for (var node of el.childNodes) {
+		if (node.nodeType == 3) {
+			if (node.length >= pos) {
+				var range = document.createRange(),
+					sel = window.getSelection();
+				range.setStart(node, pos);
+				range.collapse(true);
+				sel.removeAllRanges();
+				sel.addRange(range);
+				return -1;
+			} else pos -= node.length;
+		} else {
+			pos = setCaretPosition(node, pos);
+			if (pos == -1) return -1;
+		}
+	}
+	return pos;
 }
 
 function getLowerCase(str) {
