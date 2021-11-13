@@ -1,8 +1,10 @@
 import { mailPreview } from "./mail-preview.cmp.js";
+import { eventBus } from "../../../services/event.bus-service.js";
 
 export const mailList = {
     props: ['mails'],
     components: {
+        eventBus,
         mailPreview,
     },
     template: `
@@ -33,7 +35,7 @@ export const mailList = {
 			</section>
 			<section class="list flex columns">
 				<template v-for="mail in mailDisplay">
-					<mail-preview :mail="mail" @remove="$emit('remove',mail)" @star="$emit('star',mail)"/>
+					<mail-preview :mail="mail" @remove="$emit('remove',mail)"/>
 				</template>
 			</section>
 		</section>
@@ -63,7 +65,7 @@ export const mailList = {
         },
         next() {
             this.page.index = (this.page.index < this.page.last - 1) ? this.page.index + 1 : 0;
-        }
+        },
     },
     computed: {
         mailsBy() {
@@ -81,7 +83,6 @@ export const mailList = {
                     const text = this.filterBy.search.toLowerCase();
                     const results = [];
                     ['subject', 'body', 'from', 'to'].forEach(key => results.push(!item[key] || !item[key].toLowerCase().includes(text)));
-                    console.log(results);
                     if (results.every(result => result)) return false;
                 };
                 return true;

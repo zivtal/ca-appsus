@@ -73,6 +73,21 @@
   background-color: #999;
 }
 
+.mail-app .display .mail-read > .mail .subject .tags > button {
+  float: right;
+  border: 0;
+}
+
+.mail-app .display .mail-read > .mail .subject .tags-list {
+  margin: 20px;
+  font-size: 0.8em;
+  border-radius: 5px;
+  color: black;
+  padding: 3px;
+  border: 0;
+  background-color: whitesmoke;
+}
+
 .mail-app .display .mail-read > .mail > p {
   margin-inline-start: 58px;
 }
@@ -110,16 +125,31 @@
 
 .mail-app .display .mail-read > .mail .actions {
   margin-top: 50px;
+  margin-bottom: 80px;
 }
 
 .mail-app .display .mail-read > .mail button {
   border: 0;
-  padding: 10px;
   box-shadow: inset 0 0 0 1px #dadce0;
   background-color: transparent;
   border-radius: 5px;
+}
+
+.mail-app .display .mail-read > .mail button:not(.trimmed-content) {
+  float: right;
+  padding: 10px;
   margin-inline-end: 10px;
   transition: 0.3s;
+}
+
+.mail-app .display .mail-read > .mail button.trimmed-content {
+  float: left;
+  position: relative;
+  top: 1em;
+  left: -0.5em;
+  font-size: 1.5em;
+  margin: 0;
+  height: 0.9em;
 }
 
 .mail-app .display .mail-read > .mail button:hover {
@@ -218,8 +248,4 @@
   border: 0;
   outline: none;
   overflow: hidden;
-}
-
-.mail-app .display.flex > .mail-read > .mail .reply .board button {
-  float: right;
 }

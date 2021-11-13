@@ -104,6 +104,10 @@
   min-height: calc(50vh - 200px);
 }
 
+.mail-compose .window .content {
+  height: calc(100% - 7em);
+}
+
 .mail-compose .window .content div input {
   padding: 5px;
   width: 100%;
@@ -120,6 +124,7 @@
 }
 
 .mail-compose .window .content div:last-child {
+  white-space: pre-line;
   height: 100px;
   outline: none;
   padding: 5px;

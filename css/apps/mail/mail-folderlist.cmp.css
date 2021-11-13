@@ -105,6 +105,7 @@
   .mail-app .display .mail-folder > div .number {
     float: right;
     display: block;
+    padding-inline-end: 5px;
   }
 
   .mail-app .display .mail-folder {

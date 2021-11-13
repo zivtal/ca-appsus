@@ -4,11 +4,13 @@ export const utilService = {
 	deepCopy,
 	createDemo,
 	getTimeFormat,
-	getLowerCase,
 	makeId,
 	camelCaseToSentence,
 	getHexToRgb,
 	isRgbDarkColor,
+	isValidEmail,
+	setCaretPosition,
+	getLowerCase,
 };
 
 function saveToStorage(key, val) {
@@ -43,6 +45,7 @@ function makeId(length = 6) {
 function getTimeFormat(timestamp, countryCode = 'en-US') {
 	const year = new Date().getFullYear();
 	const date = new Date(timestamp);
+	const today = new Date().getDate();
 	var options =
 		year === date.getFullYear()
 			? {
@@ -54,7 +57,7 @@ function getTimeFormat(timestamp, countryCode = 'en-US') {
 				month: 'numeric',
 				day: 'numeric'
 			};
-	return date.toLocaleDateString(countryCode, options);
+	return (date.getDate() === today) ? 'Today' : date.toLocaleDateString(countryCode, options);
 }
 
 function camelCaseToSentence(input, isOnlyFirst = true) {
@@ -74,6 +77,32 @@ function getHexToRgb(hex) {
 
 function isRgbDarkColor(color) {
 	return (0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b) < 50;
+}
+
+function isValidEmail(mailAddress) {
+	const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	return pattern.test(mailAddress);
+}
+
+function setCaretPosition(el, pos) {
+	if (!pos) pos = el.innerText.length;
+	for (var node of el.childNodes) {
+		if (node.nodeType == 3) {
+			if (node.length >= pos) {
+				var range = document.createRange(),
+					sel = window.getSelection();
+				range.setStart(node, pos);
+				range.collapse(true);
+				sel.removeAllRanges();
+				sel.addRange(range);
+				return -1;
+			} else pos -= node.length;
+		} else {
+			pos = setCaretPosition(node, pos);
+			if (pos == -1) return -1;
+		}
+	}
+	return pos;
 }
 
 function getLowerCase(str) {

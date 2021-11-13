@@ -1,28 +1,13 @@
+import { utilService } from "../../../services/utils.service.js";
 
-function SetCaretPosition(el, pos) {
-    // Loop through all child nodes
-    for (var node of el.childNodes) {
-        if (node.nodeType == 3) { // we have a text node
-            if (node.length >= pos) {
-                // finally add our range
-                var range = document.createRange(),
-                    sel = window.getSelection();
-                range.setStart(node, pos);
-                range.collapse(true);
-                sel.removeAllRanges();
-                sel.addRange(range);
-                return -1; // we are done
-            } else {
-                pos -= node.length;
-            }
-        } else {
-            pos = SetCaretPosition(node, pos);
-            if (pos == -1) {
-                return -1; // no need to finish the for loop
-            }
-        }
-    }
-    return pos; // needed because of recursion stuff
+function setCaret(el) {
+    const range = document.createRange()
+    const selection = window.getSelection()
+    const last = el.childNodes.length - 1;
+    range.setStart(el.childNodes[last], 1);
+    range.collapse(true);
+    selection.removeAllRanges();
+    selection.addRange(range);
 }
 
 export const mailEditor = {
@@ -30,14 +15,15 @@ export const mailEditor = {
     components: {},
     template: `
         <div class="mail-compose">
-            <div class="window" :class="windowSize">
+            <div class="window">
+            <!-- <div class="window" :class="windowSize">
                 <div class="title">
                     <span class="text">New Message</span>
                     <span class="close" @click="cancel">×</span>
                     <span class="maximized" @click.stop="isMaximaized = !isMaximaized">
                         <img src="./img/mail/expand_window.png"/>
                     </span>
-                </div>
+                </div> -->
                 <section class="content">
                     <!-- <div><input type="text" placeholder="From" v-model="mail.from" readonly/></div>
                     <div><input type="text" placeholder="To" v-model="mail.to"/></div>
@@ -45,34 +31,36 @@ export const mailEditor = {
                     <div class="style-control">
                         <button>Bold</button>
                     </div>
-                    <div contenteditable id="compose-editor" @input="update($event.target)" style="height:500px"></div>
+                    <div contenteditable id="compose-editor" innerHTML="<span>" @key.enter.stop="cosole.log" @keydown.stop="update($event.target,$event.key)" style="height:500px"></div>
                 </section>
                 <div class="buttons">
-                    <button type="submit" @click="send">Send</button>
+                    <!-- <button type="submit" @click="send">Send</button> -->
                 </div>
             </div>
         </div>
     `,
     data() {
         return {
-            html: '',
+            html: '<div>',
         }
     },
     created() { },
     updated() { },
     destroyed() { },
     methods: {
-        update(el) {
-            this.html = '<span style="color:red">' + el.innerHTML;
+        update(el, key) {
+            console.log(key);
+            this.html = '<span style="color:red">' + el.innerHTML + '</span>';
             el.innerHTML = this.html;
-            SetCaretPosition(el, el.innerText.length);
+            // utilService.setCaretPosition(el);
+            setCaret(el);
         }
     },
     computed: {},
     watch: {
         html: {
             handler(newVal, oldVal) {
-                console.log(newVal, oldVal);
+                // console.log(newVal, oldVal);
             }
         }
     },

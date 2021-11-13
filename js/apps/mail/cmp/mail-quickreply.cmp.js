@@ -14,6 +14,7 @@ export const quickReply = {
                 <img @click="compose" src="./img/mail/expand_window.png"/>
 				<textarea ref="content" v-if="mail" v-model="mail.body"></textarea>
 				<button @click="send">{{button}}</button>
+				<button :hidden="!this.mail.replyContent" class="trimmed-content" @click="addReply" title="Show trimmed content">&#903;&#903;&#903;</button>
 			</section>
         </div>
     `,
@@ -34,8 +35,7 @@ export const quickReply = {
                         this.mail.forward = this.reply.id;
                         this.mail.to = '';
                         const date = new Date(this.reply.sentAt);
-                        this.mail.body = `
-							\n\n---------- Forwarded message ---------
+                        this.mail.body = `\n\n\n---------- Forwarded message ---------
 							\nFrom: ${this.reply.from}
 							\n${date.toString()}
 							\nSubject: ${this.reply.subject}
@@ -49,6 +49,7 @@ export const quickReply = {
                         this.mail.reply = this.reply.id;
                         this.mail.to = this.reply.from;
                         this.mail.from = this.reply.to;
+                        this.mail.replyContent = this.replyContent;
                         this.mail.subject = 'RE: ' + this.reply.subject;
                         break;
                 }
@@ -56,7 +57,7 @@ export const quickReply = {
             .catch(err => console.log(err));
         eventBus.$on('mailDraftId', (draftId) => { this.mail.id = draftId });
         this.interval = setInterval(() => {
-            if (this.mail.id && this.mail.body) eventBus.$emit('mailSave', this.mail);
+            if (this.mail.id) eventBus.$emit('mailSave', this.mail);
         }, 5000);
     },
     destroyed() {
@@ -68,16 +69,29 @@ export const quickReply = {
             this.mail.folder = 'sent';
             this.mail.reply = null;
             this.mail.sentAt = Date.now();
+            if (this.mail.replyContent) {
+                this.mail.body = (this.mail.body) ? this.mail.body + '\n\n' + this.mail.replyContent : '\n\n' + this.mail.replyContent;
+                this.mail.replyContent = null;
+            }
             eventBus.$emit('mailSave', this.mail);
             this.$emit('send');
         },
         compose() {
             this.$router.push({ path: `/mail/${this.reply.folder}?id=${this.reply.id}&compose=${this.mail.id}` })
         },
+        addReply() {
+            this.mail.body = (this.mail.body) ? this.mail.body + this.mail.replyContent : '\n\n' + this.mail.replyContent;
+            this.mail.replyContent = null;
+        }
     },
     computed: {
         isReply() {
             return (this.mode === 'reply');
+        },
+        replyContent() {
+            var body = this.reply.body.split('\n');
+            body = body.map(line => (line) ? `\n>${line}` : `\n`);
+            return `On ${new Date(this.reply.sentAt)} ${this.reply.from} wrote:${body}`;
         }
     }
 }
