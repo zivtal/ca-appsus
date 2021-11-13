@@ -1,8 +1,8 @@
 export default {
 	template: `
-        <section class="home-page main-app">
+        <section class="home-page main-app flex align-center columns">
 			<h1 class="home-page-title">AppSus - Take Your Productivity To The Highest Level</h1>
-			<section class="apps-cards flex align-center">
+			<section class="apps-cards flex">
 				<article class="box-app flex">
 					<img src="./img/gmail.png" />
 					<div>
