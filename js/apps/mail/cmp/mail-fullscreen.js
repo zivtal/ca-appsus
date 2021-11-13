@@ -10,7 +10,6 @@ export const mailFullscreen = {
 		<section class="mail-read" @keydown.esc="resetMode">
 			<section class="controls flex">
 				<img src="./img/mail/back.png" title="Go back" @click="goBack"/>
-				<img src="./img/mail/reply.svg" title="Reply" @click="quickReply"/>
 				<img src="./img/mail/note.svg" title="Add to notes" @click="addToNotes"/>
 				<img src="./img/mail/trash.png" :title="delTitle" @click="remove(mail)"/>
 				<img v-if="mail.restore && mail.folder === 'trash'" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>

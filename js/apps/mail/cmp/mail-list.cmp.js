@@ -83,7 +83,6 @@ export const mailList = {
                     const text = this.filterBy.search.toLowerCase();
                     const results = [];
                     ['subject', 'body', 'from', 'to'].forEach(key => results.push(!item[key] || !item[key].toLowerCase().includes(text)));
-                    console.log(results);
                     if (results.every(result => result)) return false;
                 };
                 return true;

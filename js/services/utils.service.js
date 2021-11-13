@@ -44,6 +44,7 @@ function makeId(length = 6) {
 function getTimeFormat(timestamp, countryCode = 'en-US') {
 	const year = new Date().getFullYear();
 	const date = new Date(timestamp);
+	const today = new Date().getDate();
 	var options =
 		year === date.getFullYear()
 			? {
@@ -55,7 +56,7 @@ function getTimeFormat(timestamp, countryCode = 'en-US') {
 				month: 'numeric',
 				day: 'numeric'
 			};
-	return date.toLocaleDateString(countryCode, options);
+	return (date.getDate() === today) ? 'Today' : date.toLocaleDateString(countryCode, options);
 }
 
 function camelCaseToSentence(input, isOnlyFirst = true) {

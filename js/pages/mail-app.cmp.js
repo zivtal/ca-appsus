@@ -19,8 +19,6 @@ export default {
 	},
 	template: `
 		<section class="mail-app main-app">
-			<section class="search-bar">
-			</section>
 			<section v-if="mails.all" class="display flex">
 				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange" :key="updated"/>
 				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove" @save="save"/>

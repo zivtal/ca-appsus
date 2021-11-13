@@ -7,7 +7,7 @@ export const mailPreview = {
     template: `
 	<div>
 		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="mouseOver" @mouseleave="mouseLeave">
-            <img class="star" :src="'./img/mail/'+starImg+'.svg'" @click.stop="starred(mail)"/>
+            <img class="star" :src="'./img/mail/'+starImg+'.svg'" @click.stop="setStarred(mail)"/>
             <div class="content" :class="{deleted: isInTrash}"><p>{{mail.subject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
@@ -15,6 +15,7 @@ export const mailPreview = {
 				<img v-if="mail.restore && mail.folder === 'trash'" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
 				<img src="./img/mail/trash.png" :title="delTitle" @click.stop="removeMail(mail)"/>
 				<img :src="'./img/mail/'+markImg+'.png'" :title="markAs" @click.stop="markRead(mail)"/>
+				<img src="./img/mail/note.svg" title="Add to notes" @click.stop="addToNotes(mail)"/>
 				<img src="./img/mail/fullscreen.svg" title="Full screen" @click.stop="goTo(mail)"/>
 			</div>
 		</section>
@@ -68,7 +69,10 @@ export const mailPreview = {
         restoreMail(mail) {
             eventBus.$emit('mailRestore', mail);
         },
-        starred(mail) {
+        addToNotes() {
+            this.$router.push({ path: `/note/?to=${this.mail.from}&title=${this.mail.subject}&txt=${this.mail.body}` });
+        },
+        setStarred(mail) {
             eventBus.$emit('mailStarred', mail);
         }
     },
