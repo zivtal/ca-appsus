@@ -34,6 +34,10 @@ body {
 	margin-bottom: 50px;
 }
 
+.add-note-container .new-note-toolbar .note-type-btns img:hover {
+	transform: scale(120%);
+}
+
 .add-note-container > * {
 	margin-block-start: 10px;
 	margin-block-end: 10px;
@@ -230,6 +234,13 @@ body {
 	top: 10px;
 }
 
+.btns-light {
+	fill: whitesmoke;
+}
+.btns-dark {
+	fill: black;
+}
+
 .note-pinned:hover {
 	background: rgba(95, 99, 104, 0.157);
 }
@@ -252,10 +263,16 @@ body {
 }
 
 .user-note-pinned {
+	transition: .9s;
 	position: absolute;
-	height: 15px;
+	height: 25px;
 	margin: 5px;
 	margin-block-end: 3px;
+	cursor: pointer;
+}
+
+.user-note-pinned:hover {
+	transform: scale(120%);
 }
 
 .user-note:hover {
@@ -355,6 +372,7 @@ body {
 	.close-modal-btn {
 		font-size: 0.8rem;
 	}
+
 	.main-filter .filter-container {
 		justify-content: space-between;
 		gap: 10px;

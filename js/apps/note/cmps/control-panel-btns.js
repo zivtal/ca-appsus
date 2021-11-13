@@ -8,13 +8,13 @@ export default {
 	template: `
 	<div class="note-toolbar-container">
             <div class="note-toolbar">
-                <img src="apps/note/imgs/edit.svg" @click="openEditor"></img>
+                <img src="img/note/edit.svg" @click="openEditor" ></img>
                 <input type="color" v-model="backgroundColor" value="#f1f3f4" @blur="changeColor" class="color-input"/>
-				<img src="apps/note/imgs/color.svg" />
-                <img src="apps/note/imgs/label.svg" /> 
-                <img src="apps/note/imgs/duplicate.svg" @click="duplicateNote"/>
-                <img src="apps/note/imgs/delete.svg" @click="removeNote"/>
-                <img src="apps/note/imgs/export.svg" />
+				<img src="img/note/color.svg" />
+                <img src="img/note/label.svg" /> 
+                <img src="img/note/duplicate.svg" @click="duplicateNote"/>
+                <img src="img/note/delete.svg" @click="removeNote"/>
+                <img src="img/note/export.svg" />
             </div>
 			<section class="note-editor-main">
 				<add-new-note v-if="isEditor" class="note-editor" :editNote="note" @isShown="isShown" />

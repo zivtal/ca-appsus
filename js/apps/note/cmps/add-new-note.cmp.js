@@ -9,29 +9,20 @@ export default {
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
                     <input type="text" placeHolder="Title" class="add-note-title" v-model="title" >
-                    <img src="apps/note/imgs/pinned.svg" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"/>
+                    <img :src="pinnedSrc" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"/>
                 </div>
-				<div class="colors-container grid"> 
-					<div class="color-select" @click=setColorChoice style="background-color:#DE3163"></div>
-					<div class="color-select" @click=setColorChoice style="background-color:#FF7F50"> </div>
-					<div class="color-select" @click=setColorChoice style="background-color:#FFBF00"> </div>
-					<div class="color-select" @click=setColorChoice style="background-color:#DFFF00"> </div>
-					<div class="color-select" @click=setColorChoice style="background-color:#CCCCFF"> </div>
-					<div class="color-select" @click=setColorChoice style="background-color:#6495ED"> </div>
-					<div class="color-select" @click=setColorChoice style="background-color:#40E0D0"> </div>
-					<div class="color-select" @click=setColorChoice style="background-color:#9FE2BF"> </div>
-					<div class="color-select" @click=setColorChoice style="background-color:#999999"> </div>
-</div>
                 <input type="text" PlaceHolder="Add a note" v-model="txt" class="add-note-text" :placeHolder="setPlaceHolder">
             </div>
             <div class="new-note-toolbar flex">
-                <div class="note-type-btns">
-                    <!-- <input type="color" v-model="backgroundColor" class="color-input" value="#f1f3f4" /> -->
-                    <img src="apps/note/imgs/color.svg" class="color-icon" />
-                <img src="apps/note/imgs/text.svg" @click.stop.prevent="setObjType('text')" />
-                <img src="apps/note/imgs/img.svg"  @click.stop.prevent="setObjType('image')"/>
-                <img src="apps/note/imgs/video.svg"  @click.stop.prevent="setObjType('video')"/> 
-                <img src="apps/note/imgs/todos.svg" @click.stop.prevent="setObjType('todo')"/>
+				<div class="note-type-btns">
+					<div class="colors-container grid" v-if="isColorShow"> 
+						<div class="color-select" @click=setColorChoice :style="{background:color}" v-for="color in colors"></div>
+					</div>
+                    <img src="img/note/color.svg" @click="isColorShow = !isColorShow" class="color-icon" />
+                <img src="img/note/text.svg" @click.stop.prevent="setObjType('text')" />
+                <img src="img/note/img.svg"  @click.stop.prevent="setObjType('image')"/>
+                <img src="img/note/video.svg"  @click.stop.prevent="setObjType('video')"/> 
+                <img src="img/note/todos.svg" @click.stop.prevent="setObjType('todo')"/>
                 </div>
                 <div class="note-panel-control">
                 <button class="submit-btn" type="submit" >Add</button>
@@ -42,19 +33,32 @@ export default {
     `,
 	data() {
 		return {
+			colors: [
+				'#DE3163',
+				'#FF7F50',
+				'#FFBF00',
+				'#DFFF00',
+				'#CCCCFF',
+				'#6495ED',
+				'#40E0D0',
+				'#9FE2BF',
+				'#999999'
+			],
 			setPlaceHolder: 'amir',
 			title: '',
 			txt: '',
 			isPinned: false,
 			noteType: '',
 			backgroundColor: '#f1f3f4',
+			isColorShow: false,
 			placeHolder: {
 				text: 'Please write some text',
 				image: 'Please paste your image url',
 				video: 'Please paste your video url',
 				todo: 'Please write some todos'
 			},
-			editMode: false
+			editMode: false,
+			pinnedSrc: 'img/note/pinned.svg'
 		};
 	},
 	created() {
@@ -85,12 +89,9 @@ export default {
 	destroyed() {},
 	methods: {
 		setColorChoice(ev) {
-			var style = ev.target.style.backgroundColor;
-			const rgb = style.replace(/[^0-9]/g, '');
-
-			const hexColor = noteService.rgbToHex(rgb);
-			this.backgroundColor = '#' + hexColor;
-			console.log(this.backgroundColor);
+			const hexColor = noteService.getHexColor(ev.target.style.backgroundColor);
+			this.backgroundColor = hexColor;
+			this.isColorShow = !this.isColorShow;
 		},
 		setObjType(noteType) {
 			this.noteType = noteType;
@@ -153,7 +154,9 @@ export default {
 		},
 		pinnedNote() {
 			this.isPinned = !this.isPinned;
-			console.log(this.isPinned);
+			if (!this.isPinned) this.pinnedSrc = 'img/note/pinned.svg';
+			else this.pinnedSrc = 'img/note/pinnedOn.svg';
+
 			if (this.editMode) this.editNote.isPinned = this.isPinned;
 		}
 	},
