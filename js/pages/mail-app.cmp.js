@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { mailService } from '../apps/mail/services/email-app.service.js';
 import { utilService } from '../services/utils.service.js';
 import { eventBus } from '../services/event.bus-service.js';
@@ -5,6 +6,16 @@ import { mailList } from '../apps/mail/cmp/mail-list.cmp.js';
 import { folderList } from '../apps/mail/cmp/mail-folderlist.cmp.js';
 import { mailFullscreen } from '../apps/mail/cmp/mail-fullscreen.js';
 import { mailCompose } from '../apps/mail/cmp/mail-compose.cmp.js';
+=======
+import { mailService } from "../apps/mail/services/email-app.service.js";
+import { utilService } from "../services/utils.service.js";
+import { eventBus } from "../services/event.bus-service.js";
+import { mailList } from "../apps/mail/cmp/mail-list.cmp.js";
+import { folderList } from "../apps/mail/cmp/mail-folderlist.cmp.js";
+import { mailFullscreen } from "../apps/mail/cmp/mail-fullscreen.js";
+import { mailCompose } from "../apps/mail/cmp/mail-compose.cmp.js";
+// import { mailEditor } from "../apps/mail/cmp/mail-editor.cmp.js";
+>>>>>>> a3ed39a03e343daf3e8e81194d5a9b2dead1b365
 
 export default {
 	props: [],
@@ -13,7 +24,12 @@ export default {
 		folderList,
 		mailList,
 		mailFullscreen,
+<<<<<<< HEAD
 		mailCompose
+=======
+		mailCompose,
+		// mailEditor,
+>>>>>>> a3ed39a03e343daf3e8e81194d5a9b2dead1b365
 	},
 	template: `
 		<section class="mail-app main-app">
@@ -25,6 +41,7 @@ export default {
 				<mail-list v-else-if="mails.filtered" :mails="mails.filtered" :folder="active" @remove="remove" @star="star"/>
 			</section>
 			<mail-compose v-if="compose" :data="compose" />
+			<!-- <mail-editor/> -->
 		</section>
     `,
 	data() {
@@ -160,8 +177,12 @@ export default {
 		},
 		'$route.params.folder': {
 			handler(get) {
+<<<<<<< HEAD
 				this.active.folder = this.mails.all && get ? get : null;
 				eventBus.$emit('mailFolderChange', this.active.folder);
+=======
+				this.active.folder = (this.mails.all && get) ? get : null;
+>>>>>>> a3ed39a03e343daf3e8e81194d5a9b2dead1b365
 			},
 			immediate: true
 		},

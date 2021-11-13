@@ -3,7 +3,7 @@ export default {
 	components: {},
 	template: `
 	<nav class="navbar-container flex">
-		<img @click="homePage" src="./img/newlogo.png" class="main-logo">
+		<img @click="homePage" src="./img/logo.png" class="main-logo">
 		<img src="./img/burger.svg" @click="openMenu" class="menu-burger" />
 		<div class="apps-menu flex" v-if="isMenuOpen">
 			<a @click="booksPage"><img src="./img/books.png" /> </a>

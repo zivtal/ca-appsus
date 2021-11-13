@@ -38,7 +38,6 @@ export const folderList = {
             return ICONS[folder.toLowerCase()] || 'default.png';
         },
         folderChange(activeFolder) {
-            console.log('k');
             activeFolder = activeFolder.toLowerCase();
             this.activeFolder = activeFolder;
             this.$router.push({ path: `/mail/${activeFolder}` });
