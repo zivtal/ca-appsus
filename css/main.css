@@ -86,24 +86,24 @@ body {
   right: 0;
   z-index: 10;
   padding: 20px;
-  background-color: white;
+  background-color: rgba(245, 245, 245, 0.85);
   border: 1px solid rgb(224, 224, 224);
   border-radius: 10px;
   gap: 30px;
   margin-inline-end: 20px;
 }
 
-.apps-menu img {
+.navbar-container .apps-menu img {
   padding: 10px;
   border-radius: 50%;
 }
 
-.apps-menu a {
+.navbar-container .apps-menu a {
   border-radius: 50%;
   transition: 0.5s;
 }
 
-.apps-menu a:hover {
+.navbar-container .apps-menu a:hover {
   background-color: rgb(194, 194, 194);
   cursor: pointer;
 }
@@ -157,7 +157,7 @@ body {
 
 .home-page .apps-cards .box-app {
   box-shadow: 0 3px 6px rgb(32 33 36 / 28%);
-  background-color: whitesmoke;
+  background-color: rgba(245, 245, 245, 0.85);
   flex-basis: 30%;
   align-items: center;
   justify-content: start;
