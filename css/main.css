@@ -4,182 +4,182 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap");
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	margin: 0;
+  margin: 0;
 }
 
 .main-app {
-	min-height: calc(100vh - 10em);
+  min-height: calc(100vh - 10em);
 }
 
 .default-button {
-	cursor: pointer;
-	border: 0;
-	padding: 10px;
-	box-shadow: inset 0 0 0 1px #dadce0;
-	background-color: transparent;
-	border-radius: 5px;
-	margin-inline-end: 10px;
-	transition: 0.3s;
+  cursor: pointer;
+  border: 0;
+  padding: 10px;
+  box-shadow: inset 0 0 0 1px #dadce0;
+  background-color: transparent;
+  border-radius: 5px;
+  margin-inline-end: 10px;
+  transition: 0.3s;
 }
 
 .default-button:hover {
-	background-color: rgba(32, 33, 36, 0.059);
+  background-color: rgba(32, 33, 36, 0.059);
 }
 
 /*NavBar */
 
 .navbar-container {
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px;
-	background-color: #111;
-	height: 5.5em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #111;
+  height: 5.5em;
 }
 
 .navbar-container .main-logo {
-	cursor: pointer;
-	height: 3.2em;
-	filter: invert(100%);
-	transition: 0.5s;
+  cursor: pointer;
+  height: 3.2em;
+  filter: invert(100%);
+  transition: 0.5s;
 }
 
 .navbar-container .main-logo:hover {
-	transform: scale(105%);
+  transform: scale(105%);
 }
 
 .navbar-container .menu-button {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(3, 1fr);
-	gap: 8px;
-	height: 3em;
-	width: 3em;
-	transition: 0.5s;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  height: 3em;
+  width: 3em;
+  transition: 0.5s;
 }
 
 .navbar-container .menu-button > div {
-	border-radius: 2px;
-	background-color: white;
+  border-radius: 2px;
+  background-color: white;
 }
 
 .navbar-container > input {
-	display: none;
+  display: none;
 }
 
 .navbar-container input:checked ~ .menu-button {
-	gap: 0px;
-	transform: rotate(-90deg) scale(90%);
+  gap: 0px;
+  transform: rotate(-90deg) scale(70%);
 }
 
 .navbar-container input:checked ~ .menu-button > div {
-	border-radius: 0px;
+  border-radius: 0px;
 }
 
 .navbar-container .apps-menu {
-	transition: 0.4s;
-	position: absolute;
-	top: 50px;
-	right: 0;
-	z-index: 10;
-	padding: 20px;
-	background-color: rgba(245, 245, 245, 0.85);
-	border: 1px solid rgb(224, 224, 224);
-	border-radius: 10px;
-	gap: 30px;
-	margin-inline-end: 20px;
-	margin-block-start: 20px;
+  transition: 0.4s;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 10;
+  padding: 8px;
+  background-color: rgba(245, 245, 245, 0.85);
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 10px;
+  gap: 30px;
+  margin-inline-end: 20px;
+  margin-block-start: 20px;
 }
 
 .navbar-container .apps-menu img {
-	padding: 10px;
-	border-radius: 50%;
+  padding: 10px;
+  border-radius: 50%;
 }
 
 .navbar-container .apps-menu a {
-	border-radius: 50%;
-	transition: 0.5s;
+  border-radius: 50%;
+  transition: 0.5s;
 }
 
 .navbar-container .apps-menu a:hover {
-	background-color: rgb(194, 194, 194);
-	cursor: pointer;
+  background-color: rgb(194, 194, 194);
+  cursor: pointer;
 }
 
 .navbar-container .menu-burger {
-	filter: invert(80%);
-	cursor: pointer;
+  filter: invert(80%);
+  cursor: pointer;
 }
 
 /* Footer*/
 .footer-container {
-	font-size: 0.9rem;
-	height: auto;
-	background-color: #111;
-	color: silver;
-	text-align: center;
-	padding: 10px;
-	height: 5em;
+  font-size: 0.9rem;
+  height: auto;
+  background-color: #111;
+  color: silver;
+  text-align: center;
+  padding: 10px;
+  height: 5em;
 }
 
 /*Home Page */
 .home-page {
-	background-image: url("../img/background.jfif");
-	background-size: cover;
+  background-image: url("../img/background.jfif");
+  background-size: cover;
 }
 
 .home-page h1 {
-	position: absolute;
-	top: 3.5em;
-	text-align: center;
-	color: whitesmoke;
-	text-shadow: 0 3px 6px rgb(32 33 36 / 28%);
+  position: absolute;
+  top: 3.5em;
+  text-align: center;
+  color: whitesmoke;
+  text-shadow: 0 3px 6px rgb(32 33 36 / 28%);
 }
 
 @media screen and (min-width: 740px) {
-	.home-page h1 {
-		font-size: 2em;
-	}
+  .home-page h1 {
+    font-size: 2em;
+  }
 }
 
 .home-page .apps-cards {
-	margin-block-start: 2.5em;
-	line-height: 1.5em;
+  margin-block-start: 2.5em;
+  line-height: 1.5em;
 }
 
 @media screen and (max-width: 740px) {
-	.home-page .apps-cards {
-		flex-direction: column;
-	}
+  .home-page .apps-cards {
+    flex-direction: column;
+  }
 }
 
 .home-page .apps-cards .box-app {
-	box-shadow: 0 3px 6px rgb(32 33 36 / 28%);
-	background-color: rgba(245, 245, 245, 0.85);
-	flex-basis: 30%;
-	align-items: center;
-	justify-content: start;
-	border: 1px solid #d9dcdf;
-	border-radius: 5px;
-	padding: 1.5rem;
-	margin: 0.3125rem;
-	max-width: 21rem;
-	min-height: 21rem;
-	flex-direction: column;
+  box-shadow: 0 3px 6px rgb(32 33 36 / 28%);
+  background-color: rgba(245, 245, 245, 0.85);
+  flex-basis: 30%;
+  align-items: center;
+  justify-content: start;
+  border: 1px solid #d9dcdf;
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin: 0.3125rem;
+  max-width: 21rem;
+  min-height: 21rem;
+  flex-direction: column;
 }
 
 .home-page > .apps-cards > .box-app > img {
-	height: 100px;
-	width: 100px;
+  height: 100px;
+  width: 100px;
 }
 
 .home-page > .apps-cards > .box-app > div {
-	padding: 25px;
+  padding: 25px;
 }
 
 .home-page > .apps-cards > .box-app > button {
-	align-self: flex-end;
+  align-self: flex-end;
 }
