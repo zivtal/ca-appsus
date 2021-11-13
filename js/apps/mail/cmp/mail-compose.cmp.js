@@ -1,4 +1,5 @@
 import { eventBus } from "../../../services/event.bus-service.js";
+import { utilService } from "../../../services/utils.service.js";
 
 export const mailCompose = {
     props: ['data'],
@@ -19,7 +20,7 @@ export const mailCompose = {
                     <div><textarea v-model="mail.body"></textarea></div>
                 </section>
                 <div class="buttons">
-                    <button type="submit" @click="send">Send</button>
+                    <button type="submit" @click="send" :disabled="!isValidMail">Send</button>
                 </div>
             </div>
         </div>
@@ -29,7 +30,6 @@ export const mailCompose = {
             mail: null,
             mail: true,
             isMaximaized: false,
-            html: null,
         }
     },
     created() {
@@ -48,26 +48,22 @@ export const mailCompose = {
             this.$router.go(-1);
         },
         send() {
+            if (!this.isValidMail) return;
             clearInterval(this.interval);
             this.mail.folder = 'sent';
             this.mail.reply = null;
             this.mail.sentAt = Date.now();
             eventBus.$emit('mailSave', this.mail);
+            this.$router.push({ path: `/mail/${this.mail.folder}?id=${this.mail.id}` })
             this.mail = null;
-            this.$router.go(-1);
         }
     },
     computed: {
         windowSize() {
             return { maximaized: this.isMaximaized };
-        }
-    },
-    watch: {
-        html: {
-            handler(newVal, oldVal) {
-                console.log(newVal);
-            },
-            immidiate: true,
+        },
+        isValidMail() {
+            return utilService.isValidEmail(this.mail.to);
         }
     },
 }

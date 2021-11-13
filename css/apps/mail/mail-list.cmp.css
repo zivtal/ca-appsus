@@ -140,6 +140,7 @@
 }
 
 .mail-app .display .mail-list > .list .preview-extended {
+  white-space: pre-line;
   background-color: #111;
   padding: 1em 3em;
 }
@@ -185,13 +186,26 @@
 
 .mail-app .display .mail-list > .list .controls > img {
   opacity: 0.8;
-  margin: 0 7px;
   padding: 5px;
-  height: 32px;
-  width: 32px;
   border-radius: 50%;
   object-fit: cover;
   filter: invert(100%);
+}
+
+@media screen and (max-width: 740px) {
+  .mail-app .display .mail-list > .list .controls > img {
+    height: 28px;
+    width: 28px;
+    margin: 0 2px;
+  }
+}
+
+@media screen and (min-width: 740px) {
+  .mail-app .display .mail-list > .list .controls > img {
+    height: 32px;
+    width: 32px;
+    margin: 0 5px;
+  }
 }
 
 .mail-app .display .mail-list > .list .controls > img:hover {

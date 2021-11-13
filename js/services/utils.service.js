@@ -8,6 +8,7 @@ export const utilService = {
 	camelCaseToSentence,
 	getHexToRgb,
 	isRgbDarkColor,
+	isValidEmail,
 	setCaretPosition,
 	getLowerCase,
 };
@@ -76,6 +77,11 @@ function getHexToRgb(hex) {
 
 function isRgbDarkColor(color) {
 	return (0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b) < 50;
+}
+
+function isValidEmail(mailAddress) {
+	const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	return pattern.test(mailAddress);
 }
 
 function setCaretPosition(el, pos) {

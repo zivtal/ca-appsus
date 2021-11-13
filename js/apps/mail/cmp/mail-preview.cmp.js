@@ -8,7 +8,7 @@ export const mailPreview = {
 	<div>
 		<section class="preview flex" :class="{unread:!mail.isRead}" @click="toggleExtended" @mouseover="mouseOver" @mouseleave="mouseLeave">
             <img class="star" :src="'./img/mail/'+starImg+'.svg'" @click.stop="setStarred(mail)"/>
-            <div class="content" :class="{deleted: isInTrash}"><p>{{mail.subject}}</p></div>
+            <div class="content" :class="{deleted: isInTrash}"><p>{{mailSubject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
 				<img src="./img/mail/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
@@ -21,7 +21,7 @@ export const mailPreview = {
 		</section>
 		<transition name="slide-fade">
 			<section v-if="extended" class="preview-extended">
-				{{mail.body}}
+				{{contentPreview}}
 			</section>
 		</transition>
 	</div>
@@ -94,6 +94,13 @@ export const mailPreview = {
         },
         starImg() {
             return (this.mail.isStarred) ? 'star-active' : "star-disabled";
+        },
+        mailSubject() {
+            return this.mail.subject || 'No subject';
+        },
+        contentPreview() {
+            var body = this.mail.body;
+            return body.split('\n').filter(item => item).splice(0, 5).join('\n') + '  ...';
         }
     },
 }

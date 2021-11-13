@@ -14,6 +14,7 @@ export const quickReply = {
                 <img @click="compose" src="./img/mail/expand_window.png"/>
 				<textarea ref="content" v-if="mail" v-model="mail.body"></textarea>
 				<button @click="send">{{button}}</button>
+				<button class="trimmed-content" @click="addReply" title="Show trimmed content">&#903;&#903;&#903;</button>
 			</section>
         </div>
     `,
@@ -21,6 +22,7 @@ export const quickReply = {
         return {
             mail: null,
             isNewCompose: false,
+            isIncludeReply: false,
         }
     },
     created() {
@@ -34,8 +36,7 @@ export const quickReply = {
                         this.mail.forward = this.reply.id;
                         this.mail.to = '';
                         const date = new Date(this.reply.sentAt);
-                        this.mail.body = `
-							\n\n---------- Forwarded message ---------
+                        this.mail.body = `\n\n\n---------- Forwarded message ---------
 							\nFrom: ${this.reply.from}
 							\n${date.toString()}
 							\nSubject: ${this.reply.subject}
@@ -56,7 +57,7 @@ export const quickReply = {
             .catch(err => console.log(err));
         eventBus.$on('mailDraftId', (draftId) => { this.mail.id = draftId });
         this.interval = setInterval(() => {
-            if (this.mail.id && this.mail.body) eventBus.$emit('mailSave', this.mail);
+            if (this.mail.id) eventBus.$emit('mailSave', this.mail);
         }, 5000);
     },
     destroyed() {
@@ -67,6 +68,7 @@ export const quickReply = {
             clearInterval(this.interval);
             this.mail.folder = 'sent';
             this.mail.reply = null;
+            if (this.mode === 'reply' && !this.isIncludeReply) this.mail.body = this.mail.body + this.replyContent;
             this.mail.sentAt = Date.now();
             eventBus.$emit('mailSave', this.mail);
             this.$emit('send');
@@ -74,10 +76,19 @@ export const quickReply = {
         compose() {
             this.$router.push({ path: `/mail/${this.reply.folder}?id=${this.reply.id}&compose=${this.mail.id}` })
         },
+        addReply() {
+            this.mail.body = (this.mail.body) ? this.mail.body + this.replyContent : '\n\n' + this.replyContent;
+            isIncludeReply = true;
+        }
     },
     computed: {
         isReply() {
             return (this.mode === 'reply');
+        },
+        replyContent() {
+            var body = this.reply.body.split('\n');
+            body = body.map(line => (line) ? `\n>${line}` : `\n`);
+            return `On ${new Date(this.reply.sentAt)} ${this.reply.from} wrote:${body}`;
         }
     }
 }

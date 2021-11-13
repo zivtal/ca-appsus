@@ -1,5 +1,6 @@
 import { quickReply } from "./mail-quickreply.cmp.js";
 import { eventBus } from "../../../services/event.bus-service.js";
+import { utilService } from "../../../services/utils.service.js";
 
 export const mailFullscreen = {
 	props: ['mail'],
@@ -68,7 +69,7 @@ export const mailFullscreen = {
 		},
 		restoreMail(mail) {
 			eventBus.$emit('mailRestore', mail);
-		}
+		},
 	},
 	computed: {
 		tagForDisplay() {
