@@ -4,7 +4,10 @@ export default {
 	template: `
 	<nav class="navbar-container flex">
 		<img @click="homePage" src="./img/logo.png" class="main-logo">
-		<img src="./img/burger.svg" @click="openMenu" class="menu-burger" />
+		<input id="appsusmenu" value="true" type="checkbox" class="open-menu"  @change="openMenu"/>
+		<label for="appsusmenu" class="menu-button">
+			<div v-for="n in 9"></div>
+		</label>
 		<div class="apps-menu flex" v-if="isMenuOpen">
 			<a @click="booksPage"><img src="./img/books.png" /> </a>
 			<a @click="emailPage"> <img src="./img/gmail.png" /> </a>
