@@ -1,10 +1,10 @@
-import { mailService } from "../apps/mail/services/email-app.service.js";
-import { utilService } from "../services/utils.service.js";
-import { eventBus } from "../services/event.bus-service.js";
-import { mailList } from "../apps/mail/cmp/mail-list.cmp.js";
-import { folderList } from "../apps/mail/cmp/mail-folderlist.cmp.js";
-import { mailFullscreen } from "../apps/mail/cmp/mail-fullscreen.js";
-import { mailCompose } from "../apps/mail/cmp/mail-compose.cmp.js";
+import { mailService } from '../apps/mail/services/email-app.service.js';
+import { utilService } from '../services/utils.service.js';
+import { eventBus } from '../services/event.bus-service.js';
+import { mailList } from '../apps/mail/cmp/mail-list.cmp.js';
+import { folderList } from '../apps/mail/cmp/mail-folderlist.cmp.js';
+import { mailFullscreen } from '../apps/mail/cmp/mail-fullscreen.js';
+import { mailCompose } from '../apps/mail/cmp/mail-compose.cmp.js';
 
 export default {
 	props: [],
@@ -13,7 +13,7 @@ export default {
 		folderList,
 		mailList,
 		mailFullscreen,
-		mailCompose,
+		mailCompose
 	},
 	template: `
 		<section class="mail-app main-app">
@@ -34,66 +34,67 @@ export default {
 				folder: null,
 				sort: {
 					date: true,
-					subject: false,
+					subject: false
 				},
-				mail: null,
+				mail: null
 			},
 			mails: {
 				all: null,
 				filtered: null,
 				display: null,
-				folders: ['All', 'Inbox', 'Sent', 'Draft'],
-				unread: {},
+				folders: [ 'All', 'Inbox', 'Sent', 'Draft' ],
+				unread: {}
 			},
-			compose: null,
+			compose: null
 		};
 	},
 	created() {
-		mailService.query()
-			.then(mails => {
+		mailService
+			.query()
+			.then((mails) => {
 				this.mails.all = mails;
 				eventBus.$on('mailSave', this.save);
 				eventBus.$on('mailRemove', this.remove);
-				eventBus.$on('mailComposeClose', () => this.compose = null);
+				eventBus.$on('mailComposeClose', () => (this.compose = null));
 			})
-			.catch(err => console.log(err));
+			.catch((err) => console.log(err));
 	},
-	updated() { },
-	destroyed() { },
+	updated() {},
+	destroyed() {},
 	methods: {
 		folderChange(active) {
 			this.active.folder = active;
 		},
 		remove(mail) {
-			const splicer = function (mail, mails) {
-				const idx = mails.filtered.findIndex(item => item === mail);
+			const splicer = function(mail, mails) {
+				const idx = mails.filtered.findIndex((item) => item === mail);
 				mails.filtered.splice(idx, 1);
 			};
 			if (mail.folder === 'trash') {
-				mailService.remove(mail.id)
-					.then(() => splicer(mail, this.mails))
-					.catch(err => console.log(err));
+				mailService.remove(mail.id).then(() => splicer(mail, this.mails)).catch((err) => console.log(err));
 			} else {
 				mail.folder = 'trash';
-				mailService.save(mail)
-					.catch(err => console.log(err));
+				mailService.save(mail).catch((err) => console.log(err));
 			}
 		},
 		star(mail) {
 			mail.isStarred = !mail.isStarred;
-			mailService.save(mail)
-				.then()
-				.catch(err => console.log(err));
+			mailService.save(mail).then().catch((err) => console.log(err));
 		},
 		save(mail) {
-			mailService.save(mail)
-				.then(save => {
+			mailService
+				.save(mail)
+				.then((save) => {
 					eventBus.$emit('mailDraftId', save.id);
-					const index = this.mails.all.findIndex(item => item.id === save.id);
-					if (index < 0) { this.mails.all.push(save) } else { this.mails.all[index] = save };
+					const index = this.mails.all.findIndex((item) => item.id === save.id);
+					if (index < 0) {
+						this.mails.all.push(save);
+					} else {
+						this.mails.all[index] = save;
+					}
 				})
-				.catch(err => console.log(err));
-		},
+				.catch((err) => console.log(err));
+		}
 	},
 	computed: {
 		numOfMails() {
@@ -104,34 +105,43 @@ export default {
 		active: {
 			handler(active) {
 				if (this.mails.all) {
-					const all = (!active.folder || this.mails.folders[0].toLowerCase() === active.folder);
-					this.mails.filtered = (all) ? this.mails.all : this.mails.all.filter(item => item.folder === active.folder);
+					const all = !active.folder || this.mails.folders[0].toLowerCase() === active.folder;
+					this.mails.filtered = all
+						? this.mails.all
+						: this.mails.all.filter((item) => item.folder === active.folder);
 				}
 				if (this.mails.filtered && !this.active.maill) {
 					const sort = active.sort;
 				}
 			},
-			deep: true,
+			deep: true
 		},
 		mails: {
 			handler(mails) {
 				if (mails.all) {
 					const folders = mails.folders;
-					const other = mails.all.filter(item => !folders.includes(utilService.camelCaseToSentence(item.folder)));
-					other.forEach(item => {
-						if (!folders.includes(utilService.camelCaseToSentence(item.folder))) folders.push(utilService.camelCaseToSentence(item.folder));
+					const other = mails.all.filter(
+						(item) => !folders.includes(utilService.camelCaseToSentence(item.folder))
+					);
+					other.forEach((item) => {
+						if (!folders.includes(utilService.camelCaseToSentence(item.folder)))
+							folders.push(utilService.camelCaseToSentence(item.folder));
 					});
 					mails.folders.forEach((folder, idx) => {
-						const count = this.mails.all.filter(item => (idx) ? item.folder === folder.toLowerCase() && !item.isRead : !item.isRead).length;
+						const count = this.mails.all.filter(
+							(item) => (idx ? item.folder === folder.toLowerCase() && !item.isRead : !item.isRead)
+						).length;
 						this.mails.unread[folder] = count;
 					});
-					this.active.folder = (this.$route.params.folder) ? this.$route.params.folder : 'inbox';
-					this.active.mail = (this.$route.query.id) ? this.mails.all.find(item => item.id === this.$route.query.id) : null;
+					this.active.folder = this.$route.params.folder ? this.$route.params.folder : 'inbox';
+					this.active.mail = this.$route.query.id
+						? this.mails.all.find((item) => item.id === this.$route.query.id)
+						: null;
 					eventBus.$emit('mailFolderChange', this.active.folder);
 				}
 			},
 			deep: true,
-			immediate: true,
+			immediate: true
 		},
 		'$route.query.compose': {
 			handler(get) {
@@ -143,24 +153,26 @@ export default {
 					mail.body = this.$route.query.body || null;
 					this.compose = mail;
 				} else if (get) {
-					mailService.getById(get)
-						.then(mail => this.compose = (mail) ? mail : null);
+					mailService.getById(get).then((mail) => (this.compose = mail ? mail : null));
 				}
 			},
-			immediate: true,
+			immediate: true
 		},
 		'$route.params.folder': {
 			handler(get) {
-				this.active.folder = (this.mails.all && get) ? get : null;
+				this.active.folder = this.mails.all && get ? get : null;
 				eventBus.$emit('mailFolderChange', this.active.folder);
 			},
-			immediate: true,
+			immediate: true
 		},
 		'$route.query.id': {
 			handler(get) {
-				this.active.mail = (this.$route.params.folder && this.mails.all && get) ? this.mails.all.find(item => item.id === get) : null;
+				this.active.mail =
+					this.$route.params.folder && this.mails.all && get
+						? this.mails.all.find((item) => item.id === get)
+						: null;
 			},
-			immediate: true,
+			immediate: true
 		}
 	}
 };

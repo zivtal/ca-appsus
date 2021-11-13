@@ -4,8 +4,7 @@ export const noteService = {
 	query,
 	addNote,
 	hexColor,
-	rgbToHex,
-	RGBTo
+	getHexColor
 };
 var NOTE_KEY = 'notes';
 _createDemoQuery();
@@ -50,27 +49,14 @@ function hexColor(color) {
 	return brightness > 155;
 }
 
-function rgbToHex(rgb) {
-	var hex = Number(rgb).toString(16);
-	if (hex.length < 2) {
-		hex = '0' + hex;
-	}
-	return hex;
+function _rgbToHex(r, g, b) {
+	return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
-function RGBTo(rgb) {
-	// Choose correct separator
-	let sep = rgb.indexOf(',') > -1 ? ',' : ' ';
-	// Turn "rgb(r,g,b)" into [r,g,b]
-	rgb = rgb.substr(4).split(')')[0].split(sep);
-
-	let r = (+rgb[0]).toString(16),
-		g = (+rgb[1]).toString(16),
-		b = (+rgb[2]).toString(16);
-
-	if (r.length == 1) r = '0' + r;
-	if (g.length == 1) g = '0' + g;
-	if (b.length == 1) b = '0' + b;
-
-	return '#' + r + g + b;
+function getHexColor(style) {
+	var style = style.slice(4, style.length - 1).split(',');
+	var r = parseInt(style[0]);
+	var g = parseInt(style[1]);
+	var b = parseInt(style[2]);
+	return _rgbToHex(r, g, b);
 }

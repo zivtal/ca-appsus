@@ -10,13 +10,13 @@ export default {
 				<input v-model="filterBy.type" id="All" name="All" @change="filter" type="radio" value="All" checked>
 				<label for="All">All</label>
 				<input v-model="filterBy.type" id="NoteTxt" name="NoteTxt" @change="filter" type="radio" value="NoteTxt" >
-				<label for="NoteTxt"><img src="apps/note/imgs/text.svg"/></label>
+				<label for="NoteTxt"><img src="img/note/text.svg"/></label>
 				<input v-model="filterBy.type" id="noteImg" name="NoteImg" @change="filter" type="radio" value="NoteImg" >
-				<label for="NoteImg"><img src="apps/note/imgs/img.svg"/></label>
+				<label for="NoteImg"><img src="img/note/img.svg"/></label>
 				<input v-model="filterBy.type" id="noteVideo" name="NoteVideo" @change="filter" type="radio" value="NoteVideo" >
-				<label for="NoteVideo"><img src="apps/note/imgs/video.svg" /></label>
+				<label for="NoteVideo"><img src="img/note/video.svg" /></label>
 				<input v-model="filterBy.type" id="noteToDo" name="NoteToDo" @change="filter" type="radio" value="NoteToDo" >
-				<label for="noteToDo"><img src="apps/note/imgs/todos.svg"/></label>                
+				<label for="noteToDo"><img src="img/note/todos.svg"/></label>                
 				
 			</div>
 			<div class="filter-txt-container flex">
