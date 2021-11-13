@@ -10,7 +10,7 @@ export default {
             <div class="add-note-inputs flex"> 
                 <div class="pinned-container flex"> 
                     <input type="text" placeHolder="Title" class="add-note-title" v-model="title" >
-                    <img :src="pinnedSrc" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}"/>
+                    <img :src="pinnedSrc" @click.prevent="pinnedNote" :class="{'note-pinned':true,ismark:isPinned}" :title="titleCalc"/>
                 </div>
                 <input type="text" PlaceHolder="Add a note" v-model="txt" class="add-note-text" :placeHolder="setPlaceHolder">
             </div>
@@ -19,11 +19,11 @@ export default {
 					<div class="colors-container grid" v-if="isColorShow"> 
 						<div class="color-select" @click=setColorChoice :style="{background:color}" v-for="color in colors"></div>
 					</div>
-                    <img src="img/note/color.svg" @click="isColorShow = !isColorShow" class="color-icon" />
-                <img src="img/note/text.svg" @click.stop.prevent="setObjType('text')" />
-                <img src="img/note/img.svg"  @click.stop.prevent="setObjType('image')"/>
-                <img src="img/note/video.svg"  @click.stop.prevent="setObjType('video')"/> 
-                <img src="img/note/todos.svg" @click.stop.prevent="setObjType('todo')"/>
+                    <img src="img/note/color.svg" @click="isColorShow = !isColorShow" class="color-icon" title="Color" />
+                <img src="img/note/text.svg" @click.stop.prevent="setObjType('text')" title="Text" />
+                <img src="img/note/img.svg"  @click.stop.prevent="setObjType('image')" title="Image"/>
+                <img src="img/note/video.svg"  @click.stop.prevent="setObjType('video')" title="Video"/> 
+                <img src="img/note/todos.svg" @click.stop.prevent="setObjType('todo')" title="ToDo List"/>
                 </div>
                 <div class="note-panel-control">
                 <button class="submit-btn" type="submit">Add</button>
@@ -184,7 +184,12 @@ export default {
 			if (this.editMode) this.editNote.isPinned = this.isPinned;
 		}
 	},
-	computed: {},
+	computed: {
+		titleCalc() {
+			if (this.isPinned) return 'Pinned';
+			if (!this.isPinned) return 'UnPinned';
+		}
+	},
 	watch: {},
 	components: {
 		noteService,

@@ -17,7 +17,6 @@ export default {
 		};
 		},
 		created() {
-			console.log(this.$route.query);
 		this.loadNotes();
 		eventBus.$on('showChange', this.handleEvent);
 		eventBus.$on('copyNote', this.updateNotes);
@@ -63,7 +62,6 @@ export default {
 				if (type === 'NoteToDo') return note.type === 'NoteToDo';
 				if (!type) return note.info.title?.toLowerCase().includes(txt.toLowerCase());
 				if (!txt) return note.type === type;
-				console.log(note.type, type);
 				return note.info.title?.toLowerCase().includes(txt.toLowerCase());
 			})});
 		}
@@ -74,15 +72,12 @@ export default {
 			handler(get) {
 				console.log(get);
 				if (get === null) {
-					// ('note/?to=<sender>&title=<title>&txt=<text>');
-					console.log(get);
 				} else {
 					const note = noteService.getEmptyNote();
 					note.id = utilService.makeId();
 					note.type = 'NoteTxt'
 					note.info.title = this.$route.query.title || null;
 					note.info.txt = this.$route.query.txt || null;
-					console.log(note);
 					eventBus.$emit('openNoteModal',note)
 				}
 			},
