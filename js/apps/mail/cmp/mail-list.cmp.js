@@ -16,12 +16,12 @@ export const mailList = {
             </section>
             <section class="controls">
                 <select v-model="filterBy.read" title="Filter by read status">
-                    <option :value="0">Read/Unread</option>
+                    <option :value="0">All</option>
                     <option :value="1">Read</option>
                     <option :value="2">Unread</option>
                 </select>
                 <select v-model="filterBy.star" title="Filter by starred">
-                    <option :value="0">Starred/Unstarred</option>
+                    <option :value="0">All</option>
                     <option :value="1">Starred</option>
                     <option :value="2">Unstarred</option>
                 </select>
@@ -72,12 +72,20 @@ export const mailList = {
             const mails = this.mails.slice();
             const filtered = mails.filter(item => {
                 switch (this.filterBy.read) {
-                    case 1: if (!item.isRead) return false;
-                    case 2: if (item.isRead) return false;
+                    case 1:
+                        if (!item.isRead) return false;
+                        break;
+                    case 2:
+                        if (item.isRead) return false;
+                        break;
                 }
                 switch (this.filterBy.star) {
-                    case 1: if (!item.isStarred) return false;
-                    case 2: if (item.isStarred) return false;
+                    case 1:
+                        if (item.isStarred) return false;
+                        break;
+                    case 2:
+                        if (item.isStarred) return false;
+                        break;
                 }
                 if (this.filterBy.search) {
                     const text = this.filterBy.search.toLowerCase();
