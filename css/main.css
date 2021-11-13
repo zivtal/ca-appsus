@@ -40,10 +40,43 @@ body {
   height: 5.5em;
 }
 
-.main-logo {
+.navbar-container .main-logo {
   cursor: pointer;
   height: 3.2em;
   filter: invert(100%);
+  transition: 0.5s;
+}
+
+.navbar-container .main-logo:hover {
+  transform: scale(105%);
+}
+
+.navbar-container .menu-button {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  height: 3em;
+  width: 3em;
+  transition: 0.5s;
+}
+
+.navbar-container .menu-button > div {
+  border-radius: 2px;
+  background-color: white;
+}
+
+.navbar-container > input {
+  display: none;
+}
+
+.navbar-container input:checked ~ .menu-button {
+  gap: 0px;
+  transform: rotate(-90deg) scale(90%);
+}
+
+.navbar-container input:checked ~ .menu-button > div {
+  border-radius: 0px;
 }
 
 .apps-menu {
@@ -71,7 +104,7 @@ body {
 }
 
 .apps-menu a:hover {
-  background-color: #999;
+  background-color: rgb(194, 194, 194);
   cursor: pointer;
 }
 
@@ -143,12 +176,27 @@ body {
 
 /*Home Page */
 
+.home-page {
+  background-image: url("../img/background.jfif");
+  background-size: cover;
+}
+
 .home-page h1 {
-  font-size: 1.5em;
+  position: absolute;
+  top: 3.5em;
   text-align: center;
+  color: whitesmoke;
+  text-shadow: 0 3px 6px rgb(32 33 36 / 28%);
+}
+
+@media screen and (min-width: 740px) {
+  .home-page h1 {
+    font-size: 2em;
+  }
 }
 
 .home-page .apps-cards {
+  margin-block-start: 2.5em;
   line-height: 1.5em;
 }
 
@@ -159,6 +207,8 @@ body {
 }
 
 .home-page .apps-cards .box-app {
+  box-shadow: 0 3px 6px rgb(32 33 36 / 28%);
+  background-color: whitesmoke;
   flex-basis: 30%;
   align-items: center;
   justify-content: start;
