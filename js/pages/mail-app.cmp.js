@@ -22,9 +22,9 @@ export default {
 			<section class="search-bar">
 			</section>
 			<section v-if="mails.all" class="display flex">
-				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange"/>
+				<folder-list :folders="mails.folders" :active="active.folder" :unread="mails.unread" @change="folderChange" :key="updated"/>
 				<mail-fullscreen v-if="active.mail" :mail="active.mail"  @remove="remove" @save="save"/>
-				<mail-list v-else-if="mails.filtered" :mails="mails.filtered" :folder="active" @remove="remove" @star="star"/>
+				<mail-list v-else-if="mails.filtered" :mails.sync="mails.filtered" :folder="active" @remove="remove" @star="star"/>
 			</section>
 			<mail-compose v-if="compose" :data="compose" />
 			<!-- <mail-editor/> -->
@@ -33,6 +33,7 @@ export default {
 	data() {
 		return {
 			id: null,
+			updated: Date.now(),
 			active: {
 				folder: null,
 				sort: {
@@ -56,7 +57,9 @@ export default {
 			.then(mails => {
 				this.mails.all = mails;
 				eventBus.$on('mailSave', this.save);
+				eventBus.$on('mailStarred', this.star);
 				eventBus.$on('mailRemove', this.remove);
+				eventBus.$on('mailRestore', this.restore);
 				eventBus.$on('mailComposeClose', () => this.compose = null);
 			})
 			.catch(err => console.log(err));
@@ -67,25 +70,41 @@ export default {
 		folderChange(active) {
 			this.active.folder = active;
 		},
+		splicer(mail, mails) {
+			const idx = mails.findIndex(item => item === mail);
+			if (idx > -1) mails.splice(idx, 1);
+		},
 		remove(mail) {
-			const splicer = function (mail, mails) {
-				const idx = mails.filtered.findIndex(item => item === mail);
-				mails.filtered.splice(idx, 1);
-			};
 			if (mail.folder === 'trash') {
 				mailService.remove(mail.id)
-					.then(() => splicer(mail, this.mails))
+					.then(() => {
+						this.splicer(mail, this.mails.filtered);
+						this.splicer(mail, this.mails.all);
+						this.refresh();
+					})
 					.catch(err => console.log(err));
 			} else {
+				mail.restore = mail.folder;
 				mail.folder = 'trash';
 				mailService.save(mail)
+					.then(() => {
+						if (this.active.folder !== 'all') this.splicer(mail, this.mails.filtered);
+						this.refresh();
+					})
 					.catch(err => console.log(err));
 			}
+		},
+		restore(mail) {
+			mail.folder = mail.restore;
+			mail.restore = null;
+			mailService.save(mail)
+				.then(() => this.$router.go(-1))
+				.catch(err => console.log(err));
 		},
 		star(mail) {
 			mail.isStarred = !mail.isStarred;
 			mailService.save(mail)
-				.then()
+				.then(() => this.refresh())
 				.catch(err => console.log(err));
 		},
 		save(mail) {
@@ -94,15 +113,26 @@ export default {
 					eventBus.$emit('mailDraftId', save.id);
 					const index = this.mails.all.findIndex(item => item.id === save.id);
 					if (index < 0) { this.mails.all.push(save) } else { this.mails.all[index] = save };
+					this.refresh();
 				})
 				.catch(err => console.log(err));
 		},
-	},
-	computed: {
-		numOfMails() {
-			return this.mails.filtered.length;
+		refresh() {
+			const folders = this.mails.folders;
+			const other = this.mails.all.filter(item => !folders.includes(utilService.camelCaseToSentence(item.folder)));
+			other.forEach(item => {
+				if (!folders.includes(utilService.camelCaseToSentence(item.folder))) folders.push(utilService.camelCaseToSentence(item.folder));
+			});
+			this.mails.folders.forEach((folder, idx) => {
+				const count = this.mails.all.filter(item => (idx) ? item.folder === folder.toLowerCase() && !item.isRead : !item.isRead).length;
+				this.mails.unread[folder] = count;
+			});
+			this.active.folder = (this.$route.params.folder) ? this.$route.params.folder : 'inbox';
+			this.active.mail = (this.$route.query.id) ? this.mails.all.find(item => item.id === this.$route.query.id) : null;
+			this.updated = Date.now();
 		}
 	},
+	computed: {},
 	watch: {
 		active: {
 			handler(active) {
@@ -118,20 +148,7 @@ export default {
 		},
 		mails: {
 			handler(mails) {
-				if (mails.all) {
-					const folders = mails.folders;
-					const other = mails.all.filter(item => !folders.includes(utilService.camelCaseToSentence(item.folder)));
-					other.forEach(item => {
-						if (!folders.includes(utilService.camelCaseToSentence(item.folder))) folders.push(utilService.camelCaseToSentence(item.folder));
-					});
-					mails.folders.forEach((folder, idx) => {
-						const count = this.mails.all.filter(item => (idx) ? item.folder === folder.toLowerCase() && !item.isRead : !item.isRead).length;
-						this.mails.unread[folder] = count;
-					});
-					this.active.folder = (this.$route.params.folder) ? this.$route.params.folder : 'inbox';
-					this.active.mail = (this.$route.query.id) ? this.mails.all.find(item => item.id === this.$route.query.id) : null;
-					eventBus.$emit('mailFolderChange', this.active.folder);
-				}
+				if (mails.all) this.refresh();
 			},
 			deep: true,
 			immediate: true,
