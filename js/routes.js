@@ -22,11 +22,12 @@ const routes = [
 	},
 	{
 		path: '/mail/:folder?',
-		component: mailPage,
+		component: mailPage
 	},
 	{
-		path: '/note',
+		path: '/note/:note?',
 		component: notePage
+		// props: (route) => ({ query: route.query.newnote })
 	}
 ];
 

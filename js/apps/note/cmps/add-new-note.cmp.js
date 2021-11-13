@@ -1,5 +1,6 @@
 import { noteService } from '../services/note-service.js';
 import { utilService } from '../../../services/utils.service.js';
+import { eventBus } from '../../../services/event.bus-service.js';
 
 export default {
 	props: [ 'editNote' ],
@@ -25,8 +26,8 @@ export default {
                 <img src="img/note/todos.svg" @click.stop.prevent="setObjType('todo')"/>
                 </div>
                 <div class="note-panel-control">
-                <button class="submit-btn" type="submit" >Add</button>
-                    <button @click.prevent="closeEditNote" class="close-modal-btn">close</button>
+                <button class="submit-btn" type="submit">Add</button>
+                    <button @click="slideModal" class="close-modal-btn">close</button>
     </div>
             </div>
         </form> 
@@ -42,9 +43,10 @@ export default {
 				'#6495ED',
 				'#40E0D0',
 				'#9FE2BF',
-				'#999999'
+				'#dadce0'
 			],
-			setPlaceHolder: 'amir',
+			isShow: false,
+			setPlaceHolder: 'Write text here',
 			title: '',
 			txt: '',
 			isPinned: false,
@@ -55,39 +57,50 @@ export default {
 				text: 'Please write some text',
 				image: 'Please paste your image url',
 				video: 'Please paste your video url',
-				todo: 'Please write some todos'
+				todo: 'Please write some todos',
+				noTxt: 'Please choose message type below'
 			},
 			editMode: false,
-			pinnedSrc: 'img/note/pinned.svg'
+			pinnedSrc: 'img/note/pinned.svg',
+			currNote: this.editNote,
+			isPlus: false,
+			mark: '+'
 		};
 	},
 	created() {
-		if (this.editNote) {
-			this.editMode = true;
-			this.title = this.editNote.info.title;
-			if (this.editNote.type === 'NoteTxt') {
-				this.title = this.editNote.info.title;
-				this.txt = this.editNote.info.txt;
-				this.noteType = this.editNote.type;
-				this.backgroundColor = this.editNote.style.backgroundColor;
-				console.log(this.backgroundColor);
-			} else if (this.editNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo') {
-				this.title = this.editNote.info.title;
-				this.txt = this.editNote.info.url;
-				this.noteType = this.editNote.type;
-			} else if (this.editNote.type === 'NoteToDo') {
-				var txtTodos = '';
-				this.title = this.editNote.info.title;
-				this.editNote.info.todos.map((todo) => (txtTodos += todo.txt + ','));
-				txtTodos = txtTodos.substring(0, txtTodos.length - 1);
-				this.txt = txtTodos;
-				this.noteType = this.editNote.type;
-			}
-		}
+		this.initAddNote();
 	},
 	updated() {},
 	destroyed() {},
 	methods: {
+		initAddNote() {
+			if (this.currNote) {
+				this.editMode = true;
+				this.title = this.currNote.info.title;
+				if (this.currNote.type === 'NoteTxt') {
+					this.title = this.currNote.info.title;
+					this.txt = this.currNote.info.txt;
+					this.noteType = this.currNote.type;
+					this.backgroundColor = this.currNote.style.backgroundColor;
+				} else if (this.currNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo') {
+					this.title = this.currNote.info.title;
+					this.txt = this.currNote.info.url;
+					this.noteType = this.currNote.type;
+				} else if (this.currNote.type === 'NoteToDo') {
+					var txtTodos = '';
+					this.title = this.currNote.info.title;
+					this.currNote.info.todos.map((todo) => (txtTodos += todo.txt + ','));
+					txtTodos = txtTodos.substring(0, txtTodos.length - 1);
+					this.txt = txtTodos;
+					this.noteType = this.currNote.type;
+				}
+			}
+		},
+
+		slideModal() {
+			if (this.editMode) eventBus.$emit('closeModal');
+			else eventBus.$emit('changeModal', this.editMode);
+		},
 		setColorChoice(ev) {
 			const hexColor = noteService.getHexColor(ev.target.style.backgroundColor);
 			this.backgroundColor = hexColor;
@@ -97,28 +110,43 @@ export default {
 			this.noteType = noteType;
 			this.setPlaceHolder = this.placeHolder[noteType];
 		},
-		save() {
-			this.closeEditNote();
+		async save() {
+			eventBus.$emit('closeModal');
 			if (this.editMode) {
 				this.editNote.info.title = this.title;
-				this.editNote.style = this.backgroundColor;
+				this.editNote.style.backgroundColor = this.backgroundColor;
 				if (this.editNote.type === 'NoteImg' || this.editNote.type === 'NoteVideo')
 					this.editNote.info.url = this.txt;
 				else {
 					this.editNote.info.txt = this.txt;
 				}
 				this.editMode = false;
+				const id = await noteService.getNoteByid(this.editNote);
+				console.log('fsd');
+				if (id.length !== 0) return;
+			}
+			if (!this.noteType) {
+				this.setPlaceHolder = 'Please choose message type below';
 				return;
 			}
+			eventBus.$emit('changesign');
 			const backgroundColor = this.backgroundColor;
-			if (this.noteType === 'text') {
+			if (this.noteType === 'text' || this.editNote.type === 'NoteTxt') {
 				const txtInfo = { title: this.title, txt: this.txt };
+				console.log(txtInfo);
+				console.log(this.editNote);
 				this.$emit('cmpType', {
 					type: 'NoteTxt',
 					val: txtInfo,
 					style: backgroundColor,
 					isPinned: this.isPinned
 				});
+				if (this.editNote.type === 'NoteTxt') {
+					noteService.addNote(this.editNote.type, txtInfo, backgroundColor).then((note) => {
+						eventBus.$emit('addNote', note);
+					});
+					return;
+				}
 			} else if (this.noteType === 'image') {
 				const imgInfo = { title: this.title, url: this.txt };
 				this.$emit('cmpType', { type: 'NoteImg', val: imgInfo, style: backgroundColor });
@@ -147,10 +175,6 @@ export default {
 			}
 			this.title = null;
 			this.txt = null;
-			this.closeEditNote();
-		},
-		closeEditNote() {
-			this.$emit('isShown');
 		},
 		pinnedNote() {
 			this.isPinned = !this.isPinned;

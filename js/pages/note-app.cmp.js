@@ -1,7 +1,7 @@
 import notePreview from '../apps/note/cmps/note-preview.cmp.js';
 import { noteService } from '../apps/note/services/note-service.js';
 import { eventBus } from '../services/event.bus-service.js';
-
+import { utilService } from '../services/utils.service.js';
 export default {
 	props: [],
 	components: {},
@@ -17,6 +17,7 @@ export default {
 		};
 		},
 		created() {
+			console.log(this.$route.query);
 		this.loadNotes();
 		eventBus.$on('showChange', this.handleEvent);
 		eventBus.$on('copyNote', this.updateNotes);
@@ -68,7 +69,26 @@ export default {
 		}
 	},
 	computed: {},
-	watch: {},
+	watch: {
+		'$route.query': {
+			handler(get) {
+				console.log(get);
+				if (get === null) {
+					// ('note/?to=<sender>&title=<title>&txt=<text>');
+					console.log(get);
+				} else {
+					const note = noteService.getEmptyNote();
+					note.id = utilService.makeId();
+					note.type = 'NoteTxt'
+					note.info.title = this.$route.query.title || null;
+					note.info.txt = this.$route.query.txt || null;
+					console.log(note);
+					eventBus.$emit('openNoteModal',note)
+				}
+			},
+			immediate: true
+		}
+	},
 	components: {
 		notePreview
 	}

@@ -26,7 +26,7 @@ export const NoteTxt = {
 			} else return this.note.info.txt;
 		},
 		replaceHex() {
-			if (!this.note.style.isDark) return '#ff9911';
+			if (!this.note.style.isDark) return '#222222';
 		},
 		pinnedSrc() {
 			if (this.note.isPinned) return 'img/note/pinnedOn.svg';

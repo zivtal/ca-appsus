@@ -4,7 +4,9 @@ export const noteService = {
 	query,
 	addNote,
 	hexColor,
-	getHexColor
+	getHexColor,
+	getEmptyNote,
+	getNoteByid
 };
 var NOTE_KEY = 'notes';
 _createDemoQuery();
@@ -18,6 +20,18 @@ function _createDemoQuery() {
 	return notes;
 }
 
+function getEmptyNote() {
+	return {
+		id: '',
+		type: null,
+		isPinned: false,
+		info: [],
+		style: {
+			backgroundColor: '#dadce0',
+			isDark: false
+		}
+	};
+}
 function query() {
 	return storageService.query(NOTE_KEY);
 }
@@ -27,17 +41,23 @@ function save(item) {
 	else return storageService.post(NOTE_KEY, item);
 }
 
-function addNote(type, info, style, isPinned) {
+function addNote(type, info, style = '#545454', isPinned) {
 	const noteToSave = {
 		type,
 		isPinned: isPinned || false,
 		info,
 		style: {
 			backgroundColor: style,
-			isDark: hexColor(style)
+			isDark: false
 		}
 	};
 	return save(noteToSave).then((note) => note);
+}
+
+function getNoteByid(note) {
+	return query().then((items) => {
+		return items.filter((item) => item.id === note.id);
+	});
 }
 
 function hexColor(color) {
