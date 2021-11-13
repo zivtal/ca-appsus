@@ -104,6 +104,7 @@
   .mail-app .display .mail-list > .controls select {
     /* width: 90px; */
     font-size: 0.6em;
+    max-width: 85px;
   }
 }
 
