@@ -1,5 +1,5 @@
 import controlPanelBtns from './control-panel-btns.js';
-
+import { noteService } from '../services/note-service.js';
 export const NoteTxt = {
 	props: [ 'note' ],
 	template: `
@@ -17,6 +17,7 @@ export const NoteTxt = {
 	methods: {
 		setNotePinned() {
 			this.note.isPinned = !this.note.isPinned;
+			noteService.save(this.note);
 		}
 	},
 	computed: {
@@ -35,7 +36,8 @@ export const NoteTxt = {
 	},
 	mounted() {},
 	components: {
-		controlPanelBtns
+		controlPanelBtns,
+		noteService
 	}
 };
 export const NoteImg = {
@@ -61,6 +63,7 @@ export const NoteImg = {
 		},
 		setNotePinned() {
 			this.note.isPinned = !this.note.isPinned;
+			noteService.save(this.note);
 		}
 	},
 	mounted() {},
@@ -100,6 +103,7 @@ export const NoteVideo = {
 		},
 		setNotePinned() {
 			this.note.isPinned = !this.note.isPinned;
+			noteService.save(this.note);
 		}
 	},
 	computed: {
@@ -144,6 +148,7 @@ export const NoteToDo = {
 		},
 		setNotePinned() {
 			this.note.isPinned = !this.note.isPinned;
+			noteService.save(this.note);
 		}
 	},
 	computed: {

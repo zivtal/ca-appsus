@@ -6,7 +6,8 @@ export const noteService = {
 	hexColor,
 	getHexColor,
 	getEmptyNote,
-	getNoteByid
+	getNoteByid,
+	save
 };
 var NOTE_KEY = 'notes';
 _createDemoQuery();
@@ -37,6 +38,7 @@ function query() {
 }
 
 function save(item) {
+	console.log(item);
 	if (item.id) return storageService.put(NOTE_KEY, item);
 	else return storageService.post(NOTE_KEY, item);
 }
