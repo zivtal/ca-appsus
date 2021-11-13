@@ -52,9 +52,9 @@ export const mailPreview = {
                             const id = mail[mode];
                             mailService.getById(id)
                                 .then(item => {
-                                    this.$router.push({ path: (item) ? `/mail/${mail.folder}?id=${id}&mode=${mode}` : `/mail/?compose=${mail.id}` });
+                                    this.$router.push({ path: (item) ? `/mail/${mail.folder}?id=${id}&mode=${mode}` : `/mail/${mail.folder}?compose=${mail.id}` });
                                 });
-                        } else this.$router.push({ path: `/mail/?compose=${mail.id}` });
+                        } else this.$router.push({ path: `/mail/${mail.folder}?compose=${mail.id}` });
                     } else this.$router.push({ path: `/mail/${mail.folder}?id=${mail.id}` });
                 })
                 .catch(err => console.log(err));

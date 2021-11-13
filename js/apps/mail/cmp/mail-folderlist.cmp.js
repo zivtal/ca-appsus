@@ -32,7 +32,7 @@ export const folderList = {
     },
     methods: {
         compose() {
-            this.$router.push({ path: `/mail/?compose` })
+            this.$router.push({ path: `/mail/${this.activeFolder}?compose` })
         },
         getImage(folder) {
             return ICONS[folder.toLowerCase()] || 'default.png';
