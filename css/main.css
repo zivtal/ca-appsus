@@ -71,7 +71,7 @@ body {
 }
 
 .navbar-container input:checked ~ .menu-button {
-  gap: 0px;
+  gap: 1px;
   transform: rotate(-90deg) scale(70%);
 }
 
