@@ -2,7 +2,6 @@ import { eventBus } from "../../../services/event.bus-service.js";
 
 export const mailCompose = {
     props: ['data'],
-    components: {},
     template: `
         <div v-if="mail" class="mail-compose">
             <div class="window" :class="windowSize">
@@ -30,6 +29,7 @@ export const mailCompose = {
             mail: null,
             mail: true,
             isMaximaized: false,
+            html: null,
         }
     },
     created() {
@@ -40,8 +40,6 @@ export const mailCompose = {
             if (this.mail.body) eventBus.$emit('mailSave', this.mail);
         }, 5000);
     },
-    updated() { },
-    destroyed() { },
     methods: {
         cancel() {
             clearInterval(this.interval);
@@ -64,5 +62,12 @@ export const mailCompose = {
             return { maximaized: this.isMaximaized };
         }
     },
-    watch: {},
+    watch: {
+        html: {
+            handler(newVal, oldVal) {
+                console.log(newVal);
+            },
+            immidiate: true,
+        }
+    },
 }

@@ -7,6 +7,8 @@ export const utilService = {
 	getLowerCase,
 	makeId,
 	camelCaseToSentence,
+	getHexToRgb,
+	isRgbDarkColor,
 };
 
 function saveToStorage(key, val) {
@@ -60,6 +62,19 @@ function camelCaseToSentence(input, isOnlyFirst = true) {
 	if (typeof input === 'string') input = [input];
 	return input.map(key => key.replace(/[A-Z]/g, letter => (isOnlyFirst) ? ` ${letter.toLowerCase()}` : ` ${letter}`).replace(/[a-z]/, letter => letter.toUpperCase())).join(' » ')
 };
+
+function getHexToRgb(hex) {
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}
+
+function isRgbDarkColor(color) {
+	return (0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b) < 50;
+}
 
 function getLowerCase(str) {
 	return str.toLowerCase();

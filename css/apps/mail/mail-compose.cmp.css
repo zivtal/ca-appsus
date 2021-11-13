@@ -119,6 +119,10 @@
   padding: 5px;
 }
 
+.mail-compose .window .content div:last-child {
+  min-height: 400px;
+}
+
 .mail-compose .window .buttons button {
   float: left;
   border: 0;
