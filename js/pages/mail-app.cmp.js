@@ -1,11 +1,11 @@
-import { mailService } from "../apps/mail/services/email-app.service.js";
-import { utilService } from "../services/utils.service.js";
-import { eventBus } from "../services/event.bus-service.js";
-import { mailList } from "../apps/mail/cmp/mail-list.cmp.js";
-import { folderList } from "../apps/mail/cmp/mail-folderlist.cmp.js";
-import { mailFullscreen } from "../apps/mail/cmp/mail-fullscreen.js";
-import { mailCompose } from "../apps/mail/cmp/mail-compose.cmp.js";
-import { mailEditor } from "../apps/mail/cmp/mail-editor.cmp.js";
+import { mailService } from '../apps/mail/services/email-app.service.js';
+import { utilService } from '../services/utils.service.js';
+import { eventBus } from '../services/event.bus-service.js';
+import { mailList } from '../apps/mail/cmp/mail-list.cmp.js';
+import { folderList } from '../apps/mail/cmp/mail-folderlist.cmp.js';
+import { mailFullscreen } from '../apps/mail/cmp/mail-fullscreen.js';
+import { mailCompose } from '../apps/mail/cmp/mail-compose.cmp.js';
+// import { mailEditor } from "../apps/mail/cmp/mail-editor.cmp.js";
 
 export default {
 	props: [],
@@ -14,8 +14,8 @@ export default {
 		folderList,
 		mailList,
 		mailFullscreen,
-		mailCompose,
-		mailEditor,
+		mailCompose
+		// mailEditor,
 	},
 	template: `
 		<section class="mail-app main-app">
@@ -154,7 +154,7 @@ export default {
 		},
 		'$route.params.folder': {
 			handler(get) {
-				this.active.folder = (this.mails.all && get) ? get : null;
+				this.active.folder = this.mails.all && get ? get : null;
 			},
 			immediate: true,
 		},
