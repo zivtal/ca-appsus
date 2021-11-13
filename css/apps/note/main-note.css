@@ -85,6 +85,21 @@ body {
 	padding: 5px;
 }
 
+.colors-container-edit {
+	justify-content: center;
+	align-items: center;
+	background-color: whitesmoke;
+	border-radius: 10px;
+	box-shadow: rgb(111 105 105 / 34%) -1px 0px 5px 0px;
+	gap: 3px;
+	grid-template-columns: repeat(3, 40px);
+	position: absolute;
+	top: 0;
+	/* transform: translateY(100%); */
+	z-index: 3;
+	padding: 5px;
+}
+
 .color-select {
 	border-radius: 50%;
 	width: 30px;
@@ -95,6 +110,7 @@ body {
 }
 .add-note-title {
 	font-size: 2.5rem;
+	width: 100%;
 }
 
 .add-note-text {
@@ -412,6 +428,9 @@ body {
 		height: 125px;
 		width: 450px;
 	}
+	.note-editor > .new-note-toolbar {
+		margin-block-start: 70px;
+	}
 }
 
 @media screen and (max-width: 760px) {
@@ -419,8 +438,11 @@ body {
 		max-width: 600px;
 		height: 175px;
 	}
-	.note-editor > * :not(:nth-child(3)) {
-		margin-block-start: 10px;
+	.note-editor > * {
+		margin-block-start: 20px;
+	}
+	.note-editor > *:not(:nth-child(1)) {
+		margin-block-start: 25px;
 	}
 }
 
@@ -442,10 +464,12 @@ body {
 		height: 225px;
 	}
 	.note-toolbar-container .note-editor-main .note-editor .add-note-inputs .pinned-container .note-pinned {
-		height: 20px;
+		height: 30px;
 		top: 10px;
 	}
-	.note-editor > * :not(:nth-child(3)) {
+	/* .note-editor > * :not(:nth-child(3)) {
+	} */
+	.note-editor > * {
 		margin-block-start: 20px;
 	}
 }

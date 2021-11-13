@@ -12,6 +12,9 @@ export default {
 	props: [ 'notes' ],
 	template: `
     <div class="main-note main-layout-note" >
+	<transition name="slide-fade">
+				<add-new-note v-if="isEditor" class="note-editor" :editNote="editNote"/>
+</transition>
     <div class="main-note-container">
 		<transition name="slide-fade">
 		<add-new-note v-if="show" @cmpType="addNewNote" class="add-note-container" />
@@ -19,7 +22,7 @@ export default {
 		<note-filter :notes="notes"/>
 		<h1>Pinned</h1>
         <section class="pinned-note">
-		<transition-group name="bounce"  >
+		<transition-group name="bounce">
                 <component :is="note.type" :note="note" v-if="note.isPinned" v-for="note in getPinnednotes" :key="note.id"  :ind="note"
               > 
 			</component>
@@ -44,20 +47,38 @@ export default {
 	data() {
 		return {
 			demoNotes: this.notes,
-			show: this.isShow
+			show: this.isShow,
+			isEditor: false,
+			editNote: null
 		};
 	},
 	created() {
 		eventBus.$on('showModal', this.slideNewPage);
 		eventBus.$on('tRemoveNote');
+		eventBus.$on('openModal', this.openModal);
+		eventBus.$on('closeModal', this.closeEditModal);
+		eventBus.$on('openNoteModal', this.setEamilContent);
 	},
 	updated() {},
 	destroyed() {},
 	methods: {
+		setEamilContent(note) {
+			this.openModal(note);
+		},
+		closeEditModal() {
+			if (this.isEditor) this.isEditor = !this.isEditor;
+		},
+		openModal(note) {
+			console.log(note);
+			this.isEditor = !this.isEditor;
+			console.log(note);
+			this.editNote = note;
+		},
 		slideNewPage(isShow) {
 			this.show = isShow;
 		},
 		addNewNote(val) {
+			console.log(val);
 			noteService.addNote(val.type, val.val, val.style).then((note) => {
 				eventBus.$emit('addNote', note);
 			});

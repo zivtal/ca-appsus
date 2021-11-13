@@ -42,7 +42,10 @@ export default {
 			mark: '+'
 		};
 	},
-	created() {},
+	created() {
+		eventBus.$on('changesign', this.slideModal);
+		eventBus.$on('changeModal', this.slideModal);
+	},
 	updated() {},
 	destroyed() {},
 	methods: {
