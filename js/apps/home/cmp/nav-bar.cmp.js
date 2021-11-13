@@ -8,21 +8,24 @@ export default {
 		<label for="appsusmenu" class="menu-button">
 			<div v-for="n in 9"></div>
 		</label>
-		<div class="apps-menu flex" v-if="isMenuOpen">
+		<transition name="slide-fade">
+		<div class="apps-menu flex" v-if="isMenuOpen" @click="show = !show">
 			<a @click="booksPage"><img src="./img/books.png" /> </a>
 			<a @click="emailPage"> <img src="./img/gmail.png" /> </a>
 			<a @click="notePage"> <img src="./img/keep.png" /> </a>
-</div>
+		</div>
+	</transition>
 </nav>
     `,
 	data() {
 		return {
-			isMenuOpen: false
+			isMenuOpen: false,
+			show: true
 		};
 	},
-	created() { },
-	updated() { },
-	destroyed() { },
+	created() {},
+	updated() {},
+	destroyed() {},
 	methods: {
 		openMenu() {
 			this.isMenuOpen = !this.isMenuOpen;
