@@ -72,8 +72,8 @@ export const bookReview = {
                 ],
                 action: 'review',
                 title: 'Enter a new review',
-                yes: 'Yes',
-                no: 'No'
+                yes: 'Confirm',
+                no: 'Cancel'
             };
         },
         onYes(action, book, add) {
