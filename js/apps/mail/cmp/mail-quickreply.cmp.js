@@ -14,7 +14,7 @@ export const quickReply = {
                 <img @click="compose" src="./img/mail/expand_window.png"/>
 				<textarea ref="content" v-if="mail" v-model="mail.body"></textarea>
 				<button @click="send">{{button}}</button>
-				<button class="trimmed-content" @click="addReply" title="Show trimmed content">&#903;&#903;&#903;</button>
+				<button :hidden="!this.mail.replyContent" class="trimmed-content" @click="addReply" title="Show trimmed content">&#903;&#903;&#903;</button>
 			</section>
         </div>
     `,
@@ -22,7 +22,6 @@ export const quickReply = {
         return {
             mail: null,
             isNewCompose: false,
-            isIncludeReply: false,
         }
     },
     created() {
@@ -50,6 +49,7 @@ export const quickReply = {
                         this.mail.reply = this.reply.id;
                         this.mail.to = this.reply.from;
                         this.mail.from = this.reply.to;
+                        this.mail.replyContent = this.replyContent;
                         this.mail.subject = 'RE: ' + this.reply.subject;
                         break;
                 }
@@ -68,8 +68,11 @@ export const quickReply = {
             clearInterval(this.interval);
             this.mail.folder = 'sent';
             this.mail.reply = null;
-            if (this.mode === 'reply' && !this.isIncludeReply) this.mail.body = this.mail.body + this.replyContent;
             this.mail.sentAt = Date.now();
+            if (this.mail.replyContent) {
+                this.mail.body = (this.mail.body) ? this.mail.body + '\n\n' + this.mail.replyContent : '\n\n' + this.mail.replyContent;
+                this.mail.replyContent = null;
+            }
             eventBus.$emit('mailSave', this.mail);
             this.$emit('send');
         },
@@ -77,8 +80,8 @@ export const quickReply = {
             this.$router.push({ path: `/mail/${this.reply.folder}?id=${this.reply.id}&compose=${this.mail.id}` })
         },
         addReply() {
-            this.mail.body = (this.mail.body) ? this.mail.body + this.replyContent : '\n\n' + this.replyContent;
-            isIncludeReply = true;
+            this.mail.body = (this.mail.body) ? this.mail.body + this.mail.replyContent : '\n\n' + this.mail.replyContent;
+            this.mail.replyContent = null;
         }
     },
     computed: {

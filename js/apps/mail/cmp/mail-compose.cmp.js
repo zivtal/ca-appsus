@@ -52,6 +52,10 @@ export const mailCompose = {
             clearInterval(this.interval);
             this.mail.folder = 'sent';
             this.mail.reply = null;
+            if (this.mail.replyContent) {
+                this.mail.body = (this.mail.body) ? this.mail.body + '\n\n' + this.mail.replyContent : '\n\n' + this.mail.replyContent;
+                this.mail.replyContent = null;
+            }
             this.mail.sentAt = Date.now();
             eventBus.$emit('mailSave', this.mail);
             this.$router.push({ path: `/mail/${this.mail.folder}?id=${this.mail.id}` })

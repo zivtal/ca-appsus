@@ -11,7 +11,7 @@ export const mailPreview = {
             <div class="content" :class="{deleted: isInTrash}"><p>{{mailSubject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
-				<img src="./img/mail/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
+				<img v-if="mail.folder !== 'draft'" src="./img/mail/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
 				<img v-if="mail.restore && mail.folder === 'trash'" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
 				<img src="./img/mail/trash.png" :title="delTitle" @click.stop="removeMail(mail)"/>
 				<img :src="'./img/mail/'+markImg+'.png'" :title="markAs" @click.stop="markRead(mail)"/>
@@ -20,7 +20,7 @@ export const mailPreview = {
 			</div>
 		</section>
 		<transition name="slide-fade">
-			<section v-if="extended" class="preview-extended">
+			<section v-if="extended && mail.body" class="preview-extended">
 				{{contentPreview}}
 			</section>
 		</transition>
@@ -50,7 +50,10 @@ export const mailPreview = {
                         if (mail.reply || mail.forward) {
                             const mode = (mail.reply) ? 'reply' : 'forward';
                             const id = mail[mode];
-                            this.$router.push({ path: `/mail/${mail.folder}?id=${id}&mode=${mode}` });
+                            mailService.getById(id)
+                                .then(item => {
+                                    this.$router.push({ path: (item) ? `/mail/${mail.folder}?id=${id}&mode=${mode}` : `/mail/?compose=${mail.id}` });
+                                });
                         } else this.$router.push({ path: `/mail/?compose=${mail.id}` });
                     } else this.$router.push({ path: `/mail/${mail.folder}?id=${mail.id}` });
                 })
@@ -103,5 +106,11 @@ export const mailPreview = {
             return body.split('\n').filter(item => item).splice(0, 5).join('\n') + '  ...';
         }
     },
+    watch: {
+        '$route.params': {
+            handler() { this.extended = false; },
+            immediate: true,
+        },
+    }
 }
 
