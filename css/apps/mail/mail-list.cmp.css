@@ -121,14 +121,25 @@
   top: -1px;
 }
 
+@media screen and (max-width: 720px) {
+  .mail-app .display .mail-list > .controls div {
+    display: none;
+  }
+}
+
 .mail-app .display .mail-list > .controls option {
   background-color: #444;
 }
 
 .mail-app .display .mail-list > .controls button {
-  font-size: 1.5em;
   color: whitesmoke;
   transition: 0.5s;
+}
+
+@media screen and (min-width: 720px) {
+  .mail-app .display .mail-list > .controls button {
+    font-size: 1.5em;
+  }
 }
 
 .mail-app .display .mail-list > .controls button:hover {
