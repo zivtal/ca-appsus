@@ -81,7 +81,7 @@ export const mailList = {
                 }
                 switch (this.filterBy.star) {
                     case 1:
-                        if (item.isStarred) return false;
+                        if (!item.isStarred) return false;
                         break;
                     case 2:
                         if (item.isStarred) return false;
