@@ -10,7 +10,6 @@ export default {
 	<div class="note-toolbar-container">
             <div class="note-toolbar">
                 <img src="img/note/edit.svg" @click="openEditor" ></img>
-                <!-- <input type="color" v-model="backgroundColor" value="#f1f3f4" @blur="changeColor" class="color-input"/> -->
 				<div class="colors-container-edit grid" v-if="isColorShow"> 
 						<div class="color-select" @click=setColorChoice  :style="{background:color}" v-for="color in colors"></div>
 					</div>
