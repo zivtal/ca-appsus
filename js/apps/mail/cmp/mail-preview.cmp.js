@@ -11,8 +11,8 @@ export const mailPreview = {
             <div class="content" :class="{deleted: isInTrash}"><p>{{mailSubject}}</p></div>
 			<div v-if="!controls" class="date"><p>{{sent}}</p></div>
 			<div v-if="controls" class="controls flex">
-				<img v-if="mail.folder !== 'draft'" src="./img/mail/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
-				<img v-if="mail.restore && mail.folder === 'trash'" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
+				<img v-if="!mail.folder.includes('draft')" src="./img/mail/reply.svg" title="Quick reply" @click.stop="reply(mail)"/>
+				<img v-if="mail.restore && mail.folder.includes('trash')" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
 				<img src="./img/mail/trash.png" :title="delTitle" @click.stop="removeMail(mail)"/>
 				<img :src="'./img/mail/'+markImg+'.png'" :title="markAs" @click.stop="markRead(mail)"/>
 				<img src="./img/mail/note.svg" title="Add to notes" @click.stop="addToNotes(mail)"/>
@@ -46,7 +46,7 @@ export const mailPreview = {
             mail.isRead = true;
             mailService.save(mail)
                 .then((mail) => {
-                    if (mail.folder === 'draft') {
+                    if (mail.folder.includes('draft')) {
                         if (mail.reply || mail.forward) {
                             const mode = (mail.reply) ? 'reply' : 'forward';
                             const id = mail[mode];
@@ -90,10 +90,10 @@ export const mailPreview = {
             return (this.mail.isRead) ? 'read' : "unread";
         },
         delTitle() {
-            return (this.mail.folder === 'trash') ? 'Delete forever' : 'Delete';
+            return (this.mail.folder.includes('trash')) ? 'Delete forever' : 'Delete';
         },
         isInTrash() {
-            return (this.mail.folder === 'trash' && this.$route.params.folder !== 'trash');
+            return (this.mail.folder.includes('trash') && this.$route.params.folder !== 'trash');
         },
         starImg() {
             return (this.mail.isStarred) ? 'star-active' : "star-disabled";

@@ -73,7 +73,7 @@ export default {
 			if (idx > -1) mails.splice(idx, 1);
 		},
 		remove(mail) {
-			if (mail.folder === 'trash') {
+			if (mail.folder.includes('trash')) {
 				mailService.remove(mail.id)
 					.then(() => {
 						this.splicer(mail, this.mails.filtered);
