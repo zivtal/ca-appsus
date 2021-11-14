@@ -13,7 +13,7 @@ export const mailFullscreen = {
 				<img src="./img/mail/back.png" title="Go back" @click="goBack"/>
 				<img src="./img/mail/note.svg" title="Add to notes" @click="addToNotes"/>
 				<img src="./img/mail/trash.png" :title="delTitle" @click="remove(mail)"/>
-				<img v-if="mail.restore && mail.folder === 'trash'" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
+				<img v-if="mail.restore && mail.folder.includes('trash')" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
 				<img :src="'./img/mail/'+markImg+'.png'" :title="markAs" @click="markRead(mail)"/>
 			</section>
 			<section class="mail">
@@ -29,8 +29,8 @@ export const mailFullscreen = {
 						{{mail.body}}
 					</p>
                     <div v-if="!mode" class="actions">
-                        <button @click="quickReply"><img src="./img/mail/reply.png"><p>Replay</p></button>
-                        <!-- <button @click="quickReply"><img src="./img/mail/reply-all.png"><p>Replay all</p></button> -->
+                        <button @click="quickReply"><img src="./img/mail/reply.png"><p>Reply</p></button>
+                        <!-- <button @click="quickReply"><img src="./img/mail/reply-all.png"><p>Reply all</p></button> -->
                         <button @click="quickForward"><img src="./img/mail/forward.png"><p>Forward</p></button>
                     </div>
                 </section>
@@ -82,7 +82,7 @@ export const mailFullscreen = {
 			return (this.mail.isRead) ? 'read' : "unread";
 		},
 		delTitle() {
-			return (this.mail.folder === 'trash') ? 'Delete forever' : 'Delete';
+			return (this.mail.folder.includes('trash')) ? 'Delete forever' : 'Delete';
 		},
 	},
 	watch: {
