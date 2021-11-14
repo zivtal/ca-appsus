@@ -15,7 +15,7 @@ export const mailPreview = {
 				<img v-if="mail.restore && mail.folder.includes('trash')" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
 				<img src="./img/mail/trash.png" :title="delTitle" @click.stop="removeMail(mail)"/>
 				<img :src="'./img/mail/'+markImg+'.png'" :title="markAs" @click.stop="markRead(mail)"/>
-				<img src="./img/mail/note.svg" title="Add to notes" @click.stop="addToNotes(mail)"/>
+				<img v-if="!mail.folder.includes('draft')" src="./img/mail/note.svg" title="Add to notes" @click.stop="addToNotes(mail)"/>
 				<img src="./img/mail/fullscreen.svg" title="Full screen" @click.stop="goTo(mail)"/>
 			</div>
 		</section>

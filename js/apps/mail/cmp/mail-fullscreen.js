@@ -11,7 +11,7 @@ export const mailFullscreen = {
 		<section class="mail-read" @keydown.esc="resetMode">
 			<section class="controls flex">
 				<img src="./img/mail/back.png" title="Go back" @click="goBack"/>
-				<img src="./img/mail/note.svg" title="Add to notes" @click="addToNotes"/>
+				<img v-if="!mail.folder.includes('draft')" src="./img/mail/note.svg" title="Add to notes" @click="addToNotes"/>
 				<img src="./img/mail/trash.png" :title="delTitle" @click="remove(mail)"/>
 				<img v-if="mail.restore && mail.folder.includes('trash')" src="./img/mail/restore.png" title="Restore mail" @click.stop="restoreMail(mail)"/>
 				<img :src="'./img/mail/'+markImg+'.png'" :title="markAs" @click="markRead(mail)"/>
@@ -30,7 +30,6 @@ export const mailFullscreen = {
 					</p>
                     <div v-if="!mode" class="actions">
                         <button @click="quickReply"><img src="./img/mail/reply.png"><p>Reply</p></button>
-                        <!-- <button @click="quickReply"><img src="./img/mail/reply-all.png"><p>Reply all</p></button> -->
                         <button @click="quickForward"><img src="./img/mail/forward.png"><p>Forward</p></button>
                     </div>
                 </section>

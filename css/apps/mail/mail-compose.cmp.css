@@ -133,6 +133,7 @@
 .mail-compose .window .buttons button {
   float: left;
   border: 0;
+  margin-block-start: 10px;
   padding: 10px;
   box-shadow: inset 0 0 0 1px #dadce0;
   background-color: transparent;

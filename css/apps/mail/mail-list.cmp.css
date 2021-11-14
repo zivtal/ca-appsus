@@ -76,6 +76,7 @@
 }
 
 .mail-app .display .mail-list > .controls {
+  touch-action: manipulation;
   align-items: flex-end;
   justify-content: flex-start;
   margin-top: 1.2em;
@@ -148,6 +149,7 @@
 }
 
 .mail-app .display .mail-list > .list {
+  touch-action: manipulation;
   width: 100%;
   background-color: black;
 }
