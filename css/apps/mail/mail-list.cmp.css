@@ -14,25 +14,12 @@
   justify-content: center;
   height: 2.7em;
   background-color: white;
-  border-radius: 25px;
-}
-
-.mail-app .display .mail-list > .search img {
-  width: 200px;
-  display: block;
+  border-radius: 8px;
 }
 
 .mail-app .display .mail-list > .search div:hover {
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
   border-color: rgba(223, 225, 229, 0);
-}
-
-.mail-app .display .mail-list > .search div {
-  background-color: white;
-  width: 580px;
-  height: 39px;
-  border: 1px solid silver;
-  border-radius: 25px;
 }
 
 .mail-app .display .mail-list > .search svg {
@@ -43,7 +30,7 @@
 
 .mail-app .display .mail-list > .search input {
   height: 100%;
-  width: calc(100% - 70px);
+  width: calc(100% - 58px);
   border: 0;
   font-size: 1.2em;
 }
@@ -64,14 +51,11 @@
   .mail-app .display .mail-list > .search {
     position: absolute;
     top: 0;
-    margin: 25px;
+    margin: 1.5em;
     width: 50%;
     left: 50%;
     transform: translateX(-50%);
     max-width: 600px;
-    height: 2.7em;
-    background-color: white;
-    border-radius: 25px;
   }
 }
 
